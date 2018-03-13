@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: io.kzonix.app
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, asciidoctor, cache-caffeine, config-consul, consul, discovery-consul, elasticsearch, flyway, graalvm, gradle, hibernate-jpa, hibernate-validator, http-client, java, java-application, jdbc-hikari, junit, log4j2, management, micrometer, micrometer-elastic, micrometer-influx, mysql, nats, netty-server, readme, rxjava3, security, security-annotations, security-jwt, shade, testcontainers, yaml]
