@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: community.blog
+---
+testFramework: spock
+sourceLanguage: groovy

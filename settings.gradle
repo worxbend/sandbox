@@ -1,0 +1,5 @@
+rootProject.name = "kzonix"
+
+include "stack/micronaut/configuration-management"
+include "stack/micronaut/community-blog"
+include "stack/micronaut/community-statistic"

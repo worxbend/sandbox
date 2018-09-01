@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: community.statistic
+---
+testFramework: spock
+sourceLanguage: groovy

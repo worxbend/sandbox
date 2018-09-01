@@ -1,6 +1,3 @@
-/*
-* Aggregated configuration with all default settings for modules
-* */
 lazy val commonSettings =
   Dependencies.commonDependencies ++ BaseSettings.defaultSettings
 
