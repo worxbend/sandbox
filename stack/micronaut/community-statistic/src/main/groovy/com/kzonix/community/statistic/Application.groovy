@@ -1,4 +1,4 @@
-package community.blog
+package com.kzonix.community.statistic
 
 import io.micronaut.runtime.Micronaut
 import groovy.transform.CompileStatic

@@ -9,7 +9,6 @@ buildscript {
     }
 }
 
-version "0.1"
 group "community.statistic"
 
 apply plugin:"io.spring.dependency-management"
@@ -48,4 +47,4 @@ shadowJar {
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
-mainClassName = "community.statistic.Application"
+mainClassName = "com.kzonix.community.statistic.Application"

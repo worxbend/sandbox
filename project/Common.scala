@@ -2,11 +2,11 @@ object CommonBuildConfiguration {
 
   private def _globalName: String = "kzonix"
 
-  private def __ : String = "_"
+  private def -- : String = "-"
 
   private val normalizedName: (String, String) => String =
     (name: String, typeName: String) => {
-      s"${_globalName}${__}$name${__}$typeName"
+      s"${this._globalName}${this.--}$name${this.--}$typeName"
     }
 
   val preformServiceName: String => String =

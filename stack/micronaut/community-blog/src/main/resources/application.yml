@@ -1,7 +1,15 @@
 micronaut:
-    application:
-        name: community-blog
-                
-#Uncomment to set server port
-#    server:
-#        port: 8080
+  application:
+    name: community-blog
+  server:
+    port: 8080
+
+mongodb:
+  dbName: databaseName
+  uri: mongodb://localhost:27017/${mongodb.db-name}
+  cluster:
+    maxWaitQueueSize: 5
+  connectionPool:
+    maxSize: 20
+
+

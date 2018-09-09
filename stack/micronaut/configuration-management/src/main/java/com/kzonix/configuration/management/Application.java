@@ -1,4 +1,4 @@
-package configuration.management;
+package com.kzonix.configuration.management;
 
 import io.micronaut.runtime.Micronaut;
 
