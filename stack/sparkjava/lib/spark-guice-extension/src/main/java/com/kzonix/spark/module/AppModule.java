@@ -2,8 +2,8 @@ package com.kzonix.spark.module;
 
 import com.google.inject.AbstractModule;
 import com.kzonix.spark.ApplicationServiceProvider;
-import com.kzonix.spark.starter.ApplicationStarter;
 import com.kzonix.spark.conf.ApplicationConfigProvider;
+import com.kzonix.spark.starter.ApplicationStarter;
 import com.kzonix.spark.starter.SparkApplicationStarter;
 import com.typesafe.config.Config;
 import spark.Service;
