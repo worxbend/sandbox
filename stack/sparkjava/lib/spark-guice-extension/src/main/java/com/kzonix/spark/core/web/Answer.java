@@ -1,4 +1,4 @@
-package com.kzonix.spark.core.annotation;
+package com.kzonix.spark.core.web;
 
 public interface Answer<T extends DtoOut> {
 
