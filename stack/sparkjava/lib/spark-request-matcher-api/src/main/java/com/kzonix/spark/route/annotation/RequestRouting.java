@@ -1,4 +1,4 @@
-package com.kzonix.spark.core.annotation.route;
+package com.kzonix.spark.route.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
