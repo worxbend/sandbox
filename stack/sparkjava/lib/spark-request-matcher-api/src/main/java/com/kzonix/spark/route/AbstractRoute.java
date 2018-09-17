@@ -1,4 +1,4 @@
-package com.kzonix.spark.core.annotation.route;
+package com.kzonix.spark.route;
 
 public abstract class AbstractRoute implements SparkRoute {
 
@@ -20,4 +20,5 @@ public abstract class AbstractRoute implements SparkRoute {
   public void setBaseRoutePath(String baseRoutePath) {
     this.basePath = baseRoutePath;
   }
+
 }

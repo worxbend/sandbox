@@ -41,14 +41,14 @@ public class ApplicationFileUtils {
     }
     for (File file : contentOfDirectory) {
       if (file.exists() && file.isFile()) {
-				if (checkFile(fileSeparator, fileNamePattern, file)) {
-					return Optional.of(file);
-				}
+        if (checkFile(fileSeparator, fileNamePattern, file)) {
+          return Optional.of(file);
+        }
       } else if (file.exists() && file.isDirectory()) {
         final Optional<File> maybeFile = findIsSubDirectory(fileSeparator, fileNamePattern, file);
-				if (maybeFile.isPresent()) {
-					return maybeFile;
-				}
+        if (maybeFile.isPresent()) {
+          return maybeFile;
+        }
       }
     }
     return Optional.empty();

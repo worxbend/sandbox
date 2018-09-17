@@ -1,4 +1,4 @@
-package com.kzonix.spark.core.annotation.route;
+package com.kzonix.spark.route;
 
 public interface SparkRoute {
 
