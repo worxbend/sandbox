@@ -1,6 +1,8 @@
 package com.kzonix.spark.route;
 
-public abstract class AbstractRoute implements SparkRoute {
+import com.kzonix.spark.route.handler.RequestHandler;
+
+public abstract class AbstractRoute<I, O> implements SparkRoute, RequestHandler<I, O> {
 
   private String basePath = "/";
 
