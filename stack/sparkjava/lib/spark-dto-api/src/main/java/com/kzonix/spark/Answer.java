@@ -1,7 +1,7 @@
 package com.kzonix.spark;
 
 
-public interface Answer<O> {
+public interface Answer<O extends DtoOut> {
 
   MetaData getMetadata();
 
