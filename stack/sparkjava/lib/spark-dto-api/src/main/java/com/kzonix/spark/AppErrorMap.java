@@ -1,4 +1,4 @@
-package com.kzonix.spark.core.web;
+package com.kzonix.spark;
 
 public interface AppErrorMap {
 
