@@ -19,9 +19,4 @@ subprojects {
     mavenLocal()
     maven { url "https://plugins.gradle.org/m2/" }
   }
-  task hello {
-    doLast { task ->
-      println "I'm $task.project.name"
-    }
-  }
 }

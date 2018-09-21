@@ -1,12 +1,12 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.4"
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
-    }
+  repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:2.0.4"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
+  }
 }
 
 group "community.blog"
@@ -18,32 +18,32 @@ apply plugin: "groovy"
 
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
+  mavenLocal()
+  mavenCentral()
+  maven { url "https://jcenter.bintray.com" }
 }
 
 dependencyManagement {
-    imports {
-        mavenBom 'io.micronaut:bom:1.0.0.M4'
-    }
+  imports {
+    mavenBom 'io.micronaut:bom:1.0.0.M4'
+  }
 }
 
 dependencies {
-    compile "io.micronaut:runtime-groovy"
-    compile "io.micronaut:http-client"
-    compile "io.micronaut:http-server-netty"
-    compile "io.micronaut.configuration:mongo-reactive"
-    compileOnly "io.micronaut:inject-groovy"
-    runtime "ch.qos.logback:logback-classic:1.2.3"
-    testCompile "io.micronaut:inject-groovy"
-    testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
-        exclude group: "org.codehaus.groovy", module: "groovy-all"
-    }
+  compile "io.micronaut:runtime-groovy"
+  compile "io.micronaut:http-client"
+  compile "io.micronaut:http-server-netty"
+  compile "io.micronaut.configuration:mongo-reactive"
+  compileOnly "io.micronaut:inject-groovy"
+  runtime "ch.qos.logback:logback-classic:1.2.3"
+  testCompile "io.micronaut:inject-groovy"
+  testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
+    exclude group: "org.codehaus.groovy", module: "groovy-all"
+  }
 }
 
 shadowJar {
-    mergeServiceFiles()
+  mergeServiceFiles()
 }
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')

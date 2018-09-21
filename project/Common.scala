@@ -1,43 +1,34 @@
 object CommonBuildConfiguration {
 
-  private def _globalName: String = "kzonix"
-
-  private def -- : String = "-"
-
+  val preformServiceName: String => String =
+    (_serviceName: String) => {
+      normalizedName.apply(_serviceName, "service")
+    }
+  val preformModuleName: String => String =
+    (_moduleName: String) => {
+      normalizedName.apply(_moduleName, "module")
+    }
+  val preformImplLibraryName: String => String =
+    (_libraryName: String) => {
+      normalizedName.apply(_libraryName, "impl")
+    }
+  val preformApiLibraryName: String => String =
+    (_libraryName: String) => {
+      normalizedName.apply(_libraryName, "api")
+    }
   private val normalizedName: (String, String) => String =
     (name: String, typeName: String) => {
       s"${this._globalName}${this.--}$name${this.--}$typeName"
     }
 
-  val preformServiceName: String => String =
-    (_serviceName: String) => {
-      normalizedName.apply(_serviceName, "service")
-    }
+  private def _globalName: String = "kzonix"
 
-  val preformModuleName: String => String =
-    (_moduleName: String) => {
-      normalizedName.apply(_moduleName, "module")
-    }
-
-  val preformImplLibraryName: String => String =
-    (_libraryName: String) => {
-      normalizedName.apply(_libraryName, "impl")
-    }
-
-  val preformApiLibraryName: String => String =
-    (_libraryName: String) => {
-      normalizedName.apply(_libraryName, "api")
-    }
+  private def -- : String = "-"
 
 }
 
 object ConfigPaths {
   val root = "./"
-  private val normalizedPath: List[String] => String =
-    (args: List[String]) => {
-      s"${args.mkString("/")}"
-    }
-
   val api: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-api"
   }
@@ -47,6 +38,10 @@ object ConfigPaths {
   val impl: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-impl"
   }
+  private val normalizedPath: List[String] => String =
+    (args: List[String]) => {
+      s"${args.mkString("/")}"
+    }
 }
 
 object CommonConfiguration {}
