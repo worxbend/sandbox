@@ -15,6 +15,6 @@ public class SparkApplicationStarter implements ApplicationStarter {
 
   @Override
   public void boot() {
-    sparkService.awaitInitialization();
+    sparkService.init();
   }
 }

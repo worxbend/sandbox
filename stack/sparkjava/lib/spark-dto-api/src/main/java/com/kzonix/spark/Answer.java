@@ -7,7 +7,7 @@ public interface Answer<O extends DtoOut> {
 
   O getBody();
 
-  int code();
+  String getCode();
 
   AppErrorMap getAppErrorMap();
 

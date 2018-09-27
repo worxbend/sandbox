@@ -1,11 +1,12 @@
 package com.kzonix.spark.route;
 
+import com.kzonix.spark.DtoIn;
+import com.kzonix.spark.DtoOut;
 import com.kzonix.spark.route.handler.RequestHandler;
 
-public abstract class AbstractRoute<I, O> implements SparkRoute, RequestHandler<I, O> {
+public abstract class AbstractRoute<I extends DtoIn, O extends DtoOut> implements SparkRoute, RequestHandler<I, O> {
 
   private String basePath = "/";
-
 
   protected AbstractRoute(String basePath) {
     this.basePath = basePath;

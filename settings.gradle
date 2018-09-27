@@ -1,5 +1,5 @@
 rootProject.name = "kzonix"
-
+enableFeaturePreview("IMPROVED_POM_SUPPORT")
 include "stack:micronaut:configuration-management"
 include "stack:micronaut:community-blog"
 include "stack:micronaut:community-statistic"
@@ -9,4 +9,7 @@ include "stack:sparkjava:lib:spark-guice-extension"
 include "stack:sparkjava:lib:spark-hibernate-validation"
 include "stack:sparkjava:lib:spark-hocon-validation"
 include "stack:sparkjava:lib:spark-request-matcher-api"
+include "stack:sparkjava:lib:spark-rest"
+include "stack:sparkjava:lib:spark-template-engine-api"
+include "stack:sparkjava:lib:spark-freemaker"
 include "stack:sparkjava:lib:spark-validation-api"

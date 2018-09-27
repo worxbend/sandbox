@@ -1,6 +1,8 @@
 package com.kzonix.spark.route;
 
-public interface SparkRoute {
+import spark.Route;
+
+public interface SparkRoute extends Route {
 
   String getBaseRoutePath();
 }
