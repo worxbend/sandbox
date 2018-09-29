@@ -18,7 +18,10 @@ public class Json {
 
   private static ObjectMapper objectMapper = SingletonHolder.objectMapper;
 
-  public ObjectMapper mapper() {
+  private Json() {
+  }
+
+  public static ObjectMapper mapper() {
     return objectMapper;
   }
 
@@ -27,9 +30,7 @@ public class Json {
     private static ObjectMapper objectMapper = getObjectMapper();
 
     private static ObjectMapper getObjectMapper() {
-      final ObjectMapper objectMapper = new ObjectMapper();
-
-      ObjectMapper mapper = new ObjectMapper();
+      final ObjectMapper mapper = new ObjectMapper();
 
       // Don't throw an exception when json has extra fields you are
       // not serializing on. This is useful when you want to use a pojo
