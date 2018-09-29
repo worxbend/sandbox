@@ -16,4 +16,6 @@ public class AppModule extends AbstractModule {
     bind(Service.class).toProvider(ApplicationServiceProvider.class);
     bind(ApplicationStarter.class).to(SparkApplicationStarter.class);
   }
+
+
 }

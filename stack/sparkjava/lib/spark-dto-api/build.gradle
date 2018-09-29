@@ -14,7 +14,6 @@
 
 plugins {
   // Apply the java-library plugin to add support for Java Library
-  id 'java-library'
 }
 publishing {
   publications {
@@ -26,19 +25,5 @@ publishing {
 }
 
 dependencies {
-  // This dependency is exported to consumers, that is to say found on their compile classpath.
-  implementation 'com.sparkjava:spark-core:2.7.2'
-  implementation 'com.google.guava:guava:23.0'
-  compileOnly 'org.projectlombok:lombok:1.18.2'
 
-  /* Test-dependencies */
-  testCompile 'org.assertj:assertj-core:3.11.1'
-  testCompile 'org.assertj:assertj-guava:3.2.0'
-  testCompile 'com.novocode:junit-interface:0.11'
-  testCompile 'org.jukito:jukito:1.5'
-  testCompile 'info.debatty:java-string-similarity:1.1.0'
-  // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-
-  // Use JUnit test framework
-  testImplementation 'junit:junit:4.12'
 }

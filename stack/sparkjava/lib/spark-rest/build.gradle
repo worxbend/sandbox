@@ -8,35 +8,34 @@
 
 plugins {
   // Apply the java-library plugin to add support for Java Library
-  id 'java-library'
 }
-
+ext {
+  jacksonModule = "com.fasterxml.jackson.module"
+  jacksonDatatype = "com.fasterxml.jackson.datatype"
+  jacksonCore = "com.fasterxml.jackson.core"
+  jacksonVersion = "2.9.7"
+}
 dependencies {
-  // This dependency is exported to consumers, that is to say found on their compile classpath.
-  api 'org.apache.commons:commons-math3:3.6.1'
-  compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
-  compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
-  compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
-  compile 'com.fasterxml.jackson.module:jackson-module-afterburner:2.9.7'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-modules-base', version: '2.9.7', ext: 'pom'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-modules-java8', version: '2.9.7', ext: 'pom'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-paranamer', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jsonSchema', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-guice', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-guava', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr353', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.7'
-  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.9.7'
-  
   compile project(":stack:sparkjava:lib:spark-request-matcher-api")
-  // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-  implementation 'com.google.guava:guava:23.0'
 
-  // Use JUnit test framework
-  testImplementation 'junit:junit:4.12'
+  // This dependency is exported to consumers, that is to say found on their compile classpath.
+  api group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+  compile group: jacksonCore, name: 'jackson-core', version: jacksonVersion
+  compile group: jacksonCore, name: 'jackson-databind', version: jacksonVersion
+  compile group: jacksonCore, name: 'jackson-annotations', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-afterburner', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-paranamer', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-parameter-names', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-jsonSchema', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-guice', version: jacksonVersion
+  compile group: jacksonModule, name: 'jackson-module-parameter-names', version: jacksonVersion
+  compile group: jacksonDatatype, name: 'jackson-datatype-hibernate5', version: jacksonVersion
+  compile group: jacksonDatatype, name: 'jackson-datatype-guava', version: jacksonVersion
+  compile group: jacksonDatatype, name: 'jackson-datatype-jsr353', version: jacksonVersion
+  compile group: jacksonDatatype, name: 'jackson-datatype-jsr310', version: jacksonVersion
+  compile group: jacksonDatatype, name: 'jackson-datatype-jdk8', version: jacksonVersion
+
+  // This dependency is used internally, and not exposed to consumers on their own compile classpath.
 }
 
 // In this section you declare where to find the dependencies of your project

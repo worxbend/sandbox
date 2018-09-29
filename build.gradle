@@ -1,15 +1,22 @@
-plugins {
-  id 'maven-publish'
-}
 allprojects {
+  apply plugin: 'java'
+  apply plugin: 'maven-publish'
+  group = 'com.kzonix'
+  version = '1.0.0-SNAPSHOT'
   repositories {
     jcenter()
     mavenCentral()
     mavenLocal()
     maven { url "https://plugins.gradle.org/m2/" }
   }
-  group = 'com.kzonix'
-  version = '1.0.0-SNAPSHOT'
+  dependencies {
+    compile group:'com.google.guava', name: 'guava', version: '23.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.1'
+  }
+
 }
 
 subprojects {
