@@ -16,7 +16,8 @@ object CommonBuildConfiguration {
     (_libraryName: String) => {
       normalizedName.apply(_libraryName, "api")
     }
-  private val normalizedName: (String, String) => String =
+
+  private def normalizedName: (String, String) => String =
     (name: String, typeName: String) => {
       s"${this._globalName}${this.--}$name${this.--}$typeName"
     }
@@ -38,7 +39,8 @@ object ConfigPaths {
   val impl: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-impl"
   }
-  private val normalizedPath: List[String] => String =
+
+  private def normalizedPath: List[String] => String =
     (args: List[String]) => {
       s"${args.mkString("/")}"
     }
