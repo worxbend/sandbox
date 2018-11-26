@@ -7,7 +7,7 @@ import sbt.{Setting, _}
 object BaseSettings {
   val defaultSettings: Seq[Setting[_]] = Seq(
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
-    scalaVersion := "2.12.4",
+    scalaVersion := "2.12.7",
     organization := "io.limpid.kzonix",
     organizationName := "Kzonix",
     version := Util.getVersion, // common version number for all services
