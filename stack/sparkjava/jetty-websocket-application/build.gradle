@@ -30,7 +30,7 @@ dependencies {
   compile group: 'org.zeroturnaround', name: 'zt-zip', version: '1.13'
   compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.4'
 
-  compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
 
   /* Test-dependencies */
   testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
