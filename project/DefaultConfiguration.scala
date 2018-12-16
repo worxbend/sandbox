@@ -79,13 +79,8 @@ object Dependencies {
     /* Security */
     val jjwt = "io.jsonwebtoken" % "jjwt" % "0.9.0"
     val imgscalr = "org.imgscalr" % "imgscalr-lib" % "4.2"
-
-
-    val compastHttpKit = "co.paralleluniverse" % "comsat-httpkit" % "0.7.0"
-    val compastRetrofit = "co.paralleluniverse" % "comsat-retrofit" % "0.7.0"
-    val compastOkHttp = "co.paralleluniverse" % "comsat-okhttp" % "0.7.0"
-    val compastKafka = "co.paralleluniverse" % "comsat-kafka" % "0.7.0"
-
+    
+    /*  */
     val vavr = "io.vavr" % "vavr" % "0.9.2"
     val vavrJackson = "io.vavr" % "vavr-jackson" % "0.9.2"
     val cyclops = "com.oath.cyclops" % "cyclops" % "10.0.0-M7"

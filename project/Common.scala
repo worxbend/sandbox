@@ -30,13 +30,16 @@ object CommonBuildConfiguration {
 
 object ConfigPaths {
   val root = "./"
-  val api: Seq[String] => String = (args: Seq[String]) => {
+  
+  def api: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-api"
   }
-  val service: Seq[String] => String = (args: Seq[String]) => {
+  
+  def service: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-service"
   }
-  val impl: Seq[String] => String = (args: Seq[String]) => {
+  
+  def impl: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-impl"
   }
 
