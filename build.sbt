@@ -1,5 +1,6 @@
-lazy val commonSettings =
+lazy val commonSettings = {
   Dependencies.commonDependencies ++ BaseSettings.defaultSettings
+}
 
 // TODO: override project configuration rules with 'inThisBuild' instead of custom implementation
 lazy val kzonix = (project in file("."))
