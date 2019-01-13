@@ -80,7 +80,7 @@ object Dependencies {
     val jjwt = "io.jsonwebtoken" % "jjwt" % "0.9.0"
     val imgscalr = "org.imgscalr" % "imgscalr-lib" % "4.2"
     
-    /*  */
+    /* Functional extension for Java */
     val vavr = "io.vavr" % "vavr" % "0.9.2"
     val vavrJackson = "io.vavr" % "vavr-jackson" % "0.9.2"
     val cyclops = "com.oath.cyclops" % "cyclops" % "10.0.0-M7"
@@ -103,7 +103,7 @@ object Dependencies {
 
     private[Dependencies] object Versions {
       // Play components dependencies
-      lazy val playJson = "2.6.9"
+      lazy val playJson = "2.7.0-RC2"
       // Joda dependencies
       lazy val jodaConvert = "2.0.1"
       lazy val jodaTime = "2.9.9"

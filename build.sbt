@@ -4,11 +4,44 @@ lazy val commonSettings = {
 
 // TODO: override project configuration rules with 'inThisBuild' instead of custom implementation
 lazy val kzonix = (project in file("."))
-  .aggregate(`jongo-module`, `kundera-mongo-module`)
   .settings(
     libraryDependencies ++= Seq(
       "org.projectlombok" % "lombok" % "1.16.16"
     )
+  )
+
+lazy val `simple` = (project in file(ConfigPaths.service(Seq("simple", "simple"))))
+  .enablePlugins(PlayService).settings(commonSettings: _*)
+  .dependsOn(`slib`)
+  .aggregate(`slib`)
+  .settings(
+    name := CommonBuildConfiguration.preformServiceName("simple"),
+    libraryDependencies ++= Seq(
+      akkaHttpServer,
+      ws,
+      filters,
+      guice,
+      logback,
+      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "net.codingwell" %% "scala-guice" % "4.2.2"
+    ),
+    testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+  )
+
+lazy val `slib` = (project in file(ConfigPaths.api(Seq("slib", "simple"))))
+  .enablePlugins(PlayService).settings(commonSettings: _*)
+  .settings(
+    name := CommonBuildConfiguration.preformImplLibraryName("slib"),
+    libraryDependencies ++= Seq(
+      akkaHttpServer,
+      ws,
+      guice,
+      filters,
+      logback,
+      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "net.codingwell" %% "scala-guice" % "4.2.2"
+    ),
+    testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )
 
 lazy val `kzonix-oauth-api` = (project in file(ConfigPaths.api(Seq("oauth", "kzonix-oauth"))))
