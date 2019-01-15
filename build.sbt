@@ -12,8 +12,8 @@ lazy val kzonix = (project in file("."))
 
 lazy val `simple` = (project in file(ConfigPaths.service(Seq("simple", "simple"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
-  .dependsOn(`slib`)
-  .aggregate(`slib`)
+  .dependsOn(`slib`, `alib`)
+  .aggregate(`slib`, `alib`)
   .settings(
     name := CommonBuildConfiguration.preformServiceName("simple"),
     libraryDependencies ++= Seq(
@@ -22,6 +22,7 @@ lazy val `simple` = (project in file(ConfigPaths.service(Seq("simple", "simple")
       filters,
       guice,
       logback,
+      "io.limpid.kzonix" %% "kzonix-alib-impl" % "19.01_SNAPSHOT",
       "org.scalatest" %% "scalatest" % "3.0.3" % Test,
       "net.codingwell" %% "scala-guice" % "4.2.2"
     ),
@@ -32,6 +33,22 @@ lazy val `slib` = (project in file(ConfigPaths.api(Seq("slib", "simple"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(
     name := CommonBuildConfiguration.preformImplLibraryName("slib"),
+    libraryDependencies ++= Seq(
+      akkaHttpServer,
+      ws,
+      guice,
+      filters,
+      logback,
+      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "net.codingwell" %% "scala-guice" % "4.2.2"
+    ),
+    testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+  )
+
+lazy val `alib` = (project in file(ConfigPaths.api(Seq("alib", "simple"))))
+  .enablePlugins(PlayService).settings(commonSettings: _*)
+  .settings(
+    name := CommonBuildConfiguration.preformImplLibraryName("alib"),
     libraryDependencies ++= Seq(
       akkaHttpServer,
       ws,

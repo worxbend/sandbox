@@ -8,7 +8,7 @@ object BaseSettings {
   val defaultSettings: Seq[Setting[_]] = Seq(
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
     scalaVersion := "2.12.7",
-    organization := "io.limpid.kzonix",
+    organization := "io.kzonix",
     organizationName := "Kzonix",
     version := Util.getVersion, // common version number for all services
     homepage := Some(url("https://www.scala-sbt.org")),
@@ -26,7 +26,7 @@ object BaseSettings {
   object Util {
     def getVersion: String = {
       val date: java.util.Date = Calendar.getInstance.getTime
-      new SimpleDateFormat("yy.MM").format(date).concat("_SNAPSHOT")
+      new SimpleDateFormat("yy.MM").format(date).concat("-SNAPSHOT")
     }
   }
 
