@@ -10,7 +10,7 @@ object BaseSettings {
     scalaVersion := "2.12.7",
     organization := "io.kzonix",
     organizationName := "Kzonix",
-    version := Util.getVersion, // common version number for all services
+    version := Utils.getVersion, // common version number for all services
     homepage := Some(url("https://www.scala-sbt.org")),
     startYear := Some(2018),
     description := "A build tool for Scala.",
@@ -23,7 +23,7 @@ object BaseSettings {
     )
   )
 
-  object Util {
+  object Utils {
     def getVersion: String = {
       val date: java.util.Date = Calendar.getInstance.getTime
       new SimpleDateFormat("yy.MM").format(date).concat("-SNAPSHOT")
@@ -33,6 +33,8 @@ object BaseSettings {
 }
 
 object Dependencies {
+
+  def scalaGuice = Dependencies.scalaGuice
 
   def commonDependencies: Seq[Setting[_]] = Seq(
     libraryDependencies ++= Seq(
@@ -58,6 +60,8 @@ object Dependencies {
   )
 
   private object Dependencies {
+
+    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.2"
 
     val playJson = "com.typesafe.play" %% "play-json" % Versions.playJson
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
