@@ -2,35 +2,31 @@ object CommonBuildConfiguration {
 
   val preformServiceName: String => String =
     (_serviceName: String) => {
-      normalizedName.apply(_serviceName, "service")
+      normalizedName("service")(_serviceName)
     }
-  val preformModuleName: String => String =
-    (_moduleName: String) => {
-      normalizedName.apply(_moduleName, "module")
-    }
-  val preformImplLibraryName: String => String =
+
+  val preformProjectLibraryImplName: String => String =
     (_libraryName: String) => {
-      normalizedName.apply(_libraryName, "impl")
+      normalizedName("impl")(_libraryName)
     }
-  val preformApiLibraryName: String => String =
+  val preformProjectLibraryApiName: String => String =
     (_libraryName: String) => {
-      normalizedName.apply(_libraryName, "api")
+      normalizedName("api")(_libraryName)
     }
 
-  private def normalizedName: (String, String) => String =
-    (name: String, typeName: String) => {
-      s"${this._globalName}${this.--}$name${this.--}$typeName"
+  private def normalizedName(typeName: String)(name: String) = {
+      s"$name${if (!typeName.isEmpty)"-" + typeName}"
     }
-
-  private def _globalName: String = "kzonix"
-
-  private def -- : String = "-"
 
 }
 
 object ConfigPaths {
   val root = "./"
-  
+
+  def lib: Seq[String] => String = (args: Seq[String]) => {
+    root + normalizedPath(List("stack", "playframework") ::: args.toList)
+  }
+
   def api: Seq[String] => String = (args: Seq[String]) => {
     root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-api"
   }
