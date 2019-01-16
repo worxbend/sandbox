@@ -8,7 +8,7 @@ lazy val commonSettings = {
 lazy val kzonix = (project in file("."))
   .settings(
     libraryDependencies ++= Seq(
-      "org.projectlombok" % "lombok" % "1.16.16"
+
     )
   )
 
@@ -37,4 +37,6 @@ lazy val `sird-provider` = (project in file(ConfigPaths.lib(Seq("sird-provider")
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
+  .dependsOn(`sird-provider-api`)
+  .aggregate(`sird-provider-api`)
 
