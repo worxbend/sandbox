@@ -9,7 +9,7 @@ class SirdProvider @Inject() (routes: Set[ProvidedRouter], httpConfig: HttpConfi
   override def get(): Router = {
     routes
       .map(router => {
-        router.withPrefix(Router.concatPrefix(httpConfig.context, router.withVersion ))
+        router.withPrefix(Router.concatPrefix(httpConfig.context, router.prefix))
       })
       .reduce((current, next) => current.orElse(next))
   }

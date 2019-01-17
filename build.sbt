@@ -1,4 +1,5 @@
 import Dependencies.{scalaGuice, _}
+import CommonBuildConfiguration._
 
 lazy val commonSettings = {
   commonDependencies ++ BaseSettings.defaultSettings
@@ -39,4 +40,19 @@ lazy val `sird-provider` = (project in file(ConfigPaths.lib(Seq("sird-provider")
   )))
   .dependsOn(`sird-provider-api`)
   .aggregate(`sird-provider-api`)
+
+lazy val `index-service` = (project in file(ConfigPaths.service(Seq("index"))))
+  .enablePlugins(PlayService).settings(commonSettings: _*)
+  .settings(inThisBuild(Seq(
+    name := preformServiceName("index"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback,
+      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+    ),
+    testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+  )))
+  .dependsOn(`sird-provider`)
+  .aggregate(`sird-provider`)
 
