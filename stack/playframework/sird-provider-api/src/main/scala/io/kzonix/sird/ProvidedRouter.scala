@@ -3,19 +3,21 @@ package io.kzonix.sird
 import play.api.routing.Router
 
 trait ProvidedRouter extends Router {
+
   def routePrefix: String = ""
 
-  def ver: Int = 0
+  def routeVersion: Int = 0
 
-  private def routeVersion(prefix: String)(ver: Int) : String = "/v" + ver + "/" + prefix
+  // TODO: change to lazy val
+  private def routeVersion(prefix: String)(ver: Int): String = Router.concatPrefix("/v" + ver, prefix)
 
-  private def versioned = routeVersion(routePrefix) _
+  private lazy val versioned = routeVersion(routePrefix)(_)
 
-  def withVersion : String  = {
-    if (ver == 0) {
+  final lazy val prefix: String = {
+    if (routeVersion == 0) {
       routePrefix
     } else {
-      versioned(ver)
+      versioned(routeVersion)
     }
   }
 }
