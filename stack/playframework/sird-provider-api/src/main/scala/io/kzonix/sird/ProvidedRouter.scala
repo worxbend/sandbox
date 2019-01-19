@@ -8,10 +8,7 @@ trait ProvidedRouter extends Router {
 
   def routeVersion: Int = 0
 
-  // TODO: change to lazy val
-  private def routeVersion(prefix: String)(ver: Int): String = Router.concatPrefix("/v" + ver, prefix)
-
-  private lazy val versioned = routeVersion(routePrefix)(_)
+  private lazy val versioned = routeWithVersion(routePrefix)(_)
 
   final lazy val prefix: String = {
     if (routeVersion == 0) {
