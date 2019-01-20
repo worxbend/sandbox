@@ -1,17 +1,17 @@
 object CommonBuildConfiguration {
 
   val preformServiceName: String => String =
-    (_serviceName: String) => {
-      normalizedName("service")(_serviceName)
+    (serviceName: String) => {
+      normalizedName("service")(serviceName)
     }
 
   val preformProjectLibraryImplName: String => String =
-    (_libraryName: String) => {
-      normalizedName("impl")(_libraryName)
+    (libraryName: String) => {
+      normalizedName("impl")(libraryName)
     }
   val preformProjectLibraryApiName: String => String =
-    (_libraryName: String) => {
-      normalizedName("api")(_libraryName)
+    (libraryName: String) => {
+      normalizedName("api")(libraryName)
     }
 
   private def normalizedName(typeName: String)(name: String) = {
@@ -24,25 +24,26 @@ object ConfigPaths {
   val root = "./"
 
   def lib: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: args.toList)
+    root + normalizedPath(List("stack", "playframework") ::: (args toList))
   }
 
   def api: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-api"
+    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-api"
   }
   
   def service: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-service"
+    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-service"
   }
   
   def impl: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: args.toList) + "-impl"
+    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-impl"
   }
 
-  private def normalizedPath: List[String] => String =
-    (args: List[String]) => {
-      s"${args.mkString("/")}"
+  private def normalizedPath: Seq[String] => String =
+    (args: Seq[String]) => {
+      s"${args mkString "/"}"
     }
 }
+
 
 object CommonConfiguration {}

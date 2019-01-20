@@ -10,11 +10,10 @@ trait ProvidedRouter extends Router {
 
   private lazy val versioned = routeWithVersion(routePrefix)(_)
 
+  /**
+   *
+   */
   final lazy val prefix: String = {
-    if (routeVersion == 0) {
-      routePrefix
-    } else {
-      versioned(routeVersion)
-    }
+    if (routeVersion == 0) routePrefix else versioned(routeVersion)
   }
 }
