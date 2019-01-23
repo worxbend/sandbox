@@ -6,4 +6,4 @@ import play.api.routing.Router
 /**
   * Provides a fully-constructed, composed instance of [[Router]].
   **/
-trait RouterProvider extends Provider[Router] {}
+trait RouterProvider extends Provider[Router]
