@@ -35,6 +35,21 @@ lazy val `sird-provider` = (project in file(ConfigPaths.lib(Seq("sird-provider")
   .dependsOn(`sird-provider-api`)
   .aggregate(`sird-provider-api`)
 
+lazy val `play-utile` = (project in file(ConfigPaths.lib(Seq("play-utile"))))
+  .enablePlugins(PlayService).settings(commonSettings: _*)
+  .settings(inThisBuild(Seq(
+    name := "play-utile",
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback,
+      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+    ),
+    testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+  )))
+  .dependsOn(`sird-provider`)
+  .aggregate(`sird-provider`)
+
 
 lazy val `play-underpressure-api` = (project in file(ConfigPaths.api(Seq("play","play-underpressure"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
@@ -76,6 +91,6 @@ lazy val `index-service` = (project in file(ConfigPaths.service(Seq("index"))))
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
-  .dependsOn(`sird-provider`)
-  .aggregate(`sird-provider`)
+  .dependsOn(`sird-provider`, `play-utile`)
+  .aggregate(`sird-provider`, `play-utile`)
 

@@ -7,9 +7,10 @@ import play.api.routing.Router.Routes
 import play.api.routing.SimpleRouter
 import play.api.routing.sird._
 
-class IndexRoute @Inject() (controller: IndexController) extends SimpleRouter with ProvidedRouter {
+class IndexRoute @Inject()(controller: IndexController) extends SimpleRouter with ProvidedRouter {
 
   override def routePrefix: String = "/index/"
+
   override def routeVersion: Int = 1
 
   override def routes: Routes = {

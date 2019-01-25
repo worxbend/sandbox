@@ -1,0 +1,64 @@
+<!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
+<configuration>
+
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel"/>
+
+  <appender class="ch.qos.logback.core.FileAppender" name="FILE">
+    <file>${application.home:-.}/logs/application.log</file>
+    <encoder>
+      <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.FileAppender" name="JSON">
+    <file>${application.home:-.}/logs/application.json</file>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <logLevel/>
+        <loggerName/>
+        <threadName/>
+        <message/>
+        <logstashMarkers/>
+        <arguments/>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.FileAppender" name="METRICS">
+    <file>${application.home:-.}/logs/metrics.log</file>
+    <encoder>
+      <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+    <encoder>
+      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.classic.AsyncAppender" name="ASYNCFILE">
+    <appender-ref ref="FILE"/>
+  </appender>
+
+  <appender class="ch.qos.logback.classic.AsyncAppender" name="ASYNCJSON">
+    <appender-ref ref="JSON"/>
+  </appender>
+
+  <appender class="ch.qos.logback.classic.AsyncAppender" name="ASYNCSTDOUT">
+    <appender-ref ref="STDOUT"/>
+  </appender>
+
+  <logger level="INFO" name="play"/>
+  <logger level="DEBUG" name="application"/>
+  <logger level="TRACE" name="v1.post"/>
+
+  <root level="WARN">
+    <appender-ref ref="ASYNCFILE"/>
+    <appender-ref ref="ASYNCJSON"/>
+    <appender-ref ref="ASYNCSTDOUT"/>
+  </root>
+
+</configuration>

@@ -8,9 +8,9 @@ import play.api.routing.Router
   * Provides a fully-constructed, composed instance of [[Router]].
   *
   * @constructor create a new instance of route provides with routes collection and http configuration.
-  * @param routes Collection of all defined [[ProvidedRouter]] across whole scope of DI-container.
+  * @param routes     Collection of all defined [[ProvidedRouter]] across whole scope of DI-container.
   * @param httpConfig Play http configuration contains context path value which is needed to construct and combine routers.
-  **/
+  */
 @Singleton
 class SirdProvider @Inject()(routes: Set[ProvidedRouter], httpConfig: HttpConfiguration) extends RouterProvider {
 
@@ -26,6 +26,7 @@ class SirdProvider @Inject()(routes: Set[ProvidedRouter], httpConfig: HttpConfig
     */
   override def get(): Router = routes
     .map(router => {
+      Console.println(router)
       router.withPrefix(Router.concatPrefix(httpConfig.context, router.prefix))
     })
     .reduce((current, next) => current.orElse(next))
