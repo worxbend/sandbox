@@ -15,6 +15,6 @@ package object sird {
     * @param prefix Route base prefix
     * @param ver    Route version
     * @return Concatenated string with route version and path.
-    **/
+    */
   private[sird] lazy val routeWithVersion: String => Int => String = (prefix: String) => (ver: Int) => Router.concatPrefix("/v" + ver, prefix)
 }
