@@ -1,5 +1,3 @@
 package io.kzonix
 
-package object index {
-
-}
+package object index {}

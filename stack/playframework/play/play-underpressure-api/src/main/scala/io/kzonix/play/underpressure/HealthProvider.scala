@@ -1,5 +1,3 @@
 package io.kzonix.play.underpressure
 
-trait HealthProvider[P] {
-
-}
+trait HealthProvider[P] {}

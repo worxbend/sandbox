@@ -2,8 +2,7 @@ package io.kzonix.play
 
 package object underpressure {
 
-  trait HealthInfo {
-  }
+  trait HealthInfo {}
 
   object HealthStatus extends Enumeration {
     type HealthStatus = Value
