@@ -94,3 +94,6 @@ lazy val `index-service` = (project in file(ConfigPaths.service(Seq("index"))))
   .dependsOn(`sird-provider`, `play-utile`)
   .aggregate(`sird-provider`, `play-utile`)
 
+// Scalafmt
+addCommandAlias("fmt", "; compile:scalafmt; test:scalafmt; scalafmtSbt")
+addCommandAlias("fmtCheck", "; compile:scalafmtCheck; test:scalafmtCheck; scalafmtSbtCheck")
