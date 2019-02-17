@@ -33,7 +33,7 @@
     "adm-zip": "^0.4.13",
     "fastify": "^1.14.1",
     "fastify-autoload": "^0.6.0",
-    "fastify-cli": "^0.26.2",
+    "fastify-cli": "^0.27.0",
     "fastify-compress": "^0.7.1",
     "fastify-cors": "^1.0.0",
     "fastify-env": "^0.6.2",
