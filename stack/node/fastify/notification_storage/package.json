@@ -1,0 +1,60 @@
+{
+  "name": "notification_storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  
+  "scripts": {
+    "test": "tap test/**/*.test.js",
+    "start": "fastify start -l info -p 5001 app.js",
+    "dev": "fastify start -l -p 5001 debug -P --watch --ignore-watch='node_modules .git logs/error.log' app.js",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limpid-kzonix/notification_storage.git"
+  },
+  "keywords": [
+    "fastify",
+    "notification storage"
+  ],
+  "author": "Alexander Balyshyn <balyszyn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/limpid-kzonix/notification_storage/issues"
+  },
+  "homepage": "https://github.com/limpid-kzonix/notification_storage#readme",
+  "dependencies": {
+    "fastify": "^1.11.0",
+    "fastify-autoload": "^0.5.0",
+    "fastify-cli": "^0.26.2",
+    "fastify-compress": "^0.7.1",
+    "fastify-cors": "^1.0.0",
+    "fastify-env": "^0.6.1",
+    "fastify-graceful-shutdown": "^2.0.0",
+    "fastify-healthcheck": "^0.2.0",
+    "fastify-jwt": "^0.8.0",
+    "fastify-knexjs": "^1.0.14",
+    "fastify-knexjs-mock": "^1.0.19",
+    "fastify-plugin": "^1.2.0",
+    "fastify-rate-limit": "^1.0.0",
+    "fastify-redis": "^3.0.0",
+    "fastify-swagger": "^0.16.2",
+    "mongoose": "^5.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-unicorn": "^6.0.1",
+    "tap": "^12.0.0"
+  }
+}
