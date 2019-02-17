@@ -1,0 +1,64 @@
+{
+  "name": "configuration_storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "standard",
+    "test": "tap test/**/*.test.js",
+    "start-dev": "fastify start -l debug -p 5000 app.js",
+    "start": "fastify start -l info -p 5000 app.js",
+    "debug": "fastify --inspect $NODE_DEBUG_OPTION start -l debug -P --watch --ignore-watch='node_modules .git logs/error.log' -p 5000 app.js ",
+    "dev": "fastify start -l debug -P --watch --ignore-watch='node_modules .git logs/error.log' -p 5678 app.js",
+    "lint": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limpid-kzonix/configuration_storage.git"
+  },
+  "keywords": [
+    "fastify",
+    "configuration storage"
+  ],
+  "author": "Alexander Balyshyn <balyszyn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/limpid-kzonix/configuration_storage/issues"
+  },
+  "homepage": "https://github.com/limpid-kzonix/configuration_storage#readme",
+  "dependencies": {
+    "adm-zip": "^0.4.13",
+    "fastify": "^1.14.1",
+    "fastify-autoload": "^0.5.0",
+    "fastify-cli": "^0.26.2",
+    "fastify-compress": "^0.7.1",
+    "fastify-cors": "^1.0.0",
+    "fastify-env": "^0.6.2",
+    "fastify-graceful-shutdown": "^2.0.0",
+    "fastify-healthcheck": "^0.2.0",
+    "fastify-jwt": "^0.8.1",
+    "fastify-knexjs": "^1.0.14",
+    "fastify-knexjs-mock": "^1.0.19",
+    "fastify-plugin": "^1.2.0",
+    "fastify-rate-limit": "^1.0.0",
+    "fastify-redis": "^3.0.0",
+    "fastify-swagger": "^0.16.2",
+    "make-dir": "^2.0.0",
+    "mongoose": "^5.4.9"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1",
+    "eslint": "^5.13.0",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-unicorn": "^6.0.1",
+    "tap": "^12.5.1"
+  }
+}
