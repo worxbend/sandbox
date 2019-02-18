@@ -1,9 +1,9 @@
 package io.kzonix.index.controllers
 
-import javax.inject.{Inject, Singleton}
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
+import javax.inject.{ Inject, Singleton }
+import play.api.mvc._
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 
 @Singleton
 class IndexController @Inject()(cc: ControllerComponents)(implicit ec: ExecutionContext)
