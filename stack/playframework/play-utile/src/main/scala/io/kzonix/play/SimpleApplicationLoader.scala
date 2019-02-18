@@ -3,8 +3,7 @@ package io.kzonix.play
 import io.kzonix.sird.SirdProvider
 import play.api.ApplicationLoader
 import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
+import play.api.inject.guice.{ GuiceApplicationLoader, GuiceableModule }
 import play.api.routing.Router
 
 /**
