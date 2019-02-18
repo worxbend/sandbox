@@ -1,6 +1,6 @@
 package io.kzonix.sird
 
-import javax.inject.{Inject, Singleton}
+import javax.inject.{ Inject, Singleton }
 import play.api.http.HttpConfiguration
 import play.api.routing.Router
 
@@ -26,8 +26,8 @@ class SirdProvider @Inject()(routes: Set[ProvidedRouter], httpConfig: HttpConfig
    */
   override def get(): Router =
     routes
-      .map(router => {
+      .map((router: ProvidedRouter) => {
         router.withPrefix(Router.concatPrefix(httpConfig.context, router.prefix))
       })
-      .reduce((current, next) => current.orElse(next))
+      .reduce((current: Router, next: Router) => current.orElse(next))
 }
