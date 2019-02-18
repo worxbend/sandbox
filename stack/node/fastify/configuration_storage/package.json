@@ -45,7 +45,7 @@
     "fastify-plugin": "^1.2.0",
     "fastify-rate-limit": "^1.0.0",
     "fastify-redis": "^3.0.0",
-    "fastify-swagger": "^0.16.2",
+    "fastify-swagger": "^1.0.0",
     "make-dir": "^2.0.0",
     "mongoose": "^5.4.9"
   },
