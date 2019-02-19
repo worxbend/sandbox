@@ -56,38 +56,26 @@ object Dependencies {
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
 
     /* Utils */
-    val guava       = "com.google.guava" % "guava"       % "25.0-jre"
-    val modelMapper = "org.modelmapper"  % "modelmapper" % "1.1.3"
-    val failsafe    = "net.jodah"        % "failsafe"    % "1.1.0"
+    val guava       = "com.google.guava" % "guava"       % "27.0.1-jre"
+    val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.2"
+    val failsafe    = "net.jodah"        % "failsafe"    % "2.0.1"
 
     /* Security */
-    val jjwt     = "io.jsonwebtoken" % "jjwt"         % "0.9.0"
+    val jjwt     = "io.jsonwebtoken" % "jjwt"         % "0.9.1"
     val imgscalr = "org.imgscalr"    % "imgscalr-lib" % "4.2"
 
     object Test {
-      val scalaMock = "org.scalamock" %% "scalamock" % Versions.scalaMock
-      // also add ScalaTest as a framework to run the tests
-
-      val mockito         = "org.mockito"     % "mockito-core"      % "2.18.3"
-      val restAssured     = "io.rest-assured" % "rest-assured"      % "3.1.0"
-      val assertjCore     = "org.assertj"     % "assertj-core"      % "3.9.1"
-      val assertjGuava    = "org.assertj"     % "assertj-guava"     % "3.2.0"
-      val assertjJodaTime = "org.assertj"     % "assertj-joda-time" % "2.0.0"
-      val scalaTest       = "org.scalatest"   %% "scalatest"        % Versions.scalaTest
-
+      val scalaMock    = "org.scalamock"   %% "scalamock"    % Versions.scalaMock
+      val mockito      = "org.mockito"     % "mockito-core"  % "2.24.5'"
+      val restAssured  = "io.rest-assured" % "rest-assured"  % "3.3.0"
+      val assertjCore  = "org.assertj"     % "assertj-core"  % "3.12.0"
+      val assertjGuava = "org.assertj"     % "assertj-guava" % "3.2.1"
+      val scalaTest    = "org.scalatest"   %% "scalatest"    % Versions.scalaTest
     }
 
     private[Dependencies] object Versions {
       // Play components dependencies
       lazy val playJson = "2.7.0"
-      // Joda dependencies
-      lazy val jodaConvert         = "2.0.1"
-      lazy val jodaTime            = "2.9.9"
-      lazy val jodaJacksonDatatype = "2.9.4"
-      lazy val jodaMoney           = "0.12"
-      lazy val jodaTimeHibernate   = "1.4"
-      lazy val jodaBeans           = "2.2"
-      lazy val jodaCollect         = "1.0"
       // Test dependencies
       lazy val scalaMock = "4.1.0"
       lazy val scalaTest = "3.0.4"
