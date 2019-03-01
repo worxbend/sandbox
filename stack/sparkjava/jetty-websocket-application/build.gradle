@@ -30,7 +30,7 @@ dependencies {
   compile group: 'org.zeroturnaround', name: 'zt-zip', version: '1.13'
   compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.7'
   /* Test-dependencies */
-  testCompile group: 'org.assertj', name: 'assertj-core', version: '3.12.0'
+  testCompile group: 'org.assertj', name: 'assertj-core', version: '3.12.1'
   testCompile group: 'org.assertj', name: 'assertj-guava', version: '3.2.1'
   testCompile group: 'com.novocode', name: 'junit-interface', version: '0.11'
   testCompile group: 'org.jukito', name: 'jukito', version: '1.5'
