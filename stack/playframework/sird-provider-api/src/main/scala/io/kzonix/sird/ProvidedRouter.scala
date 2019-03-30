@@ -13,15 +13,16 @@ trait ProvidedRouter extends Router {
   final lazy val prefix: String = {
     if (routeVersion == 0) routePrefix else versioned(routeVersion)
   }
-  private lazy val versioned = routeWithVersion(routePrefix)(_)
+  
+  private lazy val versioned = routeWithVersion(routePrefix)(_: Int)
 
   /**
    * Route path. Can be overrode in implementation of [[Router]].
    */
-  def routePrefix: String = ""
+  abstract def routePrefix: String = ""
 
   /**
    * Route version. Can be overrode in implementation of [[Router]].
    */
-  def routeVersion: Int = 0
+  abstract def routeVersion: Int = 0
 }
