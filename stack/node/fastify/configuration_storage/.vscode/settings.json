@@ -1,8 +1,7 @@
 {
-  "files.exclude": {
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
-  }
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "npm.enableScriptExplorer": true,
+    "javascript.format.enable": false
 }

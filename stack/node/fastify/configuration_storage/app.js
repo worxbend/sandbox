@@ -2,13 +2,21 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-// const initMongo = require('./mongoose-init')
+const initMongo = require('./mongoose-init')
 
 module.exports = async (fastify, opts) => {
   // Place here your custom code!
-  // await initMongo(opts)
+  let configuration = {
+    'mongo.host': 'localhost',
+    'mongo.port': 21017,
+    'mongo.db': 'mydb'
+  }
+  opts = {
+    ...opts,
+    ...configuration
+  }
+  await initMongo(opts)
   // Do not touch the following lines
-
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
