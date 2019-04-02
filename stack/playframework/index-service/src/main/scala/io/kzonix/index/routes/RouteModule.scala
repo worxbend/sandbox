@@ -6,7 +6,7 @@ import net.codingwell.scalaguice.{ ScalaModule, ScalaMultibinder }
 
 class RouteModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
-    val routerMulti = ScalaMultibinder.newSetBinder[ProvidedRouter](binder)
-    routerMulti.addBinding.to[IndexRoute]
+    val routeMultiBinder = ScalaMultibinder.newSetBinder[ProvidedRouter](binder)
+    routeMultiBinder.addBinding.to[IndexRoute]
   }
 }

@@ -46,7 +46,7 @@
     "fastify-rate-limit": "^2.0.0",
     "fastify-redis": "^3.0.0",
     "fastify-swagger": "^2.0.0",
-    "make-dir": "^3.0.0",
+    "fs-extra": "^7.0.1",
     "mongoose": "^5.4.9"
   },
   "devDependencies": {

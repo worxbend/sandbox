@@ -9,10 +9,13 @@ import play.api.routing.sird._
 
 class IndexRoute @Inject()(controller: IndexController) extends SimpleRouter with ProvidedRouter {
 
-  override def routePrefix: String = "/index/"
+  import play.api.mvc.Handler
+
+  override def routePrefix: String = "/main/"
 
   override def routeVersion: Int = 1
 
+  val b = Map[RequestMethodExtractor, Handler]()
   override def routes: Routes = {
     case GET(p"/index") => controller.index
   }

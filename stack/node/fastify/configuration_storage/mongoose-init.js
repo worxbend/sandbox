@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 
 // TODO: add logic of reading of connection url from configuration file.
 
-module.exports = async function (configuration) {
+module.exports = async function (instance, configuration) {
   return new Promise((resolve, reject) => {
+    configuration = fallbackConfiguration(instance, configuration)
     console.log('Initialization of mongoose configuration')
     let host = configuration['mongo.host']
     let port = configuration['mongo.port']
@@ -20,4 +21,12 @@ module.exports = async function (configuration) {
       resolve('connect')
     })
   })
+}
+
+function fallbackConfiguration(serverInstance, configuration) {
+  let falbackConfiguration = serverInstance.mongoConf()
+  return {
+    ...configuration,
+    ...falbackConfiguration
+  }
 }

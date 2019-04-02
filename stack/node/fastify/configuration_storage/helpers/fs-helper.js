@@ -1,23 +1,24 @@
 'use strict'
-const fs = require('fs')
+const fse = require('fs-extra')
 const path = require('path')
-const makeDir = require('make-dir')
 const AdmZip = require('adm-zip')
 
 class FileSystemHelper {
   /**
    * Write file.
-   * @param dirPath {String} Absolute destination path.
-   * @param filename {String} File name with extension.
-   * @param data {Buffer} Data for writing.
+   * @param {String} dirPath Absolute destination path.
+   * @param {String} filename  File name with extension.
+   * @param {Buffer} data  Data for writing.
    * @returns Object which contains file metadata.
    */
-  static async writeFile (dirPath, filename, data) {
-    await makeDir(dirPath)
+  static async writeFile(dirPath, filename, data) {
     await FileSystemHelper._writeFile(dirPath, filename, data)
   }
 
-  static async writeZipFile (dirPath, zipFileName, { innerFileName, buffer }) {
+  static async writeZipFile(dirPath, zipFileName, {
+    innerFileName,
+    buffer
+  }) {
     let newZipFile = new AdmZip()
     newZipFile.addFile(innerFileName, buffer)
     let createdZipBuffer = newZipFile.toBuffer()
@@ -25,19 +26,13 @@ class FileSystemHelper {
     return createdZipBuffer
   }
 
-  static _writeFile (dirPath, filename, buffer) {
+  static _writeFile(dirPath, filename, buffer) {
     return new Promise((resolve, reject) => {
-      fs.writeFile(path.join(dirPath, filename), buffer, 'utf8', err => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
-        }
-      })
+      fse.outputJSON()
     })
   }
 
-  static _readFile (filePath) {
+  static _readFile(filePath) {
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, (err, data) => {
         if (err) {
@@ -49,7 +44,7 @@ class FileSystemHelper {
     })
   }
 
-  static _deleteFile (filePath) {
+  static _deleteFile(filePath) {
     return new Promise((resolve, reject) => {
       fs.unlink(filePath, (err) => {
         if (err) {
@@ -58,6 +53,12 @@ class FileSystemHelper {
           resolve(true)
         }
       })
+    })
+  }
+
+  static _deleteDirectory(dirPath) {
+    return new Promise((resolve, reject) => {
+      fs.
     })
   }
 }
