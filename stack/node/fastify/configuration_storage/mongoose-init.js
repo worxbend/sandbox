@@ -22,8 +22,11 @@ module.exports = async function (instance, configuration) {
     })
   })
 }
-
-function fallbackConfiguration(serverInstance, configuration) {
+/**
+ * @param {object} serverInstance Fastify context.
+ * @param {object} configuration Configuration object.
+ */
+function fallbackConfiguration (serverInstance, configuration) {
   let falbackConfiguration = serverInstance.mongoConf()
   return {
     ...configuration,
