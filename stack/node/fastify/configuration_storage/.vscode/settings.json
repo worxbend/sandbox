@@ -3,5 +3,19 @@
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "npm.enableScriptExplorer": true,
-    "javascript.format.enable": false
+    "javascript.format.enable": false,
+    "standard._legacyModuleResolve": true,
+    "standard.autoFixOnSave": true,
+    "standard.usePackageJson": true,
+    "path-intellisense.autoSlashAfterDirectory": true,
+    "path-intellisense.extensionOnImport": true,
+    "prettier.eslintIntegration": true,
+    "tslint.enable": false,
+    "javascript.autoClosingTags": false,
+    "html.format.preserveNewLines": false,
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "files.insertFinalNewline": true,
+    "editor.fontFamily": "'Fira Code', 'monospace', monospace, 'Fira Code'",
+    "editor.fontLigatures": true
 }
