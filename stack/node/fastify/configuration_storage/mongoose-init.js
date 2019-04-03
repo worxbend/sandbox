@@ -22,6 +22,7 @@ module.exports = async function (instance, configuration) {
     })
   })
 }
+
 /**
  * @param {object} serverInstance Fastify context.
  * @param {object} configuration Configuration object.
