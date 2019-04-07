@@ -1,9 +1,16 @@
 pipeline {
   agent none
   stages {
-    stage('') {
+    stage('error') {
       steps {
-        waitUntil()
+        waitUntil() {
+          echo 'Hello world'
+        }
+
+        timestamps() {
+          echo 'Finish'
+        }
+
       }
     }
   }
