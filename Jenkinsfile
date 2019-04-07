@@ -1,16 +1,9 @@
 pipeline {
   agent none
   stages {
-    stage('error') {
+    stage('Test::printMessage') {
       steps {
-        waitUntil() {
-          echo 'Hello world'
-        }
-
-        timestamps() {
-          echo 'Finish'
-        }
-
+        echo 'Finished!!!'
       }
     }
   }
