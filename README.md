@@ -9,3 +9,4 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=security_rating)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dccbfee0bd394b3594f975296e9fcc64)](https://www.codacy.com/app/balyszyn/kzonix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kzonix/kzonix&amp;utm_campaign=Badge_Grade)
