@@ -1,5 +1,5 @@
 # Kzonix [WIP]
-[![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=kzonix%2Fmaster)](http://limpid.kzonix.com.ua:9000/job/kzonix/job/master/)
+[![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=kzonix%2Fmaster?style=flat-square)](http://limpid.kzonix.com.ua:9000/job/kzonix/job/master/)
 [![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=legacy-kzonix)](http://limpid.kzonix.com.ua:9000/job/legacy-kzonix/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=alert_status)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=code_smells)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
