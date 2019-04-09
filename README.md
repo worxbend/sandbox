@@ -1,4 +1,5 @@
 # Kzonix [WIP]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a02aff0b11df435fa5bf1e16d59be991)](https://app.codacy.com/app/balyszyn/kzonix?utm_source=github.com&utm_medium=referral&utm_content=kzonix/kzonix&utm_campaign=Badge_Grade_Settings)
 [![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=kzonix%2Fmaster&style=flat-square)](http://limpid.kzonix.com.ua:9000/job/kzonix/job/master/)
 [![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=legacy-kzonix)](http://limpid.kzonix.com.ua:9000/job/legacy-kzonix/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=alert_status)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
