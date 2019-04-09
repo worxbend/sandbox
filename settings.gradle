@@ -1,8 +1,5 @@
 rootProject.name = "kzonix"
 enableFeaturePreview("IMPROVED_POM_SUPPORT")
-include "stack:micronaut:configuration-management"
-include "stack:micronaut:community-blog"
-include "stack:micronaut:community-statistic"
 include "stack:sparkjava:jetty-websocket-application"
 include "stack:sparkjava:lib:spark-dto-api"
 include "stack:sparkjava:lib:spark-guice-extension"

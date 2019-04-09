@@ -1,5 +1,0 @@
-profile: service
-defaultPackage: com.kzonix.configuration.management
----
-testFramework: junit
-sourceLanguage: java
