@@ -39,7 +39,7 @@
     "fastify-env": "^0.6.2",
     "fastify-graceful-shutdown": "^2.0.0",
     "fastify-healthcheck": "^2.0.0",
-    "fastify-jwt": "^0.9.0",
+    "fastify-jwt": "^0.10.0",
     "fastify-knexjs": "^1.0.14",
     "fastify-knexjs-mock": "^1.0.19",
     "fastify-plugin": "^1.2.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-node": "8.0.1",
     "eslint-plugin-promise": "4.1.1",
     "eslint-plugin-standard": "4.0.0",
-    "eslint-plugin-unicorn": "8.0.1",
+    "eslint-plugin-unicorn": "8.0.2",
     "tap": "12.6.1"
   }
 }
