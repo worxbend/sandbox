@@ -1,5 +1,5 @@
-import Dependencies.{scalaGuice, _}
 import CommonBuildConfiguration._
+import Dependencies.{scalaGuice, _}
 
 lazy val commonSettings = {
   commonDependencies ++ BaseSettings.defaultSettings
@@ -7,7 +7,7 @@ lazy val commonSettings = {
 
 lazy val kzonix = (project in file("."))
 
-lazy val `sird-provider-api` = (project in file(ConfigPaths.api(Seq("sird-provider"))))
+lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := CommonBuildConfiguration.preformProjectLibraryApiName("sird-provider"),
@@ -20,7 +20,7 @@ lazy val `sird-provider-api` = (project in file(ConfigPaths.api(Seq("sird-provid
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
 
-lazy val `sird-provider` = (project in file(ConfigPaths.lib(Seq("sird-provider"))))
+lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provider"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := "sird-provider",
@@ -35,7 +35,7 @@ lazy val `sird-provider` = (project in file(ConfigPaths.lib(Seq("sird-provider")
   .dependsOn(`sird-provider-api`)
   .aggregate(`sird-provider-api`)
 
-lazy val `play-utile` = (project in file(ConfigPaths.lib(Seq("play-utile"))))
+lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := "play-utile",
@@ -51,7 +51,7 @@ lazy val `play-utile` = (project in file(ConfigPaths.lib(Seq("play-utile"))))
   .aggregate(`sird-provider`)
 
 
-lazy val `play-underpressure-api` = (project in file(ConfigPaths.api(Seq("play","play-underpressure"))))
+lazy val `play-underpressure-api` = (project in file(ConfigPaths.Play.api(Seq("play", "play-underpressure"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := CommonBuildConfiguration.preformProjectLibraryApiName("play-underpressure"),
@@ -64,7 +64,7 @@ lazy val `play-underpressure-api` = (project in file(ConfigPaths.api(Seq("play",
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
 
-lazy val `play-underpressure` = (project in file(ConfigPaths.lib(Seq("play","play-underpressure"))))
+lazy val `play-underpressure` = (project in file(ConfigPaths.Play.lib(Seq("play", "play-underpressure"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := "play-underpressure",
@@ -79,7 +79,7 @@ lazy val `play-underpressure` = (project in file(ConfigPaths.lib(Seq("play","pla
   .dependsOn(`play-underpressure-api`)
   .aggregate(`play-underpressure-api`)
 
-lazy val `index-service` = (project in file(ConfigPaths.service(Seq("index"))))
+lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"))))
   .enablePlugins(PlayService).settings(commonSettings: _*)
   .settings(inThisBuild(Seq(
     name := preformServiceName("index"),
