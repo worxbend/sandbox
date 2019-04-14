@@ -51,6 +51,8 @@ object ConfigPaths {
   object ScalaFX {}
 
   object VertX {}
+
+  object Http4s {}
 }
 
 object CommonConfiguration {}
