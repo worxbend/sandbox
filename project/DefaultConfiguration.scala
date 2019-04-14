@@ -10,10 +10,10 @@ object BaseSettings {
     scalaVersion := "2.12.8",
     organization := "io.kzonix",
     organizationName := "Kzonix",
-    version := Utils.getVersion, // common version number for all services
-    homepage := Some(url("https://www.scala-sbt.org")),
+    version := Utils.Versions.snapshot(1), // common version number for all services
+    homepage := Some(url("http://limpid.kzonix.com.ua")),
     startYear := Some(2018),
-    description := "A build tool for Scala.",
+    description := "N/A",
     licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
     resolvers ++= Seq(
       Resolver.sonatypeRepo("snapshots"),
@@ -22,9 +22,32 @@ object BaseSettings {
   )
 
   object Utils {
-    def getVersion: String = {
-      val date: java.util.Date = Calendar.getInstance.getTime
-      new SimpleDateFormat("yy.MM").format(date).concat("-SNAPSHOT")
+
+    object Versions {
+      def snapshot: String = {
+        version.concat("-SNAPSHOT")
+      }
+
+      private def version = {
+        val date: java.util.Date = Calendar.getInstance.getTime
+        new SimpleDateFormat("yy.MM").format(date)
+      }
+
+      def snapshot(subVersion: Int): String = {
+        version.concat("-%02d".format(subVersion)).concat("-SNAPSHOT")
+      }
+
+      def milestone(num: Int): String = {
+        version.concat(s"M$num")
+      }
+
+      def generalAvailability: String = {
+        version.concat("-GA")
+      }
+
+      def beta(num: Int): String = {
+        version.concat("-%04db".format(num))
+      }
     }
   }
 
