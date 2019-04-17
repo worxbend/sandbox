@@ -23,26 +23,39 @@ object CommonBuildConfiguration {
 object ConfigPaths {
   val root = "./"
 
-  def lib: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: (args toList))
-  }
-
-  def api: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-api"
-  }
-
-  def service: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-service"
-  }
-
   private def normalizedPath: Seq[String] => String =
     (args: Seq[String]) => {
       s"${args.mkString("/")}"
     }
 
-  def impl: Seq[String] => String = (args: Seq[String]) => {
-    root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-impl"
+  object Play {
+    def lib: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", "playframework") ::: (args toList))
+    }
+
+    def api: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-api"
+    }
+
+    def service: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-service"
+    }
+
+    def impl: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-impl"
+    }
   }
+
+  object Udash {}
+
+  object ScalaFX {}
+
+  object VertX {}
+
+  object Http4s {}
+
+  object PicoliCLI {}
+
 }
 
 object CommonConfiguration {}
