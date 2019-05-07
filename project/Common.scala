@@ -13,9 +13,9 @@ object CommonBuildConfiguration {
     (libraryName: String) => {
       normalizedName("api")(libraryName)
     }
-
-  private def normalizedName(typeName: String)(name: String) = {
-    s"$name${if (!typeName.isEmpty) "-" + typeName}"
+  lazy val normalizedName: String ⇒ String ⇒ String = (typeName: String) ⇒
+    (name: String) ⇒ {
+      s"$name${if (!typeName.isEmpty) "-" + typeName}"
   }
 
 }
@@ -23,39 +23,51 @@ object CommonBuildConfiguration {
 object ConfigPaths {
   val root = "./"
 
-  private def normalizedPath: Seq[String] => String =
+  lazy val normalizedPath: Seq[String] => String =
     (args: Seq[String]) => {
       s"${args.mkString("/")}"
     }
 
-  object Play {
-    def lib: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", "playframework") ::: (args toList))
-    }
+  trait Project {
 
-    def api: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-api"
+    lazy val lib: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", stack) ::: (args toList))
     }
-
-    def service: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-service"
+    lazy val api: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-api"
     }
-
-    def impl: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", "playframework") ::: (args toList)) + "-impl"
+    lazy val service: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-service"
     }
+    lazy val impl: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-impl"
+    }
+    val stack: String
   }
 
-  object Udash {}
+  object Play extends Project {
+    override val stack: String = "playframework"
+  }
 
-  object ScalaFX {}
+  object Udash extends Project {
+    override val stack: String = "udash"
+  }
 
-  object VertX {}
+  object ScalaFX extends Project {
+    override val stack: String = "scala-fx"
+  }
 
-  object Http4s {}
+  object VertX extends Project {
+    override val stack: String = "vert-x"
+  }
 
-  object PicoliCLI {}
+  object Http4s extends Project {
+    override val stack: String = "http4s"
+  }
 
+  object PicoliCLI extends Project {
+    override val stack: String = "picoli-cli"
+  }
 }
 
 object CommonConfiguration {}
