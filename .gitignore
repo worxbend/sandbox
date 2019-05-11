@@ -466,4 +466,10 @@ project/plugins/project/
 .history
 .cache
 .lib/
+/build/
+**/build/
+stack/build/
+stack/**/build/
+stack/**/taget/
+stack/**/.gradle
 
