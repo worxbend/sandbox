@@ -10,7 +10,7 @@ pipeline {
       steps {
         sleep(time: 3, unit: 'SECONDS')
         timestamps() {
-          sleep 20
+          sleep 1
         }
 
       }
