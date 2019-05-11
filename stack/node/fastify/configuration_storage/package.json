@@ -32,9 +32,9 @@
   "dependencies": {
     "adm-zip": "^0.4.13",
     "fastify": "^2.0.0",
-    "fastify-autoload": "^0.7.0",
+    "fastify-autoload": "^0.8.0",
     "fastify-cli": "^1.0.0",
-    "fastify-compress": "^0.8.0",
+    "fastify-compress": "^0.9.0",
     "fastify-cors": "^2.0.0",
     "fastify-env": "^0.6.2",
     "fastify-graceful-shutdown": "^2.0.0",
@@ -53,13 +53,13 @@
     "standard": "12.0.1",
     "eslint": "5.16.0",
     "eslint-plugin-prettier": "3.0.1",
-    "eslint-config-prettier": "4.1.0",
+    "eslint-config-prettier": "4.2.0",
     "eslint-config-standard": "12.0.0",
     "eslint-plugin-import": "2.17.2",
-    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-node": "9.0.1",
     "eslint-plugin-promise": "4.1.1",
     "eslint-plugin-standard": "4.0.0",
     "eslint-plugin-unicorn": "8.0.2",
-    "tap": "12.6.2"
+    "tap": "13.1.8"
   }
 }
