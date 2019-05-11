@@ -10,3 +10,4 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=security_rating)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/kzonix/kzonix.svg?columns=all)](https://waffle.io/kzonix/kzonix) 
