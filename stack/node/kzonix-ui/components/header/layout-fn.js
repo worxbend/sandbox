@@ -6,16 +6,11 @@ const layoutStyle = {
   border: '1px solid #DDD'
 }
 
-const withHeader = Page =
->
-() =
->
-(
-< div
-style = { layoutStyle } >
-  < Header / >
-  < Page / >
-  < /div>
+const withHeader = Page => () => (
+  <div style={layoutStyle}>
+    <Header />
+    <Page />
+  </div>
 )
 
 export default withHeader
