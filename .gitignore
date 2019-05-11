@@ -472,4 +472,4 @@ stack/build/
 stack/**/build/
 stack/**/taget/
 stack/**/.gradle
-
+/stack/node/kzonix-ui/.next
