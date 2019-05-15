@@ -8,11 +8,12 @@ pipeline {
     }
     stage('Exit') {
       steps {
-        sleep(time: 3, unit: 'SECONDS')
+        sleep(time: 20, unit: 'SECONDS')
         timestamps() {
-          sleep 1
+          sleep(time: 1000, unit: 'MILLISECONDS')
         }
 
+        echo 'Finish'
       }
     }
   }
