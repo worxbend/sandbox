@@ -15,4 +15,4 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=kzonix_kzonix) 
 
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/985d9f9265894c8aa955000dee18d155)](https://www.codacy.com/app/limpid-kzonix/kzonix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kzonix/kzonix&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/985d9f9265894c8aa955000dee18d155)](https://www.codacy.com/app/limpid-kzonix/kzonix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kzonix/kzonix&amp;utm_campaign=Badge_Grade) [![Greenkeeper badge](https://badges.greenkeeper.io/kzonix/kzonix.svg)](https://greenkeeper.io/)
