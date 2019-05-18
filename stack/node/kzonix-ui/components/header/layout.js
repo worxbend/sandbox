@@ -1,16 +1,24 @@
 import Header from './header'
 
 const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
+  margin: 10,
+  padding: 10,
+  border: '1px solid #DDD',
+  background: '#e3e3e3'
 }
 
-const Layout = props => (
-  <div style={layoutStyle}>
-    <Header/>
-    {props.children}
-  </div>
-)
+class Layout extends React.Component {
 
-export default Layout
+  render () {
+    return <div style={layoutStyle}>
+             <Header />
+             {this.props.children}
+           </div>
+  }
+}
+
+const withHeader = Page => <Layout>
+                             <Page/>
+                           </Layout>
+
+export { Layout, withHeader }
