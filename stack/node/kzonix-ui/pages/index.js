@@ -1,11 +1,16 @@
-import Layout from '../components/header/layout'
+import { Layout } from '../components/header/layout'
+import React from 'react'
 
-export default function Index () {
-  return (
-    <Layout>
-      <p>
-        Hello world !
-      </p>
-    </Layout>
-  )
+class Index extends React.Component {
+  render () {
+    return (
+      <Layout>
+        <p>
+          Hello world !
+        </p>
+      </Layout>
+    )
+  }
 }
+
+export default Index

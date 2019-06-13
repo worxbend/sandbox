@@ -15,7 +15,7 @@ lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-p
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
@@ -28,7 +28,7 @@ lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provi
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
@@ -43,7 +43,7 @@ lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
@@ -59,7 +59,7 @@ lazy val `play-underpressure-api` = (project in file(ConfigPaths.Play.api(Seq("p
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
@@ -72,7 +72,7 @@ lazy val `play-underpressure` = (project in file(ConfigPaths.Play.lib(Seq("play"
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
@@ -88,7 +88,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
       guice,
       scalaGuice,
       logback,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test,
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     ),
     testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
   )))
