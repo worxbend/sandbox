@@ -84,6 +84,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
   .settings(inThisBuild(Seq(
     name := preformServiceName("index"),
     libraryDependencies ++= Seq(
+      filters,
       guice,
       scalaGuice,
       logback,
