@@ -1,10 +1,10 @@
 properties([
   buildDiscarder(
     logRotator(
-      artifactDaysToKeepStr: '2', 
-      artifactNumToKeepStr: '2', 
-      daysToKeepStr: '2', 
-      numToKeepStr: '2',
+      artifactDaysToKeepStr: '1', 
+      artifactNumToKeepStr: '1', 
+      daysToKeepStr: '1', 
+      numToKeepStr: '1',
     ),
   ),
 ])
