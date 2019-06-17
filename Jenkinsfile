@@ -1,3 +1,13 @@
+properties([
+  buildDiscarder(
+    logRotator(
+      artifactDaysToKeepStr: '2', 
+      artifactNumToKeepStr: '2', 
+      daysToKeepStr: '2', 
+      numToKeepStr: '2',
+    ),
+  ),
+])
 pipeline {
   agent none
   stages {
