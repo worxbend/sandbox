@@ -1,4 +1,4 @@
-logLevel := Level.Debug
+logLevel := Level.Info
 addSbtPlugin("com.geirsson"      % "sbt-scalafmt"       % "1.5.1")
 addSbtPlugin("com.typesafe.play" % "sbt-plugin"         % "2.7.3")
 addSbtPlugin("com.lightbend.sbt" % "sbt-java-formatter" % "0.4.4")

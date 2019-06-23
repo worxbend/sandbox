@@ -7,7 +7,7 @@ import sbt.{ Setting, _ }
 object BaseSettings {
   val defaultSettings: Seq[Setting[_]] = Seq(
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
-    scalaVersion := "2.12.8",
+    scalaVersion := "2.13.0",
     organization := "io.kzonix",
     organizationName := "Kzonix",
     version := Utils.Versions.snapshot(1), // common version number for all services
@@ -73,12 +73,15 @@ object Dependencies {
 
   private object Dependencies {
 
-    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.2"
+    // TODO: wait for update
+    // val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.4"
+    val scalaGuice = "net.codingwell" % "scala-guice_2.13.0-RC3" % "4.2.4"
 
     val playJson     = "com.typesafe.play" %% "play-json"      % Versions.playJson
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
 
     /* Utils */
+    val scalactic   = "org.scalactic"    %% "scalactic"  % Versions.scalactic
     val guava       = "com.google.guava" % "guava"       % "27.0.1-jre"
     val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.2"
     val failsafe    = "net.jodah"        % "failsafe"    % "2.0.1"
@@ -88,20 +91,25 @@ object Dependencies {
     val imgscalr = "org.imgscalr"    % "imgscalr-lib" % "4.2"
 
     object Test {
-      val scalaMock    = "org.scalamock"   %% "scalamock"    % Versions.scalaMock
-      val mockito      = "org.mockito"     % "mockito-core"  % "2.24.5'"
-      val restAssured  = "io.rest-assured" % "rest-assured"  % "3.3.0"
-      val assertjCore  = "org.assertj"     % "assertj-core"  % "3.12.0"
-      val assertjGuava = "org.assertj"     % "assertj-guava" % "3.2.1"
-      val scalaTest    = "org.scalatest"   %% "scalatest"    % Versions.scalaTest
+
+      //TODO: wait for update
+      val scalaMock                          = test("org.scalamock" % "scalamock_2.13.0-M3" % Versions.scalaMock)
+      val mockito                            = test("org.mockito" % "mockito-core" % "2.24.5")
+      val restAssured                        = test("io.rest-assured" % "rest-assured" % "3.3.0")
+      val assertjCore                        = test("org.assertj" % "assertj-core" % "3.12.0")
+      val assertjGuava                       = test("org.assertj" % "assertj-guava" % "3.2.1")
+      val scalaTest                          = test("org.scalatest" %% "scalatest" % Versions.scalaTest)
+      private def test: ModuleID => ModuleID = d => { d % "test" }
+
     }
 
     private[Dependencies] object Versions {
       // Play components dependencies
-      lazy val playJson = "2.7.0"
+      lazy val playJson = "2.7.4"
       // Test dependencies
-      lazy val scalaMock = "4.1.0"
-      lazy val scalaTest = "3.0.4"
+      lazy val scalaMock = "4.2.0"
+      lazy val scalaTest = "3.0.8"
+      lazy val scalactic = "3.0.8"
     }
 
   }
