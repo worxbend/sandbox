@@ -30,7 +30,7 @@
   "homepage": "https://github.com/limpid-kzonix/notification_storage#readme",
   "dependencies": {
     "fastify": "^2.0.0",
-    "fastify-autoload": "^0.8.0",
+    "fastify-autoload": "^1.0.0",
     "fastify-cli": "^1.0.0",
     "fastify-compress": "^0.10.0",
     "fastify-cors": "^2.0.0",
