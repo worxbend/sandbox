@@ -36,7 +36,7 @@
     "fastify-cli": "^1.0.0",
     "fastify-compress": "^0.10.0",
     "fastify-cors": "^2.0.0",
-    "fastify-env": "^0.6.2",
+    "fastify-env": "^1.0.0",
     "fastify-graceful-shutdown": "^2.0.0",
     "fastify-healthcheck": "^2.0.0",
     "fastify-jwt": "^1.0.0",
