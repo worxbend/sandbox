@@ -15,7 +15,7 @@ class IndexRoute @Inject()(controller: IndexController) extends SimpleRouter wit
 
   override def routeVersion: Int = 1
 
-  val b = Map[RequestMethodExtractor, Handler]()
+  val b: Map[RequestMethodExtractor, Handler] = Map[RequestMethodExtractor, Handler]()
   override def routes: Routes = {
     case GET(p"/index") => controller.index
   }

@@ -3,6 +3,8 @@
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 const initMongo = require('./mongoose-init')
+const LogRocket = require('logrocket')
+LogRocket.init('bgj3ya/kzonix')
 
 module.exports = async (fastify, opts) => {
   // Place here your custom code!
