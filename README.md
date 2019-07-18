@@ -1,12 +1,10 @@
 # Kzonix [WIP]
 
 [![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=kzonix%2Fmaster&style=flat-square)](http://limpid.kzonix.com.ua:9000/job/kzonix/job/master/)
-
-
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=alert_status)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
-
-
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/kzonix/kzonix.svg?logo=lgtm&logoWidth=36)](https://lgtm.com/projects/g/kzonix/kzonix/alerts/)
+[![DeepScan grade](https://deepscan.io/api/teams/4710/projects/6457/branches/53848/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4710&pid=6457&bid=53848)
+
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=code_smells)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
