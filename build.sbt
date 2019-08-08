@@ -7,7 +7,7 @@ lazy val commonSettings = {
 }
 val scalaVersion = "2.13.0"
 
-lazy val kzonix = (project in file("."))
+lazy val kzonix = project in file(".")
 
 lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
   .enablePlugins(PlayService)
@@ -109,6 +109,28 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
         name := preformServiceName("index"),
         libraryDependencies ++= Seq(
           filters,
+          caffeine,
+          guice,
+          scalaGuice,
+          logback
+        ),
+        testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+      )
+    )
+  )
+  .dependsOn(`sird-provider`, `play-utile`)
+  .aggregate(`sird-provider`, `play-utile`)
+
+lazy val `view-service` = (project in file(ConfigPaths.Play.app(Seq("view"))))
+  .enablePlugins(PlayScala)
+  .settings(commonSettings: _*)
+  .settings(
+    inThisBuild(
+      Seq(
+        name := preformServiceName("view"),
+        libraryDependencies ++= Seq(
+          filters,
+          caffeine,
           guice,
           scalaGuice,
           logback

@@ -5,6 +5,11 @@ object CommonBuildConfiguration {
       normalizedName("service")(serviceName)
     }
 
+  val preformAppName: String => String =
+    (serviceName: String) => {
+      normalizedName("app")(serviceName)
+    }
+
   val preformProjectLibraryImplName: String => String =
     (libraryName: String) => {
       normalizedName("impl")(libraryName)
@@ -15,7 +20,7 @@ object CommonBuildConfiguration {
     }
   lazy val normalizedName: String ⇒ String ⇒ String = (typeName: String) ⇒
     (name: String) ⇒ {
-      s"$name${if (!typeName.isEmpty) "-" + typeName}"
+      s"$name${if (typeName != null && !typeName.isEmpty) "-" + typeName}"
   }
 
 }
@@ -38,6 +43,9 @@ object ConfigPaths {
     }
     lazy val service: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(List("stack", stack) ::: (args toList)) + "-service"
+    }
+    lazy val app: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-app"
     }
     lazy val impl: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(List("stack", stack) ::: (args toList)) + "-impl"
