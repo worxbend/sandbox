@@ -1,6 +1,7 @@
 package io.kzonix.index.controllers
 
 import javax.inject.{ Inject, Singleton }
+import play.api.libs.json.Json
 import play.api.mvc._
 
 import scala.concurrent.{ ExecutionContext, Future }
@@ -11,7 +12,7 @@ class IndexController @Inject()(cc: ControllerComponents)(implicit ec: Execution
 
   def index: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     Future {
-      Ok("Hello world")
+      Ok(Json.toJson("Hello world"))
     }
   }
 }
