@@ -17,7 +17,7 @@ object BaseSettings {
     licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
     resolvers ++= Seq(
       Resolver.sonatypeRepo("snapshots"),
-      "Akka Snapshot Repository".at("http://repo.akka.io/snapshots/"),
+      "Akka Snapshot Repository".at("http://repo.akka.io/snapshots/")
     )
   )
 
@@ -92,7 +92,6 @@ object Dependencies {
 
     object Test {
 
-      //TODO: wait for update
       val scalaMock                          = test("org.scalamock" % "scalamock_2.13.0-M3" % Versions.scalaMock)
       val mockito                            = test("org.mockito" % "mockito-core" % "2.24.5")
       val restAssured                        = test("io.rest-assured" % "rest-assured" % "3.3.0")
