@@ -6,14 +6,12 @@
   "directories": {
     "test": "test"
   },
-  
   "scripts": {
     "test": "tap test/**/*.test.js",
     "start": "fastify start -l info -p 5001 app.js",
     "dev": "fastify start -l -p 5001 debug -P --watch --ignore-watch='node_modules .git logs/error.log' app.js",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/limpid-kzonix/notification_storage.git"
