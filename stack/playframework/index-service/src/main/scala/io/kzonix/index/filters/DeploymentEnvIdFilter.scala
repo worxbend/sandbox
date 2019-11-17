@@ -3,7 +3,6 @@ package io.kzonix.index.filters
 import javax.inject._
 import play.api.Configuration
 import play.api.mvc._
-import play.server.Server
 
 import scala.concurrent.ExecutionContext
 
@@ -21,9 +20,9 @@ class DeploymentEnvIdFilter @Inject()(config: Configuration)(implicit ec: Execut
   override def apply(next: EssentialAction): EssentialAction =
     EssentialAction { request: RequestHeader =>
       {
-        val value = config.get[EnvId]("docker.env")
+        val value = config.getOptional[EnvId]("docker.env")
         next(request).map { result: Result =>
-          result.withHeaders("X-Container-Id" -> value.id)
+          result.withHeaders("X-Container-Id" -> (if (value.isDefined) value.get.id else ""))
         }
       }
     }

@@ -17,6 +17,8 @@ class IndexRoute @Inject()(controller: IndexController) extends SimpleRouter wit
 
   val b: Map[RequestMethodExtractor, Handler] = Map[RequestMethodExtractor, Handler]()
   override def routes: Routes = {
-    case GET(p"/index") => controller.index
+    case GET(p"/index")      => controller.index
+    case GET(p"/asyncCache") => controller.asyncCacheTest
+    case GET(p"/syncCache")  => controller.cacheTest
   }
 }

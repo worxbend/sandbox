@@ -5,7 +5,7 @@ import Dependencies.{ scalaGuice, _ }
 lazy val commonSettings = {
   commonDependencies ++ testDependencies ++ defaultSettings
 }
-val scalaVersion = "2.13.0"
+val scalaVersion = "2.13.1"
 
 lazy val kzonix = (project in file("."))
 
