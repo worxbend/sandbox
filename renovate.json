@@ -1,6 +1,7 @@
 {
   "assignAutomerge": true,
-  "assignees": [ "limpid-kzonix" ],
+  "lables": ["dependencies'],
+  "assignees": [ "@limpid-kzonix" ],
   "branchName": "feature/deps-{{{branchPrefix}}}{{{managerBranchPrefix}}}{{{branchTopic}}}",
   "enabledManagers": ["ansible", "bazel", "cargo", "circleci",
                       "deps-edn","docker-compose", "dockerfile", "droneci", "github-actions", "gitlabci", 
@@ -10,5 +11,9 @@
   "extends": [
     "config:base", 
     "schedule:nonOfficeHours"
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "assignees": ["@limpid-kzonix"]
+  }
 }
