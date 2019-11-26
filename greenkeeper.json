@@ -3,8 +3,7 @@
     "default": {
       "packages": [
         "stack/node/fastify/configuration_storage/package.json",
-        "stack/node/fastify/notification_storage/package.json",
-        "stack/node/kzonix-ui/package.json"
+        "stack/node/fastify/notification_storage/package.json"
       ]
     }
   }
