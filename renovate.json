@@ -1,6 +1,6 @@
 {
   "assignAutomerge": true,
-  "schedule": "every day"
+  "schedule": "every day",
   "labels": ["dependencies"],
   "assignees": [ "@limpid-kzonix" ],
   "branchName": "feature/deps-{{{branchPrefix}}}{{{managerBranchPrefix}}}{{{branchTopic}}}",
