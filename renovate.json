@@ -1,5 +1,6 @@
 {
   "assignAutomerge": true,
+  "schedule": "every day"
   "labels": ["dependencies"],
   "assignees": [ "@limpid-kzonix" ],
   "branchName": "feature/deps-{{{branchPrefix}}}{{{managerBranchPrefix}}}{{{branchTopic}}}",
@@ -10,7 +11,6 @@
                       "pip_setup", "pipenv", "poetry", "sbt","terraform", "travis"],
   "extends": [
     "config:base", 
-    "schedule:nonOfficeHours"
   ],
   "vulnerabilityAlerts": {
     "labels": ["security"],
