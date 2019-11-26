@@ -1,6 +1,10 @@
 {
   "assignAutomerge": true,
-  "schedule": "every day",
+  "schedule": [
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend"
+  ],
   "labels": ["dependencies"],
   "assignees": [ "@limpid-kzonix" ],
   "branchName": "feature/deps-{{{branchPrefix}}}{{{managerBranchPrefix}}}{{{branchTopic}}}",
