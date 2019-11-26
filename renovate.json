@@ -1,6 +1,6 @@
 {
   "assignAutomerge": true,
-  "lables": ["dependencies'],
+  "lables": ["dependencies"],
   "assignees": [ "@limpid-kzonix" ],
   "branchName": "feature/deps-{{{branchPrefix}}}{{{managerBranchPrefix}}}{{{branchTopic}}}",
   "enabledManagers": ["ansible", "bazel", "cargo", "circleci",
