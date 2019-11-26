@@ -10,7 +10,7 @@
                       "maven", "npm", "pip_requirements", 
                       "pip_setup", "pipenv", "poetry", "sbt","terraform", "travis"],
   "extends": [
-    "config:base", 
+    "config:base"
   ],
   "vulnerabilityAlerts": {
     "labels": ["security"],
