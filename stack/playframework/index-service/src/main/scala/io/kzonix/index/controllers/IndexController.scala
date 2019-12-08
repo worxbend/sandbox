@@ -4,8 +4,8 @@ import javax.inject.{ Inject, Singleton }
 import play.api.cache.{ AsyncCacheApi, SyncCacheApi }
 import play.api.libs.json.Json
 import play.api.mvc._
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
 import scala.concurrent.{ Await, ExecutionContext, Future }
 
 @Singleton
