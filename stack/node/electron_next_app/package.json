@@ -1,0 +1,32 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "next-dev": "next",
+    "next-build": "next build",
+    "next-start": "next start"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Alexander Balyshyn",
+  "devDependencies": {
+    "electron": "^7.0.0"
+  },
+  "dependencies": {
+    "electron-debug": "^3.0.1",
+    "electron-is-dev": "^1.1.0",
+    "electron-util": "^0.12.2",
+    "next": "^9.1.2",
+    "opencv4nodejs": "^5.4.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  }
+}
