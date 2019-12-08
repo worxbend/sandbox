@@ -4,7 +4,7 @@ buildscript {
     maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
-    classpath "com.github.jengelman.gradle.plugins:shadow:5.1.0"
+    classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
     classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
   }
 }
@@ -28,7 +28,7 @@ dependencies {
   compile group: 'com.sparkjava', name: 'spark-core', version: '2.9.1'
   compile group: 'software.reinvent', name: 'commons', version: '0.3.12'
   compile group: 'org.zeroturnaround', name: 'zt-zip', version: '1.13'
-  compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.14'
+  compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.15'
   /* Test-dependencies */
   testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
   testCompile group: 'org.assertj', name: 'assertj-guava', version: '3.3.0'
