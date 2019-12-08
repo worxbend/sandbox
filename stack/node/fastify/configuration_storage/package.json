@@ -48,7 +48,7 @@
     "fastify-swagger": "^2.0.0",
     "fs-extra": "^8.0.0",
     "logrocket": "^1.0.1",
-    "mongoose": "^5.4.9"
+    "mongoose": "5.7.14"
   },
   "devDependencies": {
     "standard": "14.3.1",
