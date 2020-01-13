@@ -28,7 +28,7 @@ dependencies {
   compile group: 'com.sparkjava', name: 'spark-core', version: '2.9.1'
   compile group: 'software.reinvent', name: 'commons', version: '0.3.12'
   compile group: 'org.zeroturnaround', name: 'zt-zip', version: '1.13'
-  compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.16'
+  compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.17'
   /* Test-dependencies */
   testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
   testCompile group: 'org.assertj', name: 'assertj-guava', version: '3.3.0'
