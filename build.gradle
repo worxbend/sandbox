@@ -16,7 +16,7 @@ allprojects {
     maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '23.6.1-jre'
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.1'
