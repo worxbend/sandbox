@@ -18,12 +18,12 @@
   ],
   "author": "Alexander Balyshyn",
   "devDependencies": {
-    "electron": "^7.0.0"
+    "electron": "7.1.14"
   },
   "dependencies": {
     "electron-debug": "^3.0.1",
     "electron-is-dev": "^1.1.0",
-    "electron-util": "^0.12.2",
+    "electron-util": "^0.14.0",
     "next": "^9.1.2",
     "opencv4nodejs": "^5.4.0",
     "react": "^16.11.0",
