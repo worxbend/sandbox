@@ -7,7 +7,7 @@ import sbt.{ Setting, _ }
 object BaseSettings {
   val defaultSettings: Seq[Setting[_]] = Seq(
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
-    scalaVersion := "2.13.0",
+    scalaVersion := "2.13.2",
     organization := "io.kzonix",
     organizationName := "Kzonix",
     version := Utils.Versions.snapshot(1), // common version number for all services
@@ -73,9 +73,7 @@ object Dependencies {
 
   private object Dependencies {
 
-    // TODO: wait for update
-    // val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.4"
-    val scalaGuice = "net.codingwell" % "scala-guice_2.13.0-RC3" % "4.2.4"
+    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.6"
 
     val playJson     = "com.typesafe.play" %% "play-json"      % Versions.playJson
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson

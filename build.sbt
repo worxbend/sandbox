@@ -5,13 +5,13 @@ import Dependencies.{ scalaGuice, _ }
 lazy val commonSettings = {
   commonDependencies ++ testDependencies ++ defaultSettings
 }
-val scalaVersion = "2.13.1"
 
 lazy val kzonix = (project in file("."))
+  .settings(commonSettings: _*)
 
 lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
   .enablePlugins(PlayService)
-  .settings(commonSettings: _*)
+  .settings(defaultSettings: _*)
   .settings(
     inThisBuild(
       Seq(
