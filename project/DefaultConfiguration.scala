@@ -73,7 +73,7 @@ object Dependencies {
 
   private object Dependencies {
 
-    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.6"
+    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.7"
 
     val playJson     = "com.typesafe.play" %% "play-json"      % Versions.playJson
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
