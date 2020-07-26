@@ -44,7 +44,7 @@
     "fastify-knexjs-mock": "^1.0.19",
     "fastify-plugin": "^1.2.0",
     "fastify-rate-limit": "^3.0.0",
-    "fastify-redis": "^4.0.0",
+    "fastify-redis": "4.0.3",
     "fastify-swagger": "^2.0.0",
     "fs-extra": "^9.0.0",
     "logrocket": "1.0.10",
