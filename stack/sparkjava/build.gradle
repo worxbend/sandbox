@@ -16,6 +16,6 @@ subprojects {
     testCompile 'org.assertj:assertj-guava:3.4.0'
     testCompile 'com.novocode:junit-interface:0.11'
     testCompile 'org.jukito:jukito:1.5'
-    testCompile 'info.debatty:java-string-similarity:1.2.1'
+    testCompile 'info.debatty:java-string-similarity:2.0.0'
   }
 }
