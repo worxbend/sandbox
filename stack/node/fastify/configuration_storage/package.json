@@ -32,7 +32,7 @@
   "dependencies": {
     "adm-zip": "^0.4.13",
     "fastify": "^3.0.0",
-    "fastify-autoload": "^1.2.2",
+    "fastify-autoload": "^3.0.0",
     "fastify-cli": "^2.0.0",
     "fastify-compress": "2.0.1",
     "fastify-cors": "^3.0.0",
