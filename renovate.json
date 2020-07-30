@@ -2,8 +2,7 @@
   "assignAutomerge": true,
   "schedule": [
     "after 10pm every weekday",
-    "before 5am every weekday",
-    "every weekend"
+    "before 5am every weekday"
   ],
   "labels": ["dependencies"],
   "assignees": [ "@limpid-kzonix" ],
