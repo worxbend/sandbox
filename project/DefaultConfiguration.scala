@@ -73,7 +73,7 @@ object Dependencies {
 
   private object Dependencies {
 
-    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.6"
+    val scalaGuice = "net.codingwell" %% "scala-guice" % "4.2.11"
 
     val playJson     = "com.typesafe.play" %% "play-json"      % Versions.playJson
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
@@ -81,8 +81,8 @@ object Dependencies {
     /* Utils */
     val scalactic   = "org.scalactic"    %% "scalactic"  % Versions.scalactic
     val guava       = "com.google.guava" % "guava"       % "29.0-jre"
-    val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.7"
-    val failsafe    = "net.jodah"        % "failsafe"    % "2.3.5"
+    val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.8"
+    val failsafe    = "net.jodah"        % "failsafe"    % "2.4.0"
 
     /* Security */
     val jjwt     = "io.jsonwebtoken" % "jjwt"         % "0.9.1"

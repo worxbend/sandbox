@@ -4,7 +4,7 @@ buildscript {
     maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
-    classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+    classpath "com.github.jengelman.gradle.plugins:shadow:6.0.0"
     classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
   }
 }
@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-  compile group: 'com.sparkjava', name: 'spark-core', version: '2.9.1'
+  compile group: 'com.sparkjava', name: 'spark-core', version: '2.9.2'
   compile group: 'software.reinvent', name: 'commons', version: '0.3.12'
   compile group: 'org.zeroturnaround', name: 'zt-zip', version: '1.14'
   compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.19'
@@ -34,7 +34,7 @@ dependencies {
   testCompile group: 'org.assertj', name: 'assertj-guava', version: '3.4.0'
   testCompile group: 'com.novocode', name: 'junit-interface', version: '0.11'
   testCompile group: 'org.jukito', name: 'jukito', version: '1.5'
-  testCompile group: 'info.debatty', name: 'java-string-similarity', version: '1.2.1'
+  testCompile group: 'info.debatty', name: 'java-string-similarity', version: '2.0.0'
 }
 
 shadowJar {
