@@ -1,7 +1,5 @@
 # Kzonix [WIP]
 
-[![Build Status](http://limpid.kzonix.com.ua:9000/buildStatus/icon?job=kzonix%2Fmaster&style=flat-square)](http://limpid.kzonix.com.ua:9000/job/kzonix/job/master/)
-
 [![buddy branch](https://app.buddy.works/kzonix/kzonix/repository/branch/master/badge.svg?token=6a022b986a515dcdf2450744c1128769962f961fcb92dfe1076ddd023eb0d858 "buddy branch")](https://app.buddy.works/kzonix/kzonix/repository/branch/master)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=alert_status)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
