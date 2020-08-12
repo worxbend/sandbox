@@ -13,7 +13,7 @@ ext {
   jacksonModule = "com.fasterxml.jackson.module"
   jacksonDatatype = "com.fasterxml.jackson.datatype"
   jacksonCore = "com.fasterxml.jackson.core"
-  jacksonVersion = "2.9.7"
+  jacksonVersion = "2.11.2"
 }
 dependencies {
   compile project(":stack:sparkjava:lib:spark-request-matcher-api")
