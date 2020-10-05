@@ -31,7 +31,7 @@
   "homepage": "https://github.com/limpid-kzonix/configuration_storage#readme",
   "dependencies": {
     "adm-zip": "^0.4.13",
-    "fastify": "3.5.0",
+    "fastify": "3.5.1",
     "fastify-autoload": "3.3.0",
     "fastify-cli": "2.3.0",
     "fastify-compress": "3.3.1",
