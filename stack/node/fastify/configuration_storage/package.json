@@ -47,7 +47,7 @@
     "fastify-redis": "4.0.3",
     "fastify-swagger": "3.4.0",
     "fs-extra": "^9.0.0",
-    "logrocket": "1.0.13",
+    "logrocket": "1.0.14",
     "mongoose": "^5.4.9"
   },
   "devDependencies": {
