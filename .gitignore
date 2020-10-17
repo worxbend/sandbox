@@ -200,9 +200,7 @@ StyleCopReport.xml
 *.tlb
 *.tli
 *.tlh
-*.tmp
 *.tmp_proj
-*.log
 *.vspscc
 *.vssscc
 .builds
@@ -463,7 +461,6 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
-.history
 .cache
 .lib/
 /build/
@@ -472,7 +469,6 @@ components/build/
 components/**/build/
 components/**/taget/
 components/**/.gradle
-/components/node/kzonix-ui/.next
 
 .metals/
 .bloop/
