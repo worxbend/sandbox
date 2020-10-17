@@ -1,6 +1,6 @@
 # Kzonix [WIP]
 
-[![buddy branch](https://app.buddy.works/kzonix/kzonix/repository/branch/master/badge.svg?token=6a022b986a515dcdf2450744c1128769962f961fcb92dfe1076ddd023eb0d858 "buddy branch")](https://app.buddy.works/kzonix/kzonix/repository/branch/master)
+[![buddy branch](https://app.buddy.works/kzonix/kzonix/repository/branch/main/badge.svg?token=6a022b986a515dcdf2450744c1128769962f961fcb92dfe1076ddd023eb0d858 "buddy branch")](https://app.buddy.works/kzonix/kzonix/repository/branch/main)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=alert_status)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/kzonix/kzonix.svg?logo=lgtm&logoWidth=36)](https://lgtm.com/projects/g/kzonix/kzonix/alerts/)
