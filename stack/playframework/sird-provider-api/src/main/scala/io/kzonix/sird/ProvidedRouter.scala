@@ -1,31 +1,21 @@
 package io.kzonix.sird
 
+import io.kzonix.sird.ProvidedRouter.routeWithVersion
 import play.api.routing.Router
 
 /** Uses for definition String Interpolation Route Definition */
 trait ProvidedRouter extends Router {
 
+  val routePrefix: RoutePrefix
   /**
    * Provides a router prefix based on router configuration: base prefix and route version.
    *
    * @return String prefix
    */
-  final lazy val prefix: String = {
-    if (routeVersion == 0) routePrefix else versioned(routeVersion)
-  }
+  final lazy val prefix: String = routeWithVersion(routePrefix)
+}
 
-  private lazy val versioned = routeWithVersion(routePrefix)(_: Int)
-
-  /**
-   * Route path. Can be overrode in implementation of [[Router]].
-   */
-  def routePrefix: String = ""
-
-  /**
-   * Route version. Can be overrode in implementation of [[Router]].
-   */
-  def routeVersion: Int = 0
-
+private[sird] object ProvidedRouter {
   /**
    * Concat route version with the base route path.
    *
@@ -35,6 +25,10 @@ trait ProvidedRouter extends Router {
    *
    * @return Function responsible to concat route version and path.
    */
-  private[sird] lazy val routeWithVersion: String => Int => String = (prefix: String) =>
-    (ver: Int) => Router.concatPrefix("/v" + ver, prefix)
+  private[sird] def routeWithVersion: RoutePrefix => String = (routePrefix: RoutePrefix) => {
+    if (routePrefix.isVersional)
+      Router.concatPrefix("v" + routePrefix.version, routePrefix.prefix)
+    else
+      routePrefix.prefix
+  }
 }

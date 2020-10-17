@@ -1,7 +1,8 @@
 package io.kzonix.index.routes
 
 import io.kzonix.index.controllers.IndexController
-import io.kzonix.sird.ProvidedRouter
+import io.kzonix.sird.{ProvidedRouter, RoutePrefix}
+import io.kzonix.sird.RouteVersioningHelper.RoutePrefixWithVersion
 import javax.inject.Inject
 import play.api.routing.Router.Routes
 import play.api.routing.SimpleRouter
@@ -11,9 +12,7 @@ class IndexRoute @Inject()(controller: IndexController) extends SimpleRouter wit
 
   import play.api.mvc.Handler
 
-  override def routePrefix: String = "/main/"
-
-  override def routeVersion: Int = 1
+  override val routePrefix: RoutePrefix = "/main".withVersion(1)
 
   val b: Map[RequestMethodExtractor, Handler] = Map[RequestMethodExtractor, Handler]()
   override def routes: Routes = {
