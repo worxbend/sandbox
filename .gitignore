@@ -476,3 +476,4 @@ stack/**/.gradle
 
 .metals/
 .bloop/
+.bsp/

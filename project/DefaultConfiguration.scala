@@ -17,7 +17,7 @@ object BaseSettings {
     licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
     resolvers ++= Seq(
       Resolver.sonatypeRepo("snapshots"),
-      "Akka Snapshot Repository".at("http://repo.akka.io/snapshots/")
+      "Akka Snapshot Repository".at("https://repo.akka.io/snapshots/")
     )
   )
 
