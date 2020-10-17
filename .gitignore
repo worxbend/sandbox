@@ -468,11 +468,11 @@ project/plugins/project/
 .lib/
 /build/
 **/build/
-stack/build/
-stack/**/build/
-stack/**/taget/
-stack/**/.gradle
-/stack/node/kzonix-ui/.next
+components/build/
+components/**/build/
+components/**/taget/
+components/**/.gradle
+/components/node/kzonix-ui/.next
 
 .metals/
 .bloop/

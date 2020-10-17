@@ -35,20 +35,22 @@ object ConfigPaths {
 
   trait Project {
 
+    private val basePath = "components"
+
     lazy val lib: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", stack) ::: (args toList))
+      root + normalizedPath(List(basePath, stack) ::: (args toList))
     }
     lazy val api: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-api"
+      root + normalizedPath(List(basePath, stack) ::: (args toList)) + "-api"
     }
     lazy val service: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-service"
+      root + normalizedPath(List(basePath, stack) ::: (args toList)) + "-service"
     }
     lazy val app: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-app"
+      root + normalizedPath(List(basePath, stack) ::: (args toList)) + "-app"
     }
     lazy val impl: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(List("stack", stack) ::: (args toList)) + "-impl"
+      root + normalizedPath(List(basePath, stack) ::: (args toList)) + "-impl"
     }
     val stack: String
   }
