@@ -1,0 +1,89 @@
+- pipeline: "Build"
+  trigger_mode: "SCHEDULED"
+  ref_name: "refs/heads/main*"
+  ref_type: "WILDCARD"
+  start_date: "2020-06-06T00:39:00.000Z"
+  delay: 10080
+  paused: true
+  trigger_condition: "ALWAYS"
+  actions:
+  - action: "Execute: sbt scalafmt"
+    type: "BUILD"
+    working_directory: "/buddy/kzonix"
+    docker_image_name: "library/openjdk"
+    docker_image_tag: "8"
+    execute_commands:
+    - "sbt scalafmt"
+    setup_commands:
+    - "# Install Scala"
+    - "curl -fsL https://downloads.typesafe.com/scala/2.12.5/scala-2.12.5.tgz | tar xfz - -C /root/ && \\"
+    - "echo >> /root/.bashrc && \\"
+    - "echo \"export PATH=~/scala-2.12.5/bin:$PATH\" >> /root/.bashrc"
+    - "# Install sbt"
+    - "curl -L -o sbt-1.1.2.deb https://dl.bintray.com/sbt/debian/sbt-1.1.2.deb && \\"
+    - "dpkg -i sbt-1.1.2.deb && \\"
+    - "rm sbt-1.1.2.deb && \\"
+    - "apt-get update && \\"
+    - "apt-get install sbt && \\"
+    - "sbt sbtVersion"
+    cached_dirs:
+    - "/root/.ivy2/cache"
+    - "/root/.sbt"
+    volume_mappings:
+    - "/:/buddy/kzonix"
+    trigger_condition: "ALWAYS"
+    shell: "BASH"
+  - action: "Execute: sbt compile"
+    type: "BUILD"
+    working_directory: "/buddy/kzonix"
+    docker_image_name: "library/openjdk"
+    docker_image_tag: "8"
+    execute_commands:
+    - "sbt compile"
+    setup_commands:
+    - "# Install Scala"
+    - "curl -fsL https://downloads.typesafe.com/scala/2.13.0-M1/scala-2.13.0-M1.tgz | tar xfz - -C /root/ && \\"
+    - "echo >> /root/.bashrc && \\"
+    - "echo \"export PATH=~/scala-2.13.0-M1/bin:$PATH\" >> /root/.bashrc"
+    - "# Install sbt"
+    - "curl -L -o sbt-1.1.4.deb https://dl.bintray.com/sbt/debian/sbt-1.1.4.deb && \\"
+    - "dpkg -i sbt-1.1.4.deb && \\"
+    - "rm sbt-1.1.4.deb && \\"
+    - "apt-get update && \\"
+    - "apt-get install sbt && \\"
+    - "sbt sbtVersion"
+    cached_dirs:
+    - "/root/.ivy2/cache"
+    - "/root/.sbt"
+    volume_mappings:
+    - "/:/buddy/kzonix"
+    trigger_condition: "ALWAYS"
+    shell: "BASH"
+    execute_every_command: true
+  - action: "Execute: sbt compile"
+    type: "BUILD"
+    working_directory: "/buddy/kzonix"
+    docker_image_name: "library/openjdk"
+    docker_image_tag: "8"
+    execute_commands:
+    - "sbt compile"
+    setup_commands:
+    - "# Install Scala"
+    - "curl -fsL https://downloads.typesafe.com/scala/2.12.5/scala-2.12.5.tgz | tar xfz - -C /root/ && \\"
+    - "echo >> /root/.bashrc && \\"
+    - "echo \"export PATH=~/scala-2.12.5/bin:$PATH\" >> /root/.bashrc"
+    - "# Install sbt"
+    - "curl -L -o sbt-1.1.2.deb https://dl.bintray.com/sbt/debian/sbt-1.1.2.deb && \\"
+    - "dpkg -i sbt-1.1.2.deb && \\"
+    - "rm sbt-1.1.2.deb && \\"
+    - "apt-get update && \\"
+    - "apt-get install sbt && \\"
+    - "sbt sbtVersion"
+    cached_dirs:
+    - "/root/.ivy2/cache"
+    - "/root/.sbt"
+    volume_mappings:
+    - "/:/buddy/kzonix"
+    trigger_condition: "VAR_IS"
+    shell: "BASH"
+    run_next_parallel: true
