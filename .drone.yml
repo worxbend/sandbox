@@ -1,24 +1,50 @@
 kind: pipeline
 type: docker
-name: default
+name: Test
 
 steps:
 - name: greeting
   image: golang:1.12
   commands:
-  - echo Hello World
+  - echo Running tests...
+---
+kind: pipeline
+type: docker
+name: Publishing artifact
+
+steps:
+- name: greeting
+  image: golang:1.12
+  commands:
+  - echo Publishing artifact
+---
+kind: pipeline
+type: docker
+name: Docker Hub
+
+steps:
+- name: greeting
+  image: golang:1.12
+  commands:
+  - echo Docker Hub
 ---
 kind: pipeline
 type: ssh
-name: SSH
+name: SSH Connection to Master Deployment Server
 
 server:
-  host: 192.168.68.112
-  user: kzonix
+  host: 
+    from_secret: SSH_HOST
+  user: 
+    from_secret: SSH_LOGIN
   password:
     from_secret: SSH_PASS
 
 steps:
 - name: greeting
+  environment:
+    PASS: 
+      from_secret: SSH_PASS
   commands:
-  - echo hello world
+  - echo To be replaced with command for deployment
+  - echo ${PASS} | sudo -S apt update
