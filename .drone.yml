@@ -25,7 +25,9 @@ steps:
 ---
 kind: pipeline
 type: ssh
-name: ssh
+name: ssh-connect
+depends_on:
+- test
 server:
   host: 
     from_secret: SSH_HOST
@@ -35,8 +37,6 @@ server:
     from_secret: SSH_PASS
 
 steps:
-- name: greeting
-  depends_on:
-  - test/docker-hub
+- name: command
   commands:
   - echo To be replaced with command for deployment
