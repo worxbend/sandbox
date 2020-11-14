@@ -10,7 +10,7 @@ steps:
 ---
 kind: pipeline
 type: ssh
-name: default
+name: SSH
 
 server:
   host: 192.168.68.112
