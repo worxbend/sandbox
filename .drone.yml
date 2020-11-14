@@ -35,8 +35,13 @@ server:
     from_secret: SSH_LOGIN
   password:
     from_secret: SSH_PASS
-
+environment:
+      RAILS_ENV: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DATABASE_HOST: database
+      PARALLEL_TEST_PROCESSORS: 15
 steps:
 - name: command
   commands:
-  - echo To be replaced with command for deployment
+  - echo ${RAILS_ENV} To be replaced with command for deployment
