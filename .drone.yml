@@ -3,27 +3,22 @@ type: docker
 name: Test
 
 steps:
-- name: greeting
+- name: Test
   image: golang:1.12
   commands:
   - echo Running tests...
----
-kind: pipeline
-type: docker
-name: Publishing artifact
+  
+- name: Build
+  image: golang:1.12
+  commands:
+  - echo Building...
 
-steps:
-- name: greeting
+- name: Publishing
   image: golang:1.12
   commands:
   - echo Publishing artifact
----
-kind: pipeline
-type: docker
-name: Docker Hub
 
-steps:
-- name: greeting
+- name: Docker Hub
   image: golang:1.12
   commands:
   - echo Docker Hub
@@ -42,8 +37,7 @@ server:
 
 steps:
 - name: greeting
-  environment:
-    PASS: 
-      from_secret: SSH_PASS
+  depends_on:
+  - Docker Hub
   commands:
   - echo To be replaced with command for deployment
