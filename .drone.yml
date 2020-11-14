@@ -47,4 +47,4 @@ steps:
       from_secret: SSH_PASS
   commands:
   - echo To be replaced with command for deployment
-  - echo ${PASS} | sudo -S apt update
+  - echo ${SSH_PASS} | sudo -S apt update
