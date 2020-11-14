@@ -27,7 +27,7 @@ steps:
       DATABASE_HOST: database
       PARALLEL_TEST_PROCESSORS: 15
   commands:
-  - echo Docker Hub $RAILS_ENV
+  - echo Docker Hub ${RAILS_ENV}
 ---
 kind: pipeline
 type: ssh
