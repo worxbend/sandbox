@@ -21,13 +21,9 @@ steps:
 - name: docker-hub
   image: golang:1.12
   environment:
-      RAILS_ENV: test
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      DATABASE_HOST: database
-      PARALLEL_TEST_PROCESSORS: 15
+      TEST_ENV: Test
   commands:
-  - echo Docker Hub $RAILS_ENV
+  - echo Docker Hub $TEST_ENV
 ---
 kind: pipeline
 type: ssh
