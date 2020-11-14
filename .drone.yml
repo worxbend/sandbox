@@ -1,32 +1,31 @@
 kind: pipeline
 type: docker
-name: Test
+name: test
 
 steps:
-- name: Test
+- name: test
   image: golang:1.12
   commands:
   - echo Running tests...
   
-- name: Build
+- name: build
   image: golang:1.12
   commands:
   - echo Building...
 
-- name: Publishing
+- name: publish
   image: golang:1.12
   commands:
   - echo Publishing artifact
 
-- name: Docker Hub
+- name: docker-hub
   image: golang:1.12
   commands:
   - echo Docker Hub
 ---
 kind: pipeline
 type: ssh
-name: SSH Connection to Master Deployment Server
-
+name: ssh
 server:
   host: 
     from_secret: SSH_HOST
@@ -38,6 +37,6 @@ server:
 steps:
 - name: greeting
   depends_on:
-  - Docker Hub
+  - test/docker-hub
   commands:
   - echo To be replaced with command for deployment
