@@ -1,12 +1,8 @@
 kind: pipeline
 type: exec
-name: default
-
-platform:
-  os: linux
-  arch: amd64
+name: test-pipeline
 
 steps:
 - name: greeting
   commands:
-  - echo hello world
+  - echo Hello World
