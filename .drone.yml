@@ -7,3 +7,18 @@ steps:
   image: golang:1.12
   commands:
   - echo Hello World
+---
+kind: pipeline
+type: ssh
+name: default
+
+server:
+  host: 192.168.68.112
+  user: kzonix
+  password:
+    from_secret: SSH_PASS
+
+steps:
+- name: greeting
+  commands:
+  - echo hello world
