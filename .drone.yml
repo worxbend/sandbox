@@ -45,4 +45,4 @@ server:
 steps:
 - name: command
   commands:
-  - echo $RAILS_ENV To be replaced with command for deployment
+  - echo To be replaced with command for deployment
