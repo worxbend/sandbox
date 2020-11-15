@@ -1,8 +1,8 @@
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
+import sbt._
 import sbt.Keys._
-import sbt.{ Setting, _ }
 
 object BaseSettings {
   val defaultSettings: Seq[Setting[_]] = Seq(
@@ -11,7 +11,7 @@ object BaseSettings {
     organization := "io.kzonix",
     organizationName := "Kzonix",
     version := Utils.Versions.snapshot(1), // common version number for all services
-    homepage := Some(url("http://limpid.kzonix.com.ua")),
+    homepage := Some(url("http://recursive-escalator.io")),
     startYear := Some(2018),
     description := "N/A",
     licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
@@ -57,19 +57,11 @@ object Dependencies {
 
   def scalaGuice: ModuleID = Dependencies.scalaGuice
 
-  def commonDependencies: Seq[Setting[_]] = Seq(
-    libraryDependencies ++= Seq(
-      Dependencies.playJson,
-      Dependencies.playJsonJoda
-    )
-  )
+  def commonDependencies: Seq[Setting[_]] =
+    Seq(libraryDependencies ++= Seq(Dependencies.playJson, Dependencies.playJsonJoda))
 
-  def testDependencies: Seq[Setting[_]] = Seq(
-    libraryDependencies ++= Seq(
-      Dependencies.Test.scalaTest,
-      Dependencies.Test.scalaMock
-    )
-  )
+  def testDependencies: Seq[Setting[_]] =
+    Seq(libraryDependencies ++= Seq(Dependencies.Test.scalaTest, Dependencies.Test.scalaMock))
 
   private object Dependencies {
 
@@ -79,7 +71,7 @@ object Dependencies {
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
 
     /* Utils */
-    val scalactic   = "org.scalactic"    %% "scalactic"  % Versions.scalactic
+    val scalactic   = "org.scalactic"   %% "scalactic"   % Versions.scalactic
     val guava       = "com.google.guava" % "guava"       % "30.0-jre"
     val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.8"
     val failsafe    = "net.jodah"        % "failsafe"    % "2.4.0"
@@ -96,13 +88,13 @@ object Dependencies {
       val assertjCore                        = test("org.assertj" % "assertj-core" % "3.12.0")
       val assertjGuava                       = test("org.assertj" % "assertj-guava" % "3.2.1")
       val scalaTest                          = test("org.scalatest" %% "scalatest" % Versions.scalaTest)
-      private def test: ModuleID => ModuleID = d => { d % "test" }
+      private def test: ModuleID => ModuleID = (d: ModuleID) => { d % "test" }
 
     }
 
     private[Dependencies] object Versions {
       // Play components dependencies
-      lazy val playJson = "2.7.4"
+      lazy val playJson  = "2.7.4"
       // Test dependencies
       lazy val scalaMock = "4.2.0"
       lazy val scalaTest = "3.0.8"

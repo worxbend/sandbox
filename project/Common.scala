@@ -21,7 +21,7 @@ object CommonBuildConfiguration {
   lazy val normalizedName: String ⇒ String ⇒ String = (typeName: String) ⇒
     (name: String) ⇒ {
       s"$name${if (typeName != null && !typeName.isEmpty) "-" + typeName}"
-  }
+    }
 
 }
 

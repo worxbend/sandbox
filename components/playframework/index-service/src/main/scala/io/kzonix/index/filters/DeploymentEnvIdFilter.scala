@@ -2,7 +2,10 @@ package io.kzonix.index.filters
 
 import javax.inject._
 import play.api.Configuration
-import play.api.mvc._
+import play.api.mvc.EssentialAction
+import play.api.mvc.EssentialFilter
+import play.api.mvc.RequestHeader
+import play.api.mvc.Result
 
 import scala.concurrent.ExecutionContext
 
@@ -15,15 +18,14 @@ import scala.concurrent.ExecutionContext
  * It is used below by the `map` method.
  */
 @Singleton
-class DeploymentEnvIdFilter @Inject()(config: Configuration)(implicit ec: ExecutionContext) extends EssentialFilter {
+class DeploymentEnvIdFilter @Inject() (config: Configuration)(implicit ec: ExecutionContext) extends EssentialFilter {
 
   override def apply(next: EssentialAction): EssentialAction =
     EssentialAction { request: RequestHeader =>
-      {
-        val value = config.getOptional[EnvId]("docker.env")
-        next(request).map { result: Result =>
-          result.withHeaders("X-Container-Id" -> (if (value.isDefined) value.get.id else ""))
-        }
+      val value: Option[EnvId] = config.getOptional[EnvId]("docker.env")
+      next(request).map { result: Result =>
+        result.withHeaders("X-Container-Id" -> value.map((_: EnvId).id).getOrElse(""))
       }
     }
+
 }
