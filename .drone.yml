@@ -3,42 +3,43 @@ type: docker
 name: test
 
 steps:
-- name: test
-  image: golang:1.12
-  commands:
-  - echo Running tests...
-  
-- name: build
-  image: golang:1.12
-  commands:
-  - echo Building...
+  - name: test
+    image: golang:1.12
+    commands:
+      - echo Running tests...
+    when:
+      event:
+        - custom
+  - name: build
+    image: golang:1.12
+    commands:
+      - echo Building...
 
-- name: publish
-  image: golang:1.12
-  commands:
-  - echo Publishing artifact
+  - name: publish
+    image: golang:1.12
+    commands:
+      - echo Publishing artifact
 
-- name: docker-hub
-  image: golang:1.12
-  environment:
+  - name: docker-hub
+    image: golang:1.12
+    environment:
       TEST_ENV: Test
-  commands:
-  - echo Docker Hub $TEST_ENV
+    commands:
+      - echo Docker Hub $TEST_ENV
 ---
 kind: pipeline
 type: ssh
 name: ssh-connect
-depends_on:
-- test
+
 server:
-  host: 
+  host:
     from_secret: SSH_HOST
-  user: 
+  user:
     from_secret: SSH_LOGIN
   password:
     from_secret: SSH_PASS
 
 steps:
-- name: command
-  commands:
-  - echo To be replaced with command for deployment
+  - name: command
+    commands:
+      - echo To be replaced with command for deployment
