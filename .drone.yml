@@ -7,6 +7,9 @@ steps:
     image: golang:1.12
     commands:
       - echo Running tests...
+    when:
+      event:
+        - custom
 
   - name: build
     image: golang:1.12
@@ -24,6 +27,9 @@ steps:
       TEST_ENV: Test
     commands:
       - echo Docker Hub $TEST_ENV
+when:
+  event:
+    - custom
 ---
 kind: pipeline
 type: ssh
