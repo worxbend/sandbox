@@ -15,21 +15,26 @@ steps:
     image: golang:1.12
     commands:
       - echo Building...
+    when:
+      event:
+        - custom
 
   - name: publish
     image: golang:1.12
     commands:
       - echo Publishing artifact
-
+    when:
+      event:
+        - custom
   - name: docker-hub
     image: golang:1.12
     environment:
       TEST_ENV: Test
     commands:
       - echo Docker Hub $TEST_ENV
-when:
-  event:
-    - custom
+    when:
+      event:
+        - custom
 ---
 kind: pipeline
 type: ssh
@@ -47,3 +52,6 @@ steps:
   - name: command
     commands:
       - echo To be replaced with command for deployment
+    when:
+      event:
+        - custom
