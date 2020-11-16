@@ -9,7 +9,7 @@ trigger:
     - custom
 steps:
   - name: test
-    image: golang:1.12
+    image: golang:1.15
     commands:
       - echo Running tests...
     when:
@@ -17,7 +17,7 @@ steps:
         - custom
 
   - name: build
-    image: golang:1.12
+    image: golang:1.15
     commands:
       - echo Building...
     when:
@@ -25,14 +25,14 @@ steps:
         - custom
 
   - name: publish
-    image: golang:1.12
+    image: golang:1.15
     commands:
       - echo Publishing artifact
     when:
       event:
         - custom
   - name: docker-hub
-    image: golang:1.12
+    image: golang:1.15
     environment:
       TEST_ENV: Test
     commands:
