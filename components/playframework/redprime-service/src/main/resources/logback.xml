@@ -17,7 +17,7 @@
 
   <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
     <encoder>
-      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+      <pattern>%coloredLevel :: %date -|🧵 %thread |- %logger{30} - %message%n%xException{50}</pattern>
     </encoder>
   </appender>
 
@@ -33,6 +33,7 @@
 
   <logger level="INFO" name="play"/>
   <logger level="DEBUG" name="application"/>
+  <logger level="DEBUG" name="io.kzonix.redprime"/>
 
   <root level="INFO">
     <appender-ref ref="ASYNCFILE"/>

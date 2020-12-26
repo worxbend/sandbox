@@ -1,8 +1,9 @@
-import java.text.SimpleDateFormat
-import java.util.Calendar
-
+import com.typesafe.sbt.packager.Keys.maintainer
 import sbt._
 import sbt.Keys._
+
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 object BaseSettings {
 
@@ -16,6 +17,7 @@ object BaseSettings {
     scalaVersion := "2.13.4",
     organization := "io.kzonix",
     organizationName := "Kzonix",
+    maintainer := "balyszyn@gmail.com",
     version := Utils.Versions.snapshot(1), // common version number for all services
     homepage := Some(url("http://recursive-escalator.io")),
     startYear := Some(2018),
@@ -94,13 +96,14 @@ object Dependencies {
 
     object Test {
 
-      val scalaMock                          = test("org.scalamock" % "scalamock_2.13.0-M3" % Versions.scalaMock)
-      val mockito                            = test("org.mockito" % "mockito-core" % "2.24.5")
-      val restAssured                        = test("io.rest-assured" % "rest-assured" % "3.3.0")
-      val assertjCore                        = test("org.assertj" % "assertj-core" % "3.12.0")
-      val assertjGuava                       = test("org.assertj" % "assertj-guava" % "3.2.1")
-      val scalaTest                          = test("org.scalatest" %% "scalatest" % Versions.scalaTest)
-      private def test: ModuleID => ModuleID = (d: ModuleID) => { d % "test" }
+      val scalaMock    = "org.scalamock"   % "scalamock_2.13.0-M3" % Versions.scalaMock
+      val mockito      = "org.mockito"     % "mockito-core"        % "2.24.5"
+      val restAssured  = "io.rest-assured" % "rest-assured"        % "3.3.0"
+      val assertjCore  = "org.assertj"     % "assertj-core"        % "3.12.0"
+      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.2.1"
+      val scalaTest    = "org.scalatest"  %% "scalatest"           % Versions.scalaTest
+
+      def testDependency: ModuleID => ModuleID = (d: ModuleID) => { d % "test" }
 
     }
 

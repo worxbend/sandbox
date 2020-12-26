@@ -1,4 +1,4 @@
-package io.kzonix.index.controllers
+package io.kzonix.redprime.controllers
 
 import play.api.cache.AsyncCacheApi
 import play.api.cache.SyncCacheApi
@@ -7,13 +7,13 @@ import play.api.mvc._
 
 import javax.inject.Inject
 import javax.inject.Singleton
+import scala.concurrent.duration.DurationInt
 import scala.concurrent.Await
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
-import scala.concurrent.duration.DurationInt
 
 @Singleton
-class IndexController @Inject() (
+class BotContextController @Inject() (
     cc: ControllerComponents,
     cache: AsyncCacheApi,
     syncCache: SyncCacheApi
@@ -21,10 +21,10 @@ class IndexController @Inject() (
     ec: ExecutionContext
 ) extends AbstractController(cc) {
 
-  def index: Action[AnyContent] =
+  def index(num: String): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
       Future {
-        Ok(Json.toJson("Hello world"))
+        Ok(Json.toJson("Hello world and " + num))
       }
     }
 

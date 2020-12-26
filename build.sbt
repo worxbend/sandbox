@@ -9,26 +9,25 @@ lazy val commonSettings = {
 
 lazy val kzonix = (project in file("."))
   .settings(commonSettings: _*)
+  .settings(
+    name := "kzonix"
+  )
 
 lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
   .enablePlugins(PlayService)
   .settings(defaultSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := CommonBuildConfiguration.preformProjectLibraryApiName("sird-provider"),
-        libraryDependencies ++= Seq(
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := CommonBuildConfiguration.preformProjectLibraryApiName("sird-provider"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )
@@ -37,21 +36,17 @@ lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provi
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := "sird-provider",
-        libraryDependencies ++= Seq(
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := CommonBuildConfiguration.preformProjectLibraryImplName("sird-provider"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )
@@ -62,21 +57,17 @@ lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := "play-utile",
-        libraryDependencies ++= Seq(
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := "play-utile",
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )
@@ -94,21 +85,17 @@ lazy val `play-underpressure-api` = (project in file(
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := CommonBuildConfiguration.preformProjectLibraryApiName("play-underpressure"),
-        libraryDependencies ++= Seq(
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := preformProjectLibraryApiName("play-underpressure"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )
@@ -124,48 +111,72 @@ lazy val `play-underpressure` = (project in file(
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := "play-underpressure",
-        libraryDependencies ++= Seq(
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := preformProjectLibraryImplName("play-underpressure"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )
   .dependsOn(`play-underpressure-api`)
   .aggregate(`play-underpressure-api`)
 
+/* ------- Applications ------ */
+
+lazy val `redprime-service` = (project in file(ConfigPaths.Play.service(Seq("redprime"))))
+  .enablePlugins(PlayService)
+  .settings(commonSettings: _*)
+  .settings(
+    name := preformServiceName("redprime"),
+    libraryDependencies ++= Seq(
+      filters,
+      caffeine,
+      guice,
+      scalaGuice,
+      logback,
+      ws
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
+      )
+    )
+  )
+  .dependsOn(
+    `sird-provider`,
+    `play-utile`
+  )
+  .aggregate(
+    `sird-provider`,
+    `play-utile`
+  )
+
 lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    inThisBuild(
-      Seq(
-        name := preformServiceName("index"),
-        libraryDependencies ++= Seq(
-          filters,
-          caffeine,
-          guice,
-          scalaGuice,
-          logback
-        ),
-        testOptions in Test := Seq(
-          Tests.Argument(
-            TestFrameworks.JUnit,
-            "-a",
-            "-v"
-          )
-        )
+    name := preformServiceName("index"),
+    libraryDependencies ++= Seq(
+      filters,
+      caffeine,
+      guice,
+      scalaGuice,
+      logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
     )
   )

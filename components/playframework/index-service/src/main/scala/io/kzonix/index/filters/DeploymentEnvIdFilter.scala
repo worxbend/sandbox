@@ -1,12 +1,12 @@
 package io.kzonix.index.filters
 
-import javax.inject._
 import play.api.Configuration
 import play.api.mvc.EssentialAction
 import play.api.mvc.EssentialFilter
 import play.api.mvc.RequestHeader
 import play.api.mvc.Result
 
+import javax.inject._
 import scala.concurrent.ExecutionContext
 
 /**
@@ -15,7 +15,7 @@ import scala.concurrent.ExecutionContext
  * [[Filters]] class.
  *
  * @param ec This class is needed to execute code asynchronously.
- * It is used below by the `map` method.
+ *           It is used below by the `map` method.
  */
 @Singleton
 class DeploymentEnvIdFilter @Inject() (config: Configuration)(implicit ec: ExecutionContext) extends EssentialFilter {

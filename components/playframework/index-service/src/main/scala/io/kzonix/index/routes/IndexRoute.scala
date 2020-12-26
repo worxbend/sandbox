@@ -4,11 +4,12 @@ import io.kzonix.index.controllers.IndexController
 import io.kzonix.sird.ProvidedRouter
 import io.kzonix.sird.RoutePrefix
 import io.kzonix.sird.RouteVersioningHelper.RoutePrefixWithVersion
-import javax.inject.Inject
 import play.api.routing.Router.Routes
 import play.api.routing.SimpleRouter
 import play.api.routing.sird.GET
 import play.api.routing.sird.UrlContext
+
+import javax.inject.Inject
 
 class IndexRoute @Inject() (controller: IndexController) extends SimpleRouter with ProvidedRouter {
 

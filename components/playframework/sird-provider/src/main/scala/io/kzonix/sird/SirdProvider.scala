@@ -1,8 +1,10 @@
 package io.kzonix.sird
 
-import javax.inject.{ Inject, Singleton }
 import play.api.http.HttpConfiguration
 import play.api.routing.Router
+
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Provides a fully-constructed, composed instance of [[Router]].
@@ -12,7 +14,7 @@ import play.api.routing.Router
  * @param httpConfig Play http configuration contains context path value which is needed to construct and combine routers.
  */
 @Singleton
-class SirdProvider @Inject()(routes: Set[ProvidedRouter], httpConfig: HttpConfiguration) extends RouterProvider {
+class SirdProvider @Inject() (routes: Set[ProvidedRouter], httpConfig: HttpConfiguration) extends RouterProvider {
 
   /**
    * Provides a fully-constructed and injected instance of [[Router]].
@@ -26,8 +28,14 @@ class SirdProvider @Inject()(routes: Set[ProvidedRouter], httpConfig: HttpConfig
    */
   override def get(): Router =
     routes
-      .map((router: ProvidedRouter) => {
-        router.withPrefix(Router.concatPrefix(httpConfig.context, router.prefix))
-      })
+      .map { (router: ProvidedRouter) =>
+        router.withPrefix(
+          Router.concatPrefix(
+            httpConfig.context,
+            router.prefix
+          )
+        )
+      }
       .reduce((current: Router, next: Router) => current.orElse(next))
+
 }

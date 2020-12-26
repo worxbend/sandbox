@@ -6,14 +6,13 @@ import play.api.routing.Router
 /** Uses for definition String Interpolation Route Definition */
 trait ProvidedRouter extends Router {
 
-  val routePrefix: RoutePrefix
-
   /**
    * Provides a router prefix based on router configuration: base prefix and route version.
    *
    * @return String prefix
    */
   final lazy val prefix: String = routeWithVersion(routePrefix)
+  val routePrefix: RoutePrefix
 }
 
 private[sird] object ProvidedRouter {

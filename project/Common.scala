@@ -15,14 +15,14 @@ object CommonBuildConfiguration {
       normalizedName("impl")(libraryName)
     }
 
-  val preformProjectLibraryApiName: String => String  =
+  val preformProjectLibraryApiName: String => String =
     (libraryName: String) => {
       normalizedName("api")(libraryName)
     }
 
-  lazy val normalizedName: String ⇒ String ⇒ String   = (typeName: String) ⇒
-    (name: String) ⇒ {
-      s"$name${if (typeName != null && !typeName.isEmpty) "-" + typeName}"
+  lazy val normalizedName: String ⇒ String ⇒ String = (typeName: String) ⇒
+    (name: String) => {
+      s"$name${if (typeName != null && typeName.nonEmpty) "-" + typeName}"
     }
 
 }
@@ -39,7 +39,7 @@ object ConfigPaths {
 
     private val basePath = "components"
 
-    lazy val lib: Seq[String] => String     = (args: Seq[String]) => {
+    lazy val lib: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(
         List(
           basePath,
@@ -48,7 +48,7 @@ object ConfigPaths {
       )
     }
 
-    lazy val api: Seq[String] => String     = (args: Seq[String]) => {
+    lazy val api: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(
         List(
           basePath,
@@ -66,7 +66,7 @@ object ConfigPaths {
       ) + "-service"
     }
 
-    lazy val app: Seq[String] => String     = (args: Seq[String]) => {
+    lazy val app: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(
         List(
           basePath,
@@ -75,7 +75,7 @@ object ConfigPaths {
       ) + "-app"
     }
 
-    lazy val impl: Seq[String] => String    = (args: Seq[String]) => {
+    lazy val impl: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(
         List(
           basePath,

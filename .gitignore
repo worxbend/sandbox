@@ -465,10 +465,6 @@ project/plugins/project/
 .lib/
 /build/
 **/build/
-components/build/
-components/**/build/
-components/**/taget/
-components/**/.gradle
 
 .metals/
 .bloop/
