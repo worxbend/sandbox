@@ -100,7 +100,7 @@ object Dependencies {
       val mockito      = "org.mockito"     % "mockito-core"        % "2.24.5"
       val restAssured  = "io.rest-assured" % "rest-assured"        % "3.3.0"
       val assertjCore  = "org.assertj"     % "assertj-core"        % "3.19.0"
-      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.2.1"
+      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.4.0"
       val scalaTest    = "org.scalatest"  %% "scalatest"           % Versions.scalaTest
 
       def testDependency: ModuleID => ModuleID = (d: ModuleID) => { d % "test" }
