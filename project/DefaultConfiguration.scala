@@ -86,7 +86,7 @@ object Dependencies {
 
     /* Utils */
     val scalactic = "org.scalactic"   %% "scalactic" % Versions.scalactic
-    val guava     = "com.google.guava" % "guava"     % "30.0-jre"
+    val guava     = "com.google.guava" % "guava"     % "30.1-jre"
     val failsafe  = "net.jodah"        % "failsafe"  % "2.4.0"
 
     /* Security */
@@ -96,10 +96,10 @@ object Dependencies {
     object Test {
 
       val scalaMock    = "org.scalamock"   % "scalamock_2.13.0-M3" % Versions.scalaMock
-      val mockito      = "org.mockito"     % "mockito-core"        % "2.24.5"
+      val mockito      = "org.mockito"     % "mockito-core"        % "2.28.2"
       val restAssured  = "io.rest-assured" % "rest-assured"        % "3.3.0"
-      val assertjCore  = "org.assertj"     % "assertj-core"        % "3.12.0"
-      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.2.1"
+      val assertjCore  = "org.assertj"     % "assertj-core"        % "3.19.0"
+      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.4.0"
       val scalaTest    = "org.scalatest"  %% "scalatest"           % Versions.scalaTest
 
       def testDependency: ModuleID => ModuleID = (module: ModuleID) => {
