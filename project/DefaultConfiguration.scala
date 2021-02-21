@@ -1,6 +1,6 @@
 import com.typesafe.sbt.packager.Keys.maintainer
-import sbt._
 import sbt.Keys._
+import sbt._
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -41,7 +41,7 @@ object BaseSettings {
       }
 
       def snapshot(subVersion: Int): String =
-        version.concat("-%02d".format(subVersion)).concat("-SNAPSHOT")
+        version + "-%02d".format(subVersion) + "-SNAPSHOT"
 
       def milestone(num: Int): String =
         version.concat(s"M$num")
@@ -85,10 +85,9 @@ object Dependencies {
     val playJsonJoda = "com.typesafe.play" %% "play-json-joda" % Versions.playJson
 
     /* Utils */
-    val scalactic   = "org.scalactic"   %% "scalactic"   % Versions.scalactic
-    val guava       = "com.google.guava" % "guava"       % "30.0-jre"
-    val modelMapper = "org.modelmapper"  % "modelmapper" % "2.3.9"
-    val failsafe    = "net.jodah"        % "failsafe"    % "2.4.0"
+    val scalactic = "org.scalactic"   %% "scalactic" % Versions.scalactic
+    val guava     = "com.google.guava" % "guava"     % "30.0-jre"
+    val failsafe  = "net.jodah"        % "failsafe"  % "2.4.0"
 
     /* Security */
     val jjwt     = "io.jsonwebtoken" % "jjwt"         % "0.9.1"
@@ -103,7 +102,9 @@ object Dependencies {
       val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.2.1"
       val scalaTest    = "org.scalatest"  %% "scalatest"           % Versions.scalaTest
 
-      def testDependency: ModuleID => ModuleID = (d: ModuleID) => { d % "test" }
+      def testDependency: ModuleID => ModuleID = (module: ModuleID) => {
+        module % "test"
+      }
 
     }
 

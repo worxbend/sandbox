@@ -1,14 +1,16 @@
 package io.kzonix.redprime.client
 
+import akka.http.scaladsl.model.HttpMethods.POST
 import com.google.inject.Inject
+import io.kzonix.redprime.client.RedditClient.LoginQueryParams._
 import io.kzonix.redprime.client.model.OAuthResponse.responseReads
 import io.kzonix.redprime.client.model.OAuthResponse
 import io.kzonix.redprime.client.model.PasswordGrantTypePayload
+import play.api.Configuration
+import play.api.Logger
 import play.api.libs.ws.WSAuthScheme
 import play.api.libs.ws.WSClient
 import play.api.libs.ws.WSResponse
-import play.api.Configuration
-import play.api.Logger
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
@@ -33,16 +35,26 @@ class RedditClient @Inject() (
         WSAuthScheme.BASIC
       )
       .withQueryStringParameters(
-        "grant_type" -> cfg.grantType,
-        "username"   -> cfg.userName,
-        "password"   -> cfg.password
+        GrantType -> cfg.grantType,
+        UserName  -> cfg.userName,
+        Password  -> cfg.password
       )
-      .execute("POST")
+      .execute(POST.value)
 
     eventualResponse.map { response =>
       logger.info(response.json.toString())
       response.json.validate[OAuthResponse].asOpt
     }
+  }
+
+}
+
+object RedditClient {
+
+  object LoginQueryParams {
+    val GrantType = "grant_type"
+    val UserName  = "username"
+    val Password  = "password"
   }
 
 }

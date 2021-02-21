@@ -17,7 +17,7 @@ class RedditUserOverviewTask @Inject() (
 ) {
   actorSystem.scheduler.scheduleAtFixedRate(
     initialDelay = 0.microseconds,
-    interval = 60.seconds,
+    interval = 15.seconds,
     receiver = actorRef,
     message = RedditUserOverviewActor.Tick
   )

@@ -48,6 +48,8 @@ object ConfigPaths {
       )
     }
 
+    /**
+     */
     lazy val api: Seq[String] => String = (args: Seq[String]) => {
       root + normalizedPath(
         List(
@@ -55,6 +57,15 @@ object ConfigPaths {
           stack
         ) ::: (args toList)
       ) + "-api"
+    }
+
+    lazy val impl: Seq[String] => String = (args: Seq[String]) => {
+      root + normalizedPath(
+        List(
+          basePath,
+          stack
+        ) ::: (args toList)
+      ) + "-impl"
     }
 
     lazy val service: Seq[String] => String = (args: Seq[String]) => {
@@ -73,15 +84,6 @@ object ConfigPaths {
           stack
         ) ::: (args toList)
       ) + "-app"
-    }
-
-    lazy val impl: Seq[String] => String = (args: Seq[String]) => {
-      root + normalizedPath(
-        List(
-          basePath,
-          stack
-        ) ::: (args toList)
-      ) + "-impl"
     }
 
     val stack: String

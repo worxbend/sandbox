@@ -7,9 +7,11 @@ import io.kzonix.redprime.client.RedditClient
 import io.kzonix.redprime.client.model.OAuthResponse
 import play.api.Logger
 
-import java.time.LocalDateTime
 import javax.inject.Inject
+import scala.concurrent.Await
 import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
 
 object RedditUserOverviewActor {
 
@@ -27,12 +29,16 @@ class RedditUserOverviewActor @Inject() (
 
   override def receive: Receive = {
     case Tick =>
-      rc.login.map { (res: Option[OAuthResponse]) =>
-        logger.info(s"Result 🥰 - ${LocalDateTime.now().toString}")
-        logger.info(s"$res")
-
-        sender() ! "Done"
+      val promise: Future[Unit] = rc.login.map { (maybeRes: Option[OAuthResponse]) =>
+        maybeRes match {
+          case Some(res) => logger.info(res.expiresIn.toString)
+        }
       }
+      Await.result(
+        promise,
+        20.seconds
+      )
+
   }
 
 }

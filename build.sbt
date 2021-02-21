@@ -8,9 +8,13 @@ lazy val commonSettings = {
 }
 
 lazy val kzonix = (project in file("."))
-  .settings(commonSettings: _*)
   .settings(
     name := "kzonix"
+  )
+  .aggregate(
+    `twitee-service`,
+    `index-service`,
+    `redprime-service`
   )
 
 lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
@@ -171,6 +175,36 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
       guice,
       scalaGuice,
       logback
+    ),
+    testOptions in Test := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
+      )
+    )
+  )
+  .dependsOn(
+    `sird-provider`,
+    `play-utile`
+  )
+  .aggregate(
+    `sird-provider`,
+    `play-utile`
+  )
+
+lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twitee"))))
+  .enablePlugins(PlayService)
+  .settings(commonSettings: _*)
+  .settings(
+    name := preformServiceName("redprime"),
+    libraryDependencies ++= Seq(
+      filters,
+      caffeine,
+      guice,
+      scalaGuice,
+      logback,
+      ws
     ),
     testOptions in Test := Seq(
       Tests.Argument(
