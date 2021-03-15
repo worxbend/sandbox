@@ -42,7 +42,7 @@ dependencies {
     implementation("io.micronaut.elasticsearch:micronaut-elasticsearch")
     runtimeOnly("org.slf4j:log4j-over-slf4j:1.7.30")
     implementation("org.apache.logging.log4j:log4j-api:2.14.1")
-    implementation("org.apache.logging.log4j:log4j-core:2.14.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.14.1")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
     implementation("io.micronaut.nats:micronaut-nats")
