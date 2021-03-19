@@ -86,7 +86,7 @@ object Dependencies {
 
     /* Utils */
     val scalactic = "org.scalactic"   %% "scalactic" % Versions.scalactic
-    val guava     = "com.google.guava" % "guava"     % "30.1-jre"
+    val guava     = "com.google.guava" % "guava"     % "30.1.1-jre"
     val failsafe  = "net.jodah"        % "failsafe"  % "2.4.0"
 
     /* Security */
