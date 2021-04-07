@@ -96,7 +96,7 @@ object Dependencies {
     object Test {
 
       val scalaMock    = "org.scalamock"   % "scalamock_2.13.0-M3" % Versions.scalaMock
-      val mockito      = "org.mockito"     % "mockito-core"        % "3.8.0"
+      val mockito      = "org.mockito"     % "mockito-core"        % "3.9.0"
       val restAssured  = "io.rest-assured" % "rest-assured"        % "4.3.3"
       val assertjCore  = "org.assertj"     % "assertj-core"        % "3.19.0"
       val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.4.0"
