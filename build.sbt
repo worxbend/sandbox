@@ -27,7 +27,7 @@ lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-p
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -46,7 +46,7 @@ lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provi
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -67,7 +67,7 @@ lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -95,7 +95,7 @@ lazy val `play-underpressure-api` = (project in file(
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -121,7 +121,7 @@ lazy val `play-underpressure` = (project in file(
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -147,7 +147,7 @@ lazy val `redprime-service` = (project in file(ConfigPaths.Play.service(Seq("red
       logback,
       ws
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -176,7 +176,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
       scalaGuice,
       logback
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",
@@ -206,7 +206,7 @@ lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twite
       logback,
       ws
     ),
-    testOptions in Test := Seq(
+    Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
         "-a",

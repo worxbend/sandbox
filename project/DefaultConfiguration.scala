@@ -95,12 +95,11 @@ object Dependencies {
 
     object Test {
 
-      val scalaMock    = "org.scalamock"   % "scalamock_2.13.0-M3" % Versions.scalaMock
-      val mockito      = "org.mockito"     % "mockito-core"        % "3.9.0"
-      val restAssured  = "io.rest-assured" % "rest-assured"        % "4.3.3"
-      val assertjCore  = "org.assertj"     % "assertj-core"        % "3.19.0"
-      val assertjGuava = "org.assertj"     % "assertj-guava"       % "3.4.0"
-      val scalaTest    = "org.scalatest"  %% "scalatest"           % Versions.scalaTest
+      val scalaMock    = "org.scalamock"  %% "scalamock"     % Versions.scalaMock
+      val restAssured  = "io.rest-assured" % "rest-assured"  % "4.3.3"
+      val assertjCore  = "org.assertj"     % "assertj-core"  % "3.19.0"
+      val assertjGuava = "org.assertj"     % "assertj-guava" % "3.4.0"
+      val scalaTest    = "org.scalatest"  %% "scalatest"     % Versions.scalaTest
 
       def testDependency: ModuleID => ModuleID = (module: ModuleID) => {
         module % "test"
@@ -112,8 +111,8 @@ object Dependencies {
       // Play components dependencies
       lazy val playJson  = "2.7.4"
       // Test dependencies
-      lazy val scalaMock = "4.2.0"
-      lazy val scalaTest = "3.0.8"
+      lazy val scalaMock = "5.1.0"
+      lazy val scalaTest = "3.1.0"
       lazy val scalactic = "3.0.8"
     }
 
