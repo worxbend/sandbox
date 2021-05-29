@@ -1,13 +1,22 @@
+import BaseSettings.Utils
 import BaseSettings.defaultSettings
-import CommonBuildConfiguration._
 import Dependencies.scalaGuice
 import Dependencies._
+import sbt.Test
+
+/* -- START: Global Settings -- */
+Global / onChangedBuildSource := ReloadOnSourceChanges
+Global / homepage := Some(url("http://recursive-escalator.io"))
+Global / startYear := Some(2018)
+
+/* -- END:   Global Settings  -- */
 
 lazy val commonSettings = {
   commonDependencies ++ testDependencies ++ defaultSettings
 }
 
 lazy val kzonix = (project in file("."))
+  .settings(defaultSettings: _*)
   .settings(
     name := "kzonix"
   )
@@ -21,7 +30,7 @@ lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-p
   .enablePlugins(PlayService)
   .settings(defaultSettings: _*)
   .settings(
-    name := CommonBuildConfiguration.preformProjectLibraryApiName("sird-provider"),
+    name := ProjectNames.api("sird-provider"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
@@ -40,7 +49,8 @@ lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provi
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := CommonBuildConfiguration.preformProjectLibraryImplName("sird-provider"),
+    version := Utils.Versions.version(),
+    name := ProjectNames.lib("sird-provider"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
@@ -61,7 +71,7 @@ lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := "play-utile",
+    name := ProjectNames.lib("play-utile"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
@@ -89,7 +99,7 @@ lazy val `play-underpressure-api` = (project in file(
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := preformProjectLibraryApiName("play-underpressure"),
+    name := ProjectNames.api("play-underpressure"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
@@ -115,7 +125,7 @@ lazy val `play-underpressure` = (project in file(
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := preformProjectLibraryImplName("play-underpressure"),
+    name := ProjectNames.lib("play-underpressure"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
@@ -138,7 +148,7 @@ lazy val `redprime-service` = (project in file(ConfigPaths.Play.service(Seq("red
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := preformServiceName("redprime"),
+    name := ProjectNames.service("redprime"),
     libraryDependencies ++= Seq(
       filters,
       caffeine,
@@ -168,7 +178,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := preformServiceName("index"),
+    name := ProjectNames.service("index"),
     libraryDependencies ++= Seq(
       filters,
       caffeine,
@@ -197,7 +207,7 @@ lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twite
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
-    name := preformServiceName("redprime"),
+    name := ProjectNames.service("redprime"),
     libraryDependencies ++= Seq(
       filters,
       caffeine,
