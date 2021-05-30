@@ -11,6 +11,7 @@ class RouteModule extends AbstractModule with ScalaModule {
     val routeMultiBinder: ScalaMultibinder[ProvidedRouter] =
       ScalaMultibinder.newSetBinder[ProvidedRouter](binder)
     routeMultiBinder.addBinding.to[IndexRoute]
+    ()
   }
 
 }

@@ -173,6 +173,7 @@ object BaseSettings {
       //"-print",
       "-deprecation",
       "-feature",
+      "-Ymacro-annotations",
       "-encoding",
       "utf8",         // scala 3 non-compatible
       "-Werror",      // scala 3 non-compatible
@@ -224,43 +225,107 @@ object Dependencies {
     Seq(
       libraryDependencies ++= Seq(
         playJson,
-        scalaGuice
+        scalaGuice,
+        scalaLogging
       )
+        ++ cats
+        ++ circe
+        ++ pureConfig
     )
 
   def testDependencies: Seq[Setting[_]] =
     Seq(
-      libraryDependencies ++= Seq(
-        testDependency(scalaTest),
-        testDependency(scalaMock)
-      )
+      libraryDependencies ++=
+        (Seq(
+          scalaTest,
+          scalatic,
+          scalaCheck,
+          scalaMock,
+          "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.12.1"
+        ) ++
+          specs2)
+          .map(testDependency)
     )
 
-  val scalaGuice = "net.codingwell"    %% "scala-guice" % Versions.scalaGuice
-  val playJson   = "com.typesafe.play" %% "play-json"   % Versions.playJson
+  val scalaGuice   = "net.codingwell"             %% "scala-guice"   % Versions.scalaGuice
+  val playJson     = "com.typesafe.play"          %% "play-json"     % Versions.playJson
+  val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
+  val enumeratum   = "com.beachape"               %% "enumeratum"    % Versions.enumeratum
+
+  val circe: Seq[ModuleID] = Seq(
+    "circe-core",
+    "circe-parser",
+    "circe-generic",
+    "circe-generic-extras",
+    "circe-literal",
+    "circe-jawn",
+    "circe-testing",
+    "circe-shapes",
+    "circe-refined" // ?
+  ).map(artifact => "io.circe" %% artifact % Versions.circe)
+
+  val monix: Seq[ModuleID] = Seq(
+    "monix",
+    "monix-eval",
+    "monix-reactive",
+    "monix-execution",
+    "monix-tail"
+  ).map(artifact => "io.monix" %% artifact % Versions.monix)
+
+  val pureConfig: Seq[ModuleID] = Seq(
+    "pureconfig",
+    "pureconfig-cats-effect",
+    "pureconfig-cats",
+    "pureconfig-circe",
+    "pureconfig-magnolia"
+  ).map(artifact => "com.github.pureconfig" %% artifact % Versions.pureConfig)
+
+  val cats: Seq[ModuleID] = Seq(
+    "org.typelevel" %% "cats-core"   % Versions.cats,
+    "org.typelevel" %% "cats-effect" % Versions.catsEffect,
+    "org.typelevel" %% "cats-mtl"    % Versions.catsMtl
+  )
 
   object Test {
 
-    val scalaMock = "org.scalamock" %% "scalamock" % Versions.scalaMock
-    val scalaTest = "org.scalatest" %% "scalatest" % Versions.scalaTest
+    val scalaMock  = "org.scalamock"  %% "scalamock"  % Versions.scalaMock
+    val scalaTest  = "org.scalatest"  %% "scalatest"  % Versions.scalaTest
+    val scalatic   = "org.scalactic"  %% "scalactic"  % Versions.scalaTest
+    val scalaCheck = "org.scalacheck" %% "scalacheck" % Versions.scalaCheck
+
+    val specs2 = Seq(
+      "org.specs2" %% "specs2-mock"          % Versions.specs2,
+      "org.specs2" %% "specs2-shapeless"     % Versions.specs2,
+      "org.specs2" %% "specs2-fp"            % Versions.specs2,
+      "org.specs2" %% "specs2-scalacheck"    % Versions.specs2,
+      "org.specs2" %% "specs2-tests"         % Versions.specs2,
+      "org.specs2" %% "specs2-matcher-extra" % Versions.specs2,
+      "org.specs2" %% "specs2-matcher"       % Versions.specs2,
+      "org.specs2" %% "specs2-core"          % Versions.specs2,
+      "org.specs2" %% "specs2-common"        % Versions.specs2,
+      "org.specs2" %% "specs2-cats"          % Versions.specs2
+    )
 
     def testDependency: ModuleID => ModuleID = (module: ModuleID) => module % "test"
 
   }
 
   private[Dependencies] object Versions {
-    // Play components dependencies
-    lazy val scalaGuice   = "5.0.1"
-    lazy val playJson     = "2.9.2"
-    lazy val circe        = "0.14.1"
-    lazy val monix        = "3.4.0"
-    lazy val cats         = "2.0.0"
-    lazy val pureConfig   = "0.11.1"
-    lazy val scalaLogging = "3.9.2"
-    lazy val shapeless    = "2.3.3"
+    val scalaGuice   = "5.0.1"
+    val playJson     = "2.9.2"
+    val circe        = "0.14.0"
+    val monix        = "3.3.0"
+    val cats         = "2.3.0"
+    val catsEffect   = "3.1.1"
+    val catsMtl      = "1.2.0"
+    val pureConfig   = "0.15.0"
+    val scalaLogging = "3.9.3"
+    val enumeratum   = "1.6.1"
     // Test dependencies
-    lazy val scalaMock    = "5.1.0"
-    lazy val scalaTest    = "3.1.0"
+    val scalaMock    = "5.1.0"
+    val scalaCheck   = "1.15.4"
+    val scalaTest    = "3.2.9"
+    val specs2       = "4.12.0"
 
   }
 
