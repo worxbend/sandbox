@@ -119,6 +119,48 @@ object ConfigPaths {
 
 object BaseSettings {
 
+  private val warningOptions: Seq[String] = Seq(
+    "-Wdead-code",        // Warn when dead code is identified.
+    "-Wextra-implicit",   // Warn when more than one implicit parameter section is defined.
+    "-Wnumeric-widen",    // Warn when numerics are widened.
+    "-Woctal-literal",    // Warn on obsolete octal syntax.
+    "-Wunused:imports",   // Warn if an import selector is not referenced.
+    "-Wunused:patvars",   // Warn if a variable bound in a pattern is unused.
+    "-Wunused:privates",  // Warn if a private member is unused.
+    "-Wunused:locals",    // Warn if a local definition is unused.
+    "-Wunused:explicits", // Warn if an explicit parameter is unused.
+    "-Wunused:implicits", // Warn if an implicit parameter is unused.
+    "-Wunused:params",    // Enable -Wunused:explicits,implicits.
+    "-Wunused:linted",    // -Xlint:unused.
+    "-Wvalue-discard"     // Warn when non-Unit expression results are unused.
+  )
+
+  private val lintOptions: Seq[String] = Seq(
+    "-Xlint:adapted-args",
+    "-Xlint:nullary-unit",           // Warn when nullary methods return Unit.
+    "-Xlint:inaccessible",           // Warn about inaccessible types in method signatures.
+    "-Xlint:infer-any",              // Warn when a type argument is inferred to be Any.
+    "-Xlint:missing-interpolator",   // A string literal appears to be missing an interpolator id.
+    "-Xlint:doc-detached",           // A Scaladoc comment appears to be detached from its element.
+    "-Xlint:private-shadow",         // A private field (or class parameter) shadows a superclass field.
+    "-Xlint:type-parameter-shadow",  // A local type parameter shadows a type already in scope.
+    "-Xlint:poly-implicit-overload", // Parameterized overloaded implicit methods are not visible as view bounds.
+    "-Xlint:option-implicit",        // Option.apply used implicit view.
+    "-Xlint:delayedinit-select",     // Selecting member of DelayedInit.
+    "-Xlint:package-object-classes", // Class or object defined in package object.
+    "-Xlint:stars-align",            // Pattern sequence wildcard must align with sequence component.
+    "-Xlint:constant",               // Evaluation of a constant arithmetic expression results in an error.
+    "-Xlint:unused",                 // Enable -Ywarn-unused:imports,privates,locals,implicits.
+    "-Xlint:nonlocal-return",        // A return statement used an exception for flow control.
+    "-Xlint:implicit-not-found",     // Check @implicitNotFound and @implicitAmbiguous messages.
+    "-Xlint:serial",                 // @SerialVersionUID on traits and non-serializable classes.
+    "-Xlint:valpattern",             // Enable pattern checks in val definitions.
+    "-Xlint:eta-zero",               // Warn on eta-expansion (rather than auto-application) of zero-ary method.
+    "-Xlint:eta-sam",                // Warn on eta-expansion to meet a Java-defined functional interface that is not explicitly annotated with @FunctionalInterface.
+    "-Xlint:deprecation",            // Enable linted deprecations.
+    "-Xlint:implicit-recursion"      // Warn when an implicit resolves to an enclosing self-definition.
+  )
+
   val defaultSettings: Seq[Setting[_]] = Seq(
     versionScheme := Some("semver-spec"),
     scalaVersion := "2.13.6",
@@ -126,12 +168,16 @@ object BaseSettings {
     organizationName := "Kzonix",
     version := Utils.Versions.version(),
     scalaVersion := "2.13.6",
-    scalacOptions := Seq(
+    scalacOptions := Seq[String](
       "-unchecked",
+      //"-print",
       "-deprecation",
+      "-feature",
       "-encoding",
-      "utf8"
-    ),
+      "utf8",         // scala 3 non-compatible
+      "-Werror",      // scala 3 non-compatible
+      "-explaintypes" // scala 3 non-compatible
+    ) ++ warningOptions ++ lintOptions,
     description := "N/A",
     licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
     resolvers ++= Seq(
@@ -190,7 +236,7 @@ object Dependencies {
       )
     )
 
-  val scalaGuice = "net.codingwell"    %% "scala-guice" % "5.0.1"
+  val scalaGuice = "net.codingwell"    %% "scala-guice" % Versions.scalaGuice
   val playJson   = "com.typesafe.play" %% "play-json"   % Versions.playJson
 
   object Test {
@@ -204,11 +250,18 @@ object Dependencies {
 
   private[Dependencies] object Versions {
     // Play components dependencies
-    lazy val playJson  = "2.7.4"
+    lazy val scalaGuice   = "5.0.1"
+    lazy val playJson     = "2.9.2"
+    lazy val circe        = "0.14.1"
+    lazy val monix        = "3.4.0"
+    lazy val cats         = "2.0.0"
+    lazy val pureConfig   = "0.11.1"
+    lazy val scalaLogging = "3.9.2"
+    lazy val shapeless    = "2.3.3"
     // Test dependencies
-    lazy val scalaMock = "5.1.0"
-    lazy val scalaTest = "3.1.0"
-    lazy val scalactic = "3.0.8"
+    lazy val scalaMock    = "5.1.0"
+    lazy val scalaTest    = "3.1.0"
+
   }
 
 }

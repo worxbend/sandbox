@@ -24,6 +24,7 @@ class IndexController @Inject() (
   def index: Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
       Future {
+        println(request)
         Ok(Json.toJson("Hello world"))
       }
     }
@@ -32,6 +33,7 @@ class IndexController @Inject() (
   def asyncCacheTest: Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
       Future {
+        println(request)
         val futureValue: Future[String] = cache.getOrElseUpdate[String]("item.key") {
           Future.successful(null)
         }
@@ -47,6 +49,7 @@ class IndexController @Inject() (
   def cacheTest: Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
       Future {
+        println(request)
         val value: String = syncCache.getOrElseUpdate[String]("item.key") {
           null
         }
