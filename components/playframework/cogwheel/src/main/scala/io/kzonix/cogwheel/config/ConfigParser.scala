@@ -30,11 +30,11 @@ object ConfigParser {
 
   }
 
-  val ArrayRx = "/seq_[0-9]+(/)?".r
+  val ParameterSequence = "/seq_[0-9]+(/)?".r
 
   def parseParameters(params: Map[String, String]): Config = {
 
-    val filteredParams = params.filter { case (path, _) => ArrayRx.findAllIn(path).nonEmpty }
+    val filteredParams = params.filter { case (path, _) => ParameterSequence.findAllIn(path).nonEmpty }
 
     val list = compositeConfigSequence(filteredParams)
 
@@ -44,7 +44,7 @@ object ConfigParser {
       case (path, value) => toConfigKey(path) -> parseValue(value)
     }
 
-    val configObject = ConfigValueFactory.fromMap(configObjects.asJava).withFallback(list)
+    val configObject = ConfigFactory.parseMap(configObjects.asJava).root().withFallback(list)
     configObject.toConfig
   }
 
@@ -52,19 +52,17 @@ object ConfigParser {
     val interimMapStruct: Map[Seq[String], ConfigMergeable] = filteredParams
       .groupMap {
         case (path, _) =>
-          val pathParts = ArrayRx.split(
+          val pathParts = ParameterSequence.split(
             path
           )
-          pathParts.toSeq
+          pathParts.toSeq.reverse
       } {
         case (_, value) =>
           parseValue(value)
       }
       .map {
         case (path, iter) =>
-          path -> iter.foldLeft(ConfigValueFactory.fromMap(Map.empty[String, Any].asJava)) {
-            case (c1: ConfigMergeable, c2: ConfigMergeable) => c1.withFallback(c2)
-          }
+          path -> ConfigValueFactory.fromIterable(iter.asJava)
       }
 
     val compositeConfigTree: Map[Seq[String], ConfigMergeable] = composite(interimMapStruct)
@@ -79,12 +77,12 @@ object ConfigParser {
     val array: Map[Seq[String], ConfigMergeable] = interimMapStruct
       .groupMap {
         case (pathParts, _) =>
-          pathParts.dropRight(1)
+          if (pathParts.isEmpty) pathParts else pathParts.tail
       } {
         case (pathParts, value: ConfigMergeable) =>
           if (pathParts.isEmpty) value
           else {
-            val java = Map(toConfigKey(pathParts.last) -> value).asJava
+            val java = Map(toConfigKey(pathParts.head) -> value).asJava
             ConfigFactory.parseMap(java).root()
           }
       }

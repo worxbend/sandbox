@@ -58,8 +58,8 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
           "/region-1/customer/test_app/test_key/seq_0"          -> testJson,
           "/region-1/customer/test_app/test_key/seq_1"          -> testJson,
           "/region-1/customer/test_app/test_key/seq_2"          -> testJson,
-          "/region-1/customer/another_app/seq_1/test_key/seq_1" -> testJson,
-          "/region-1/customer/another_app/seq_2/test_key/seq_2" -> testJson,
+          "/region-1/customer/another_app/seq_0/test_key/seq_1" -> testJson,
+          "/region-1/customer/another_app/seq_1/test_key/seq_2" -> testJson,
           "/region-1/customer/another_app/seq_3/test_key/seq_3" -> testJson
         )
       )
