@@ -240,8 +240,7 @@ object Dependencies {
           scalaTest,
           scalatic,
           scalaCheck,
-          scalaMock,
-          "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.12.1"
+          scalaMock
         ) ++
           specs2)
           .map(testDependency)
