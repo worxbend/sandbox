@@ -292,18 +292,18 @@ object Dependencies {
     val scalatic   = "org.scalactic"  %% "scalactic"  % Versions.scalaTest
     val scalaCheck = "org.scalacheck" %% "scalacheck" % Versions.scalaCheck
 
-    val specs2 = Seq(
-      "org.specs2" %% "specs2-mock"          % Versions.specs2,
-      "org.specs2" %% "specs2-shapeless"     % Versions.specs2,
-      "org.specs2" %% "specs2-fp"            % Versions.specs2,
-      "org.specs2" %% "specs2-scalacheck"    % Versions.specs2,
-      "org.specs2" %% "specs2-tests"         % Versions.specs2,
-      "org.specs2" %% "specs2-matcher-extra" % Versions.specs2,
-      "org.specs2" %% "specs2-matcher"       % Versions.specs2,
-      "org.specs2" %% "specs2-core"          % Versions.specs2,
-      "org.specs2" %% "specs2-common"        % Versions.specs2,
-      "org.specs2" %% "specs2-cats"          % Versions.specs2
-    )
+    val specs2                               = Seq(
+      "specs2-mock",
+      "specs2-shapeless",
+      "specs2-fp",
+      "specs2-scalacheck",
+      "specs2-tests",
+      "specs2-matcher-extra",
+      "specs2-matcher",
+      "specs2-core",
+      "specs2-common",
+      "specs2-cats"
+    ).map(artifact => "org.specs2" %% artifact % Versions.specs2)
 
     def testDependency: ModuleID => ModuleID = (module: ModuleID) => module % "test"
 

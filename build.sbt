@@ -233,6 +233,24 @@ lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twite
     `play-utile`
   )
 
+lazy val `cogwheel` = (project in file(ConfigPaths.Play.lib(Seq("cogwheel"))))
+  .settings(commonSettings: _*)
+  .settings(
+    name := ProjectNames.service("cogwheel"),
+    Compile / run / mainClass := Some("io.kzonix.cogwheel.Main"),
+    libraryDependencies ++= Seq(
+      "com.amazonaws" % "aws-java-sdk-ssm" % "1.11.1033"
+    ),
+    Test / testOptions := Seq(
+      Tests.Argument(
+        TestFrameworks.ScalaTest,
+        "-a",
+        "-v",
+        "-oD"
+      )
+    )
+  )
+
 // Scalafmt
 addCommandAlias(
   "fmt",
