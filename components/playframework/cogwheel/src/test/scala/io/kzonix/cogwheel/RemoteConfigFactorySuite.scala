@@ -55,12 +55,13 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
       .expects("/region-1/customer/test_app")
       .returns(
         Map(
-          "/region-1/customer/test_app/test_key/seq_0"          -> testJson,
-          "/region-1/customer/test_app/test_key/seq_1"          -> testJson,
-          "/region-1/customer/test_app/test_key/seq_2"          -> testJson,
-          "/region-1/customer/another_app/seq_0/test_key/seq_1" -> testJson,
-          "/region-1/customer/another_app/seq_1/test_key/seq_2" -> testJson,
-          "/region-1/customer/another_app/seq_3/test_key/seq_3" -> testJson
+          "/region-1/customer/test_app/test_key/seq_0"                    -> testJson,
+          "/region-1/customer/test_app/test_key/seq_1"                    -> testJson,
+          "/region-1/customer/test_app/test_key/seq_2"                    -> testJson,
+          "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_0" -> testJson,
+          "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_1" -> "testJson",
+          "/region-1/customer/another_app/seq_1/first/seq_1/second/seq_2" -> testJson,
+          "/region-1/customer/another_app/seq_1/first/seq_3/second/seq_3" -> testJson
         )
       )
 
@@ -83,4 +84,5 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
     )
     assert(config.getString("region-1.customer.test_app.test_key.menu.id") == "file")
   }
+
 }

@@ -10,9 +10,9 @@ import scala.util.Try
 
 object ConfigParser {
 
-  private def parseValue(value: String): ConfigMergeable = {
-    val triedObject                           = parseJsonString(value)
-    val configObject: Option[ConfigMergeable] = triedObject.toOption
+  private def parseValue(value: String): ConfigValue = {
+    val triedObject                       = parseJsonString(value)
+    val configObject: Option[ConfigValue] = triedObject.toOption
     configObject.getOrElse(ConfigValueFactory.fromAnyRef(value))
   }
 
@@ -48,7 +48,96 @@ object ConfigParser {
     configObject.toConfig
   }
 
+  def buildConfigTree(filteredParams: Map[String, String]) = {
+    val interimMapStruct: Map[TempAgg, ConfigValue] = filteredParams
+      .groupMap {
+        case (path, _) =>
+          TempAgg(path)()
+      } {
+        case (_, value) =>
+          parseValue(value)
+      }
+      .map {
+        case (agg, value) =>
+          agg -> ConfigValueFactory.fromIterable(value.asJava)
+      }
+    buildConfigTree_(
+      interimMapStruct,
+      Map.empty
+    )
+  }
+
+  @tailrec def buildConfigTree_(tree: Map[TempAgg, ConfigValue],
+                                acc: Map[TempAgg, ConfigValue]): Map[TempAgg, ConfigValue] = {
+    val grooped                             = tree
+      .groupMap {
+        case (agg, _) =>
+          val pathParts       = agg.path.split("/").filter(_.nonEmpty)
+          val index           = pathParts.reverse.takeWhile(!_.startsWith("seq_")).length
+          val slicedPathParts = pathParts.dropRight(index + 1)
+          val dropedPath      = pathParts.drop(pathParts.length - 1 - index)
+          val configKey       = dropedPath.filter(!_.startsWith("seq_"))
+          val flatLast        = dropedPath.length != configKey.length
+          if (slicedPathParts.nonEmpty)
+            TempAgg(slicedPathParts.mkString("/"))(
+              toConfigKey(
+                (configKey
+                  .mkString("/"))
+                  .split(ParameterSequence.regex)
+                  .mkString("/")
+              ),
+              flatLast
+            )
+          else
+            TempAgg(agg.path)(
+              toConfigKey(
+                (configKey
+                  .mkString("/"))
+                  .split(ParameterSequence.regex)
+                  .mkString("/")
+              ),
+              flatLast
+            )
+      } {
+        case (_, value) =>
+          value
+      }
+    val newTrees: Map[TempAgg, ConfigValue] = grooped
+      .map {
+        case (agg, value) =>
+          val configObject: ConfigValue = value.foldLeft(ConfigValueFactory.fromIterable(Seq.empty.asJava)) {
+            case (acc, list: ConfigList)  =>
+              ConfigValueFactory.fromIterable((acc.asScala ++ list.asScala).asJava)
+            case (acc, list: ConfigValue) =>
+              ConfigValueFactory.fromIterable((acc.asScala ++ List(list)).asJava)
+          }
+          if (agg.configKey.nonEmpty)
+            agg -> configObject.atPath(agg.configKey).root()
+          else
+            agg -> configObject
+
+      }
+
+    val builtTrees = newTrees.filter { case (agg, _) => ParameterSequence.findFirstIn(agg.path).isEmpty }
+
+    val nextTrees = newTrees -- builtTrees.keySet
+    if (nextTrees.nonEmpty)
+      buildConfigTree_(
+        nextTrees,
+        builtTrees ++ acc
+      )
+    else builtTrees ++ acc
+
+  }
+
+  case class TempAgg(path: String)(var configKey: String = "", var boolean: Boolean = false)
+  case class Node(path: String)
+
   private def compositeConfigSequence(filteredParams: Map[String, String]) = {
+
+    val value1: Map[TempAgg, ConfigValue] = buildConfigTree(filteredParams)
+    println(value1)
+
     val interimMapStruct: Map[Seq[String], ConfigMergeable] = filteredParams
       .groupMap {
         case (path, _) =>
@@ -74,6 +163,7 @@ object ConfigParser {
   }
 
   @tailrec def composite(interimMapStruct: Map[Seq[String], ConfigMergeable]): Map[Seq[String], ConfigMergeable] = {
+
     val array: Map[Seq[String], ConfigMergeable] = interimMapStruct
       .groupMap {
         case (pathParts, _) =>
