@@ -7,6 +7,10 @@ import scala.annotation.tailrec
 import scala.jdk.CollectionConverters._
 import scala.util.Try
 
+// TODO: Refactor (design patterns):
+//  Split parsing logic into different classes according to parsing strategy and use them as chain of responsibility
+//  Define it as Parsing Pipeline (take inspiration from PlayFramework - ActionBuilder or
+//  https://worace.works/2021/03/07/better-play-framework-request-pipelines-with-cats/
 object ConfigParser {
 
   private def parseValue(value: String): ConfigValue = {
@@ -29,12 +33,14 @@ object ConfigParser {
 
   }
 
+  // todo: define it in some Util class to easily handle contract of parameters (path)
   val ParameterSequence = "/seq_[0-9]+(/)?".r
 
   def parseParameters(params: Map[String, String]): Config = {
 
     val filteredParams = params.filter { case (path, _) => ParameterSequence.findAllIn(path).nonEmpty }
 
+    // TODO: rename this fucking shit
     val list = compositeConfigSequence(filteredParams)
 
     val remainingSimpleParams = params.removedAll(filteredParams.keySet)
