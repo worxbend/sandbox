@@ -244,8 +244,6 @@ lazy val `cogwheel` = (project in file(ConfigPaths.Play.lib(Seq("cogwheel"))))
     Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.ScalaTest,
-        "-a",
-        "-v",
         "-oD"
       )
     )
