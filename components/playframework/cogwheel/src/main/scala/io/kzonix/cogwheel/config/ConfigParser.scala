@@ -4,7 +4,6 @@ import com.typesafe.config._
 import io.kzonix.cogwheel.config.ConfigPathUtils.PathUtils.toConfigKey
 
 import scala.annotation.tailrec
-import scala.collection.immutable
 import scala.jdk.CollectionConverters._
 import scala.util.Try
 
@@ -67,6 +66,9 @@ object ConfigParser {
     )
   }
 
+  // TODO:: Refactor this part with more meaningful naming
+  //  - provide comment describing algorithm
+  //  - experimental stuff, should be tested in couple of rounds
   @tailrec def buildConfigTree_(tree: Map[TempAgg, ConfigValue],
                                 acc: Map[TempAgg, ConfigValue]): Map[TempAgg, ConfigValue] = {
     val grooped                             = tree
@@ -74,10 +76,9 @@ object ConfigParser {
         case (agg, _) =>
           val pathParts       = agg.path.split("/").filter(_.nonEmpty)
           val index           = pathParts.reverse.takeWhile(!_.startsWith("seq_")).length
-          val slicedPathParts = pathParts.dropRight(index + 1)
-          val dropedPath      = pathParts.drop(pathParts.length - 1 - index)
+          val slicedPathParts = pathParts.dropRight(index + 2)
+          val dropedPath      = pathParts.drop(pathParts.length - 1 - (index + 1))
           val configKey       = dropedPath.filter(!_.startsWith("seq_"))
-          val flatLast        = dropedPath.length != configKey.length
           if (slicedPathParts.nonEmpty)
             TempAgg(slicedPathParts.mkString("/"))(
               toConfigKey(
@@ -85,8 +86,7 @@ object ConfigParser {
                   .mkString("/"))
                   .split(ParameterSequence.regex)
                   .mkString("/")
-              ),
-              flatLast
+              )
             )
           else
             TempAgg(agg.path)(
@@ -95,8 +95,7 @@ object ConfigParser {
                   .mkString("/"))
                   .split(ParameterSequence.regex)
                   .mkString("/")
-              ),
-              flatLast
+              )
             )
       } {
         case (_, value) =>
@@ -130,63 +129,19 @@ object ConfigParser {
 
   }
 
-  case class TempAgg(path: String)(var configKey: String = "", var boolean: Boolean = false)
+  case class TempAgg(path: String)(var configKey: String = "")
   case class Node(path: String)
 
   private def compositeConfigSequence(filteredParams: Map[String, String]) = {
 
-    val value1: Map[TempAgg, ConfigValue] = buildConfigTree(filteredParams)
-    println(value1)
+    val interimConfigTree: Map[TempAgg, ConfigValue] = buildConfigTree(filteredParams)
 
-    val interimMapStruct: Map[Seq[String], ConfigMergeable] = filteredParams
-      .groupMap {
-        case (path, _) =>
-          val pathParts = ParameterSequence.split(
-            path
-          )
-          pathParts.toSeq.reverse
-      } {
-        case (_, value) =>
-          parseValue(value)
-      }
-      .map {
-        case (path, iter) =>
-          path -> ConfigValueFactory.fromIterable(iter.asJava)
-      }
-
-    val compositeConfigTree: Map[Seq[String], ConfigMergeable] = composite(interimMapStruct)
-    val flatten: immutable.Iterable[ConfigMergeable]           = compositeConfigTree.flatMap { case (_, iter) => Seq(iter) }
-    val configMergeable: ConfigMergeable                       = flatten.foldLeft(ConfigValueFactory.fromMap(Map.empty[String, Any].asJava)) {
-      case (c1: ConfigMergeable, c2: ConfigMergeable) => c1.withFallback(c2)
+    val rootConfigObjects  = interimConfigTree.map { case (agg, config) => config.atPath(toConfigKey(agg.path)).root() }
+    val mergedConfigObject = rootConfigObjects.foldLeft(ConfigFactory.empty().root()) {
+      case (c1, c2) => c1.withFallback(c2)
     }
-    configMergeable
-  }
 
-  @tailrec def composite(interimMapStruct: Map[Seq[String], ConfigMergeable]): Map[Seq[String], ConfigMergeable] = {
-
-    val array: Map[Seq[String], ConfigMergeable] = interimMapStruct
-      .groupMap {
-        case (pathParts, _) =>
-          if (pathParts.isEmpty) pathParts else pathParts.tail
-      } {
-        case (pathParts, value: ConfigMergeable) =>
-          if (pathParts.isEmpty) value
-          else {
-            val java = Map(toConfigKey(pathParts.head) -> value).asJava
-            ConfigFactory.parseMap(java).root()
-          }
-      }
-      .map {
-        case (path, iter) =>
-          path -> iter.foldLeft(ConfigValueFactory.fromMap(Map.empty[String, Any].asJava)) {
-            case (c1: ConfigMergeable, c2: ConfigMergeable) => c1.withFallback(c2)
-          }
-      }
-    if (array.keySet.flatten.isEmpty)
-      array
-    else
-      composite(array)
-
+    mergedConfigObject
   }
 
 }

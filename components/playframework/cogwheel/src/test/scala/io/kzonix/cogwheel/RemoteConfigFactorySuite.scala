@@ -50,9 +50,12 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
     assert(config.getString("region-1.customer.test_app.test_key.menu.id") == "file")
   }
 
+  // TODO: Refactor this test to make it more tinier and readable:
+  //  - AAA
+  //  - Add more unit test for this particular case of element sequence represents JSON string value on different levels
   test("Should parse sequence element represents JSON string value under the parameter path config object") {
     (parameterStoreClient.fetchParameters _)
-      .expects("/region-1/customer/test_app")
+      .expects("/region-1/customer")
       .returns(
         Map(
           "/region-1/customer/test_app/test_key/seq_0"                    -> testJson,
@@ -61,28 +64,28 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
           "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_0" -> testJson,
           "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_1" -> "testJson",
           "/region-1/customer/another_app/seq_1/first/seq_1/second/seq_2" -> testJson,
-          "/region-1/customer/another_app/seq_1/first/seq_3/second/seq_3" -> testJson
+          "/region-1/customer/another_app/seq_1/first/seq_1/second/seq_3" -> testJson
         )
       )
 
     val config = configFactory.loadConfig(
       "region-1",
-      "customer.test_app"
-    )
-    println(config)
-    assert(
-      config
-        .getConfigList("region-1.customer.test_app.test_key.menu.menuitem")
-        .get(0)
-        .getString("value") == "New"
+      "customer"
     )
     assert(
       config
-        .getConfigList("region-1.customer.test_app.test_key.menu.menuitem")
-        .get(0)
-        .getString("onclick") == "CreateNewDoc()"
+        .getConfigList("region-1.customer.another_app")
+        .size() == 2
     )
-    assert(config.getString("region-1.customer.test_app.test_key.menu.id") == "file")
+    assert(
+      config
+        .getConfigList("region-1.customer.another_app")
+        .get(0)
+        .getConfigList("first")
+        .get(0)
+        .getList("second")
+        .size() == 2
+    )
   }
 
 }
