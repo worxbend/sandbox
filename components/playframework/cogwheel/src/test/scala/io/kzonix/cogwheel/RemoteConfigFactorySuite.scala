@@ -1,5 +1,6 @@
 package io.kzonix.cogwheel
 
+import com.typesafe.config.ConfigFactory
 import io.kzonix.cogwheel.aws.AWSParameterStoreClient
 import io.kzonix.cogwheel.config.RemoteConfigFactory
 import org.scalamock.scalatest.MockFactory
@@ -50,9 +51,6 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
     assert(config.getString("region-1.customer.test_app.test_key.menu.id") == "file")
   }
 
-  // TODO: Refactor this test to make it more tinier and readable:
-  //  - AAA
-  //  - Add more unit test for this particular case of element sequence represents JSON string value on different levels
   test("Should parse sequence element represents JSON string value under the parameter path config object") {
     (parameterStoreClient.fetchParameters _)
       .expects("/region-1/customer")
@@ -68,10 +66,11 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
       "region-1",
       "customer"
     )
+
     assert(
       config
         .getConfigList("region-1.customer.another_app")
-        .size() == 2
+        .size() == 1
     )
     assert(
       config
@@ -81,6 +80,36 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
         .get(0)
         .getList("second")
         .size() == 2
+    )
+  }
+
+  test(
+    "Should parse separated sequence element represents parts of large object value under the parameter path config object"
+  ) {
+    (parameterStoreClient.fetchParameters _)
+      .expects("/region-1/customer")
+      .returns(
+        Map(
+          "/region-1/customer/another_app/1"       -> testJson,
+          "/region-1/customer/another_app/1/first" -> testJson
+        )
+      )
+
+    val config = configFactory.loadConfig(
+      "region-1",
+      "customer"
+    )
+
+    assert(
+      config
+        .getConfigList("region-1.customer.another_app")
+        .size() == 1
+    )
+    assert(
+      config
+        .getConfigList("region-1.customer.another_app")
+        .get(0)
+        .getObject("first") == ConfigFactory.parseString(testJson).root()
     )
   }
 
