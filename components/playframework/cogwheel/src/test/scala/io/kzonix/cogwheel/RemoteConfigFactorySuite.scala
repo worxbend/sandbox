@@ -58,13 +58,13 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
       .expects("/region-1/customer")
       .returns(
         Map(
-          "/region-1/customer/test_app/test_key/seq_0"                    -> testJson,
-          "/region-1/customer/test_app/test_key/seq_1"                    -> testJson,
-          "/region-1/customer/test_app/test_key/seq_2"                    -> testJson,
-          "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_0" -> testJson,
-          "/region-1/customer/another_app/seq_0/first/seq_0/second/seq_1" -> "testJson",
-          "/region-1/customer/another_app/seq_1/first/seq_1/second/seq_2" -> testJson,
-          "/region-1/customer/another_app/seq_1/first/seq_1/second/seq_3" -> testJson
+          "/region-1/customer/test_app/test_key/0"            -> testJson,
+          "/region-1/customer/test_app/test_key/1"            -> testJson,
+          "/region-1/customer/test_app/test_key/2"            -> testJson,
+          "/region-1/customer/another_app/0/first/0/second/0" -> testJson,
+          "/region-1/customer/another_app/0/first/0/second/1" -> "testJson",
+          "/region-1/customer/another_app/1/first/1/second/2" -> testJson,
+          "/region-1/customer/another_app/1/first/1/second/3" -> testJson
         )
       )
 

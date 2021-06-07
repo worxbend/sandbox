@@ -8,10 +8,10 @@ object ConfigPathUtils {
 
     implicit class WithConfigNamespacePrefix(s: String) {
       def withConfigNameSpace(namespace: String): String =
-        s"$PathSep${ toParamPath(namespace) }$PathSep$s"
+        s"$PathSep${ toParamName(namespace) }$PathSep$s"
     }
 
-    def toParamPath(configKey: String): String =
+    def toParamName(configKey: String): String =
       configKey.replace(
         ConfigKeySep,
         PathSep

@@ -228,7 +228,7 @@ object Dependencies {
         scalaGuice,
         scalaLogging
       )
-        ++ cats
+        ++ monix
         ++ circe
         ++ pureConfig
     )
@@ -264,7 +264,6 @@ object Dependencies {
   ).map(artifact => "io.circe" %% artifact % Versions.circe)
 
   val monix: Seq[ModuleID] = Seq(
-    "monix",
     "monix-eval",
     "monix-reactive",
     "monix-execution",
@@ -273,10 +272,8 @@ object Dependencies {
 
   val pureConfig: Seq[ModuleID] = Seq(
     "pureconfig",
-    "pureconfig-cats-effect",
     "pureconfig-cats",
-    "pureconfig-circe",
-    "pureconfig-magnolia"
+    "pureconfig-circe"
   ).map(artifact => "com.github.pureconfig" %% artifact % Versions.pureConfig)
 
   val cats: Seq[ModuleID] = Seq(
@@ -313,7 +310,7 @@ object Dependencies {
     val scalaGuice   = "5.0.1"
     val playJson     = "2.9.2"
     val circe        = "0.14.0"
-    val monix        = "3.3.0"
+    val monix        = "3.4.0"
     val cats         = "2.3.0"
     val catsEffect   = "3.1.1"
     val catsMtl      = "1.2.0"
