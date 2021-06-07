@@ -16,17 +16,16 @@ class RemoteConfigFactory(
   def loadConfig(namespace: String, configKey: String): Config = {
     val paramPath                   = toParamName(configKey).withConfigNameSpace(namespace)
     val params: Map[String, String] = parameterStoreClient.fetchParameters(paramPath)
-    // TODO: validation
     val parsedParams                = params.map { case (path, value) => path -> ValueParser.parseStringValue(value) }
     val failedParams                = parsedParams.filter { case (_, triedConfigValue) => triedConfigValue.isFailure }
     if (failedParams.nonEmpty) {
       val downFields = failedParams.map {
-        case (path, error) =>
-          println(error)
+        case (path, _) =>
+          // log error for more details even if typesafe config provides bad explanation of error.
           DownField(path)
       }
       throw DecodingFailure(
-        s"Failed to parse configuration at key ${}",
+        s"Failed to parse configuration at key: ",
         downFields.toList
       )
     }
