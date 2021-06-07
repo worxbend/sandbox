@@ -1,6 +1,8 @@
 package io.kzonix.cogwheel.config
 
 import com.typesafe.config._
+import io.circe.CursorOp.DownField
+import io.circe.DecodingFailure
 import io.kzonix.cogwheel.aws.AWSParameterStoreClient
 import io.kzonix.cogwheel.config.ConfigPathUtils.PathUtils._
 import io.kzonix.cogwheel.config.parser.CompositeKeyParser
@@ -16,7 +18,21 @@ class RemoteConfigFactory(
     val params: Map[String, String] = parameterStoreClient.fetchParameters(paramPath)
     // TODO: validation
     val parsedParams                = params.map { case (path, value) => path -> ValueParser.parseStringValue(value) }
-    new CompositeKeyParser(new SimpleKeyParser()).parse(parsedParams).toConfig
+    val failedParams                = parsedParams.filter { case (_, triedConfigValue) => triedConfigValue.isFailure }
+    if (failedParams.nonEmpty) {
+      val downFields = failedParams.map {
+        case (path, error) =>
+          println(error)
+          DownField(path)
+      }
+      throw DecodingFailure(
+        s"Failed to parse configuration at key ${}",
+        downFields.toList
+      )
+    }
+    new CompositeKeyParser(new SimpleKeyParser())
+      .parse(parsedParams.map { case (path, success) => path -> success.get })
+      .toConfig
   }
 
 }

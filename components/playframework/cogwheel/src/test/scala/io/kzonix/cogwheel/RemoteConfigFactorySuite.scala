@@ -51,7 +51,7 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
     assert(config.getString("region-1.customer.test_app.test_key.menu.id") == "file")
   }
 
-  test("Should parse sequence element represents JSON string value under the parameter path config object") {
+  test("Should parse sequence element represents JSON string value under the parameter path") {
     (parameterStoreClient.fetchParameters _)
       .expects("/region-1/customer")
       .returns(
@@ -84,7 +84,7 @@ class RemoteConfigFactorySuite extends AnyFunSuite with MockFactory {
   }
 
   test(
-    "Should parse separated sequence element represents parts of large object value under the parameter path config object"
+    "Should parse the separated single sequence element represents parts of large object value under the parameter path"
   ) {
     (parameterStoreClient.fetchParameters _)
       .expects("/region-1/customer")

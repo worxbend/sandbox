@@ -66,7 +66,7 @@ class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], C
       // Combine all folded child nodes to 'ConfigList' type
       if (node.isCollection) ConfigValueFactory.fromIterable(builtNodes.asJava)
       // If there is some 'finishedValues', then it means that current node can not be a collection holder
-      // Combine finished nodes with those that are built on this step.
+      // Combine finished nodes with those that are built on this step [step 1].
       else if (finishedValues.size == 1)
         finishedValues.head
           .withFallback(
@@ -88,11 +88,12 @@ class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], C
     val cfg                             = if (compositeParams.nonEmpty) {
       val config = buildTree(
         Node(
-          "root", // dummy value, will ignored
+          "root", // dummy value, will be ignored
           compositeParams
         )
       )
-      // convert config value to object at some key level wrapping to enclosed key and fetching config object by the same key
+      // convert config value to object at some key level
+      // by wrapping to some enclosed key and fetching config object by the same key
       config.atKey("root").getConfig("root")
     } else ConfigFactory.empty()
 

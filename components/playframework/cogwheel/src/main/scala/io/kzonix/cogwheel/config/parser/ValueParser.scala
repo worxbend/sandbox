@@ -3,14 +3,15 @@ package io.kzonix.cogwheel.config.parser
 import com.typesafe.config._
 import io.kzonix.cogwheel.config.parser.ValueParser.ValuePatterns.JsonStructLike
 
+import scala.util.Try
 import scala.util.matching.Regex
 
 object ValueParser {
 
-  def parseStringValue(value: String): ConfigValue =
+  def parseStringValue(value: String): Try[ConfigValue] =
     value match {
-      case JsonStructLike(s) => parseJsonString(s)
-      case _                 => ConfigValueFactory.fromAnyRef(value)
+      case JsonStructLike(s) => Try(parseJsonString(s))
+      case _                 => Try(ConfigValueFactory.fromAnyRef(value))
     }
 
   private def parseJsonString(value: String): ConfigObject = {
