@@ -2,11 +2,15 @@ package io.kzonix.cogwheel.config.parser
 
 import com.typesafe.config._
 import io.kzonix.cogwheel.config.parser.CompositeKeyParser.Node
+import io.kzonix.cogwheel.config.parser.CompositeKeyParser.TrieNode
 import io.kzonix.cogwheel.config.parser.CompositeKeyParser.ParamNamePatters.PathWithSequenceIndex
 import io.kzonix.cogwheel.config.parser.CompositeKeyParser.ParamNamePatters.SequenceIndex
 
+import scala.annotation.tailrec
 import scala.collection.immutable
+import scala.collection.mutable
 import scala.jdk.CollectionConverters._
+import scala.util.Try
 
 class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], ConfigValue])
     extends ParameterParser[Map[String, ConfigValue], ConfigValue] {
@@ -85,7 +89,19 @@ class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], C
     val (compositeParams, simpleParams) = parameters.partition {
       case (path, _) => PathWithSequenceIndex.r.findAllIn(path).nonEmpty
     }
-    val cfg                             = if (compositeParams.nonEmpty) {
+
+    val trie = TrieNode()
+    compositeParams.foreach {
+      case (path, value) =>
+        trie.append(
+          path,
+          value
+        )
+    }
+//    println(trie)
+    trie.reverse().foreach(println)
+    TrieNode.fold(trie.reverse())
+    val cfg  = if (compositeParams.nonEmpty) {
       val config = buildTree(
         Node(
           "root", // dummy value, will be ignored
@@ -104,6 +120,141 @@ class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], C
 }
 
 object CompositeKeyParser {
+
+  type LeafKey = String
+
+  case class TrieNode(id: String = "root",
+                      var fullPath: Seq[String] = Seq("root"),
+                      var value: Option[ConfigValue] = None,
+                      leaves: mutable.Map[LeafKey, TrieNode] = new mutable.HashMap[LeafKey, TrieNode](),
+                      parent: Option[TrieNode] = None
+  ) {
+    override def toString: String =
+      s"Trie(id = $id, fullPath= $fullPath, leaves = ${ leaves.values }, value = $value)"
+
+    def append(path: String, config: ConfigValue) = {
+
+      val pathBlocks: Seq[String] = path.split('/').filter(_.nonEmpty).toSeq
+
+      @tailrec def appendHelper(node: TrieNode, currentIndex: Int): Unit =
+        if (currentIndex == pathBlocks.length) {
+          node.value = Some(config)
+          node.fullPath = pathBlocks
+        } else {
+          val pathBlock = pathBlocks(currentIndex)
+          val result    = node.leaves.getOrElseUpdate(
+            pathBlock,
+            TrieNode(
+              id = pathBlock,
+              parent = Some(node),
+              fullPath = node.fullPath ++ Seq(pathBlock)
+            )
+          )
+
+          appendHelper(
+            result,
+            currentIndex + 1
+          )
+        }
+
+      appendHelper(
+        this,
+        0
+      )
+    }
+
+    def reverse(): Seq[TrieNode] = {
+
+      @tailrec
+      def reverseHelper(valueLeaves: Seq[TrieNode], leaves: Seq[TrieNode]): Seq[TrieNode] = {
+        val (v, r) = leaves.partition(node => node.value.isDefined)
+        r match {
+          case Nil => valueLeaves ++ v
+          case _   =>
+            reverseHelper(
+              valueLeaves ++ v,
+              r.flatMap(_.leaves.values)
+            )
+        }
+
+      }
+
+      reverseHelper(
+        Seq.empty,
+        this.leaves.values.toSeq
+      )
+    }
+
+  }
+
+  object TrieNode {
+
+    def fold(seq: List[TrieNode]): Seq[TrieNode] = {
+      val iterator                  = seq.iterator
+      var foldedSeq: List[TrieNode] = List.empty[TrieNode]
+      while (iterator.hasNext) {
+        val node = iterator.next()
+        if (Try(Integer.parseInt(node.id)).isFailure) {
+          val value = node.value.get
+          foldedSeq = foldedSeq ++ List(
+            TrieNode(
+              id = node.parent.get.id,
+              value = Some(value.atKey(node.id).root())
+            )
+          )
+        }
+      }
+      foldedSeq
+    }
+
+    case class StackFrame(value: ConfigValue, computedChildren: List[ConfigValue], remainingChildren: List[TrieNode])
+
+    def fold(t: TrieNode)(f: String => ConfigValue)(g: (ConfigValue, List[ConfigValue]) => ConfigValue): ConfigValue = {
+
+      def go(stack: List[StackFrame]): ConfigValue = stack match {
+        case StackFrame(v, cs, Nil) :: tail                 =>
+          val folded = g(
+            f(v),
+            cs.reverse
+          )
+          tail match {
+            case Nil                                  => folded
+            case StackFrame(vUp, csUp, remUp) :: rest =>
+              go(
+                StackFrame(
+                  vUp,
+                  folded :: csUp,
+                  remUp
+                ) :: rest
+              )
+          }
+        case StackFrame(v, cs, nextChild :: others) :: tail =>
+          go(
+            StackFrame(
+              nextChild.value.get,
+              Nil,
+              nextChild.leaves.values.toList
+            ) ::
+              StackFrame(
+                v,
+                cs,
+                others
+              ) ::
+              tail
+          )
+        case Nil                                            => sys.error("Should not go there")
+      }
+
+      go(
+        StackFrame(
+          t.value.get,
+          Nil,
+          t.leaves.values.toList
+        ) :: Nil
+      )
+    }
+
+  }
 
   case class Node(id: String, children: Map[String, ConfigValue]) {
     var isCollection: Boolean  = false

@@ -184,7 +184,8 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
       caffeine,
       guice,
       scalaGuice,
-      logback
+      logback,
+      "com.azure" % "azure-storage-blob" % "12.9.0"
     ),
     Test / testOptions := Seq(
       Tests.Argument(

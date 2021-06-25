@@ -9,9 +9,9 @@ import io.kzonix.cogwheel.config.ConfigPathUtils.PathUtils._
 import io.kzonix.cogwheel.config.parser.CompositeKeyParser
 import io.kzonix.cogwheel.config.parser.SimpleKeyParser
 import io.kzonix.cogwheel.config.parser.ValueParser
-import org.checkerframework.checker.units.qual.s
 
 import scala.util.Failure
+import scala.util.Success
 import scala.util.Try
 
 class RemoteConfigFactory(
@@ -46,7 +46,12 @@ class RemoteConfigFactory(
     if (failedParams.nonEmpty) {
       val downFields = failedParams.map {
         case (path, Failure(exception)) =>
-          s
+          logger.error(
+            s"Failed entry with key '${ toConfigKey(path) }':",
+            exception
+          )
+          DownField(toConfigKey(path))
+        case (path, Success(exception)) =>
           logger.error(
             s"Failed entry with key '${ toConfigKey(path) }':",
             exception
