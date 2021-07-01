@@ -1,4 +1,4 @@
 // DO NOT EDIT! This file is auto-generated.
 // This file enables sbt-bloop to create bloop config files.
 
-addSbtPlugin("ch.epfl.scala" % "sbt-bloop" % "1.4.8-73-ce63e03d")
+addSbtPlugin("ch.epfl.scala" % "sbt-bloop" % "1.4.8-75-381f435c")
