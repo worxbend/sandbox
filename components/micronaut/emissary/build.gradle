@@ -50,7 +50,7 @@ dependencies {
     runtimeOnly("org.apache.logging.log4j:log4j-api:2.14.0")
     runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
     runtimeOnly("mysql:mysql-connector-java")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.15.3"))
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.16.0"))
     testRuntimeOnly("org.testcontainers:mysql")
 }
 
