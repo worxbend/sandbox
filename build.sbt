@@ -185,7 +185,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
       guice,
       scalaGuice,
       logback,
-      "com.azure" % "azure-storage-blob" % "12.12.0"
+      "com.azure" % "azure-storage-blob" % "12.13.0"
     ),
     Test / testOptions := Seq(
       Tests.Argument(
