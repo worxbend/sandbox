@@ -11,7 +11,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=security_rating)](https://sonarcloud.io/dashboard?id=kzonix_kzonix)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=kzonix_kzonix&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=kzonix_kzonix) 
 [![DepShield Badge](https://depshield.sonatype.org/badges/kzonix/kzonix/depshield.svg)](https://depshield.github.io)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/985d9f9265894c8aa955000dee18d155)](https://www.codacy.com/app/limpid-kzonix/kzonix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kzonix/kzonix&amp;utm_campaign=Badge_Grade) [![Greenkeeper badge](https://badges.greenkeeper.io/kzonix/kzonix.svg)](https://greenkeeper.io/)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/985d9f9265894c8aa955000dee18d155)](https://www.codacy.com/app/limpid-kzonix/kzonix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kzonix/kzonix&amp;utm_campaign=Badge_Grade) 
 [![CodeScene Code Health](https://codescene.io/projects/10258/status-badges/code-health)](https://codescene.io/projects/10258)
 [![CodeScene System Mastery](https://codescene.io/projects/10258/status-badges/system-mastery)](https://codescene.io/projects/10258)
 [![CodeScene general](https://codescene.io/images/analyzed-by-codescene-badge.svg)](https://codescene.io/projects/10258)
