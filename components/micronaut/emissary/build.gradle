@@ -1,7 +1,7 @@
 plugins {
     id "org.asciidoctor.jvm.convert" version "3.3.2"
     id "com.github.johnrengelman.shadow" version "7.0.0"
-    id "io.micronaut.application" version '2.0.0'
+    id "io.micronaut.application" version '2.0.3'
 }
 
 version "0.1"
@@ -40,7 +40,7 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.elasticsearch:micronaut-elasticsearch")
-    runtimeOnly("org.slf4j:log4j-over-slf4j:1.7.31")
+    runtimeOnly("org.slf4j:log4j-over-slf4j:1.7.32")
     implementation("org.apache.logging.log4j:log4j-api:2.14.1")
     implementation("org.apache.logging.log4j:log4j-core:2.14.1")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
@@ -50,7 +50,7 @@ dependencies {
     runtimeOnly("org.apache.logging.log4j:log4j-api:2.14.0")
     runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
     runtimeOnly("mysql:mysql-connector-java")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.15.3"))
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.16.0"))
     testRuntimeOnly("org.testcontainers:mysql")
 }
 
