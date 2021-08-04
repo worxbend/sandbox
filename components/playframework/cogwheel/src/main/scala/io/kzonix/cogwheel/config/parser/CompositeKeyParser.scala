@@ -98,9 +98,9 @@ class CompositeKeyParser(nextParser: ParameterParser[Map[String, ConfigValue], C
           value
         )
     }
-//    println(trie)
+    // println(trie)
     trie.reverse().foreach(println)
-    TrieNode.fold(trie.reverse())
+    // TrieNode.fold(trie.reverse())
     val cfg  = if (compositeParams.nonEmpty) {
       val config = buildTree(
         Node(
@@ -209,7 +209,8 @@ object CompositeKeyParser {
 
     case class StackFrame(value: ConfigValue, computedChildren: List[ConfigValue], remainingChildren: List[TrieNode])
 
-    def fold(t: TrieNode)(f: String => ConfigValue)(g: (ConfigValue, List[ConfigValue]) => ConfigValue): ConfigValue = {
+    def fold(t: TrieNode)(f: ConfigValue => ConfigValue)(
+        g: (ConfigValue, List[ConfigValue]) => ConfigValue): ConfigValue = {
 
       def go(stack: List[StackFrame]): ConfigValue = stack match {
         case StackFrame(v, cs, Nil) :: tail                 =>

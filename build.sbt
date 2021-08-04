@@ -1,6 +1,4 @@
-import BaseSettings.Utils
-import BaseSettings.defaultSettings
-import Dependencies.scalaGuice
+import BaseSettings._
 import Dependencies._
 import sbt.Test
 
@@ -24,6 +22,39 @@ lazy val kzonix = (project in file("."))
     `twitee-service`,
     `index-service`,
     `redprime-service`
+  )
+
+lazy val `scala3-sandbox` = (project in file(ConfigPaths.Common.app(Seq("scala3-sandbox"))))
+  .settings(scala3: _*)
+  .settings(
+    name := ProjectNames.app("scala3-sandbox")
+  )
+
+lazy val `akka-quickstart-service` = (project in file(ConfigPaths.Akka.service(Seq("akka-quickstart"))))
+  .enablePlugins(
+    AutomateHeaderPlugin,
+    BuildInfoPlugin,
+    DockerPlugin,
+    JavaAppPackaging
+  )
+  .settings(commonDependencies: _*)
+  .settings(
+    scalaVersion := "2.13.6",
+    name := ProjectNames.service("quickstart"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logback,
+      "com.typesafe"           % "config"     % "1.4.1",
+      "com.github.pureconfig" %% "pureconfig" % "0.16.0"
+    ) ++ akka ++ akkaTest ++ circe,
+    Test / testOptions := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
+      )
+    )
   )
 
 lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
