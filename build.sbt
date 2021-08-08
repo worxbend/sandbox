@@ -44,10 +44,14 @@ lazy val `akka-quickstart-service` = (project in file(ConfigPaths.Akka.service(S
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
-      logback,
-      "com.typesafe"           % "config"     % "1.4.1",
-      "com.github.pureconfig" %% "pureconfig" % "0.16.0"
-    ) ++ akka ++ akkaTest ++ circe,
+      logbackLogging,
+      alpakkaKafka,
+      kafkaClients
+    )
+      ++ akka
+      ++ akkaTest
+      ++ circe
+      ++ pureConfig,
     Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
