@@ -7,6 +7,7 @@ import sbt._
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import scala.language.postfixOps
 
 object ProjectNames {
 
@@ -43,9 +44,16 @@ object ConfigPaths {
 
   def normalizedPath(args: Seq[String]): String = s"${ args.mkString("/") }"
 
-  trait Project {
+  trait ProjectType {
+    protected val basePath: String
 
-    private val basePath = "components"
+  }
+
+  trait GeneralComponents extends Project {
+    override val basePath: String = "components"
+  }
+
+  trait Project extends ProjectType {
 
     protected val stack: String
 
@@ -91,35 +99,35 @@ object ConfigPaths {
 
   }
 
-  object Common extends Project {
+  object Common extends GeneralComponents {
     override val stack: String = "common"
   }
 
-  object Play extends Project {
+  object Play extends GeneralComponents {
     override val stack: String = "playframework"
   }
 
-  object Akka extends Project {
+  object Akka extends GeneralComponents {
     override val stack: String = "akka"
   }
 
-  object Udash extends Project {
+  object Udash extends GeneralComponents {
     override val stack: String = "udash"
   }
 
-  object ScalaFX extends Project {
+  object ScalaFX extends GeneralComponents {
     override val stack: String = "scala-fx"
   }
 
-  object VertX extends Project {
+  object VertX extends GeneralComponents {
     override val stack: String = "vert-x"
   }
 
-  object Http4s extends Project {
+  object Http4s extends GeneralComponents {
     override val stack: String = "http4s"
   }
 
-  object PicoliCLI extends Project {
+  object PicoliCLI extends GeneralComponents {
     override val stack: String = "picoli-cli"
   }
 
@@ -171,9 +179,10 @@ object BaseSettings {
 
   val defaultSettings: Seq[Setting[_]] = Seq(
     versionScheme := Some("semver-spec"),
+    startYear := Some(2020),
     scalaVersion := "2.13.6",
     organization := "io.kzonix",
-    organizationName := "Kzonix",
+    organizationName := "Kzonix Projects",
     version := Utils.Versions.version(),
     scalaVersion := "2.13.6",
     scalacOptions := Seq[String](
@@ -188,7 +197,7 @@ object BaseSettings {
       "-explaintypes" // scala 3 non-compatible
     ) ++ warningOptions ++ lintOptions,
     description := "N/A",
-    licenses += "GPLv2" -> url("https://www.gnu.org/licenses/gpl-2.0.html"),
+    licenses += ("MIT", url("https://www.gnu.org/licenses/gpl-2.0.html")),
     resolvers ++= Seq(
       Resolver.mavenLocal,
       Resolver.mavenCentral,

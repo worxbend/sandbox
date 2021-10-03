@@ -69,6 +69,7 @@ lazy val `akka-cluster-bootstrap-service` = (project in file(ConfigPaths.Akka.se
     DockerPlugin,
     JavaAppPackaging
   )
+  .settings(defaultSettings: _*)
   .settings(commonDependencies: _*)
   .settings(
     scalaVersion := "2.13.6",

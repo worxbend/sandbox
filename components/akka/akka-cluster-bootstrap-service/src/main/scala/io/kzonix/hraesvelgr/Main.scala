@@ -19,13 +19,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.sird
+package io.kzonix.hraesvelgr
 
-import play.api.routing.Router
-
-import javax.inject.Provider
-
-/**
- * Provides a fully-constructed, composed instance of [[Router]].
- */
-trait RouterProvider extends Provider[Router]
+class Main {}
