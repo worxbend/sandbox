@@ -51,6 +51,39 @@ lazy val `akka-quickstart-service` = (project in file(ConfigPaths.Akka.service(S
       ++ akka
       ++ akkaTest
       ++ circe
+      ++ micrometerPrometheus
+      ++ pureConfig,
+    Test / testOptions := Seq(
+      Tests.Argument(
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
+      )
+    )
+  )
+
+lazy val `akka-cluster-bootstrap-service` = (project in file(ConfigPaths.Akka.service(Seq("akka-cluster-bootstrap"))))
+  .enablePlugins(
+    AutomateHeaderPlugin,
+    BuildInfoPlugin,
+    DockerPlugin,
+    JavaAppPackaging
+  )
+  .settings(commonDependencies: _*)
+  .settings(
+    scalaVersion := "2.13.6",
+    name := ProjectNames.service("akka-cluster-bootstrap"),
+    libraryDependencies ++= Seq(
+      guice,
+      scalaGuice,
+      logbackLogging,
+      alpakkaKafka,
+      kafkaClients
+    )
+      ++ akka
+      ++ akkaTest
+      ++ circe
+      ++ micrometerPrometheus
       ++ pureConfig,
     Test / testOptions := Seq(
       Tests.Argument(

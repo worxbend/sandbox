@@ -469,3 +469,8 @@ project/plugins/project/
 .metals/
 .bloop/
 .bsp/
+
+
+### dot Env
+**/.env
+docker/lenses/.env

@@ -309,6 +309,11 @@ object Dependencies {
     "pureconfig-circe"
   ).map(artifact => "com.github.pureconfig" %% artifact % PureConfig)
 
+  val micrometerPrometheus: Seq[ModuleID] = Seq(
+    "io.micrometer" % "micrometer-registry-prometheus" % "1.7.4",
+    "io.micrometer" % "micrometer-core"                % "1.7.4"
+  )
+
   val cats: Seq[ModuleID] = Seq(
     "org.typelevel" %% "cats-core"   % Cats,
     "org.typelevel" %% "cats-effect" % CatsEffect,

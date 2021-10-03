@@ -6,35 +6,43 @@ import akka.actor.typed.ActorSystem
 import com.typesafe.config.ConfigFactory
 import io.kzonix.quickstart.Launcher.ApplicationStart
 import io.kzonix.quickstart.Launcher.ApplicationStop
-
+import scala.concurrent.ExecutionContextExecutor
 import scala.concurrent.Future
 
 object Main {
   private val Name = "quickstart"
 
   def main(args: Array[String]): Unit = {
+
     // Happens before creating the actor system to fail fast
     val config = ConfigFactory.load("application.conf")
 
     // Use a classic system, because some libraries still rely on it
-    val system = ActorSystem(
+    implicit val as                           = ActorSystem(
       Launcher(),
       Name,
       config
     )
+    implicit val ec: ExecutionContextExecutor = as.executionContext
 
-    system ! ApplicationStart(config)
+    val cs = CoordinatedShutdown(as)
 
-    CoordinatedShutdown(system).addTask(
+    as ! ApplicationStart(config)
+
+    cs.addTask(
       CoordinatedShutdown.PhaseBeforeServiceUnbind,
       "application-stop"
     ) { () =>
-       system ! ApplicationStop("Oops...")
+       as ! ApplicationStop("Oops...")
        Future.successful(Done)
     }
 
-    system.terminate()
-
+    cs.addTask(
+      CoordinatedShutdown.PhaseBeforeActorSystemTerminate,
+      "application-termination"
+    ) { () =>
+      Future.successful(Done)
+    }
   }
 
 }
