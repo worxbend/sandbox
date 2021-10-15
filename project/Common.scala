@@ -319,7 +319,7 @@ object Dependencies {
   ).map(artifact => "com.github.pureconfig" %% artifact % PureConfig)
 
   val micrometerPrometheus: Seq[ModuleID] = Seq(
-    "io.micrometer" % "micrometer-registry-prometheus" % "1.7.4",
+    "io.micrometer" % "micrometer-registry-prometheus" % "1.7.5",
     "io.micrometer" % "micrometer-core"                % "1.7.4"
   )
 
