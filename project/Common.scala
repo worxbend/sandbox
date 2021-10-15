@@ -320,7 +320,7 @@ object Dependencies {
 
   val micrometerPrometheus: Seq[ModuleID] = Seq(
     "io.micrometer" % "micrometer-registry-prometheus" % "1.7.4",
-    "io.micrometer" % "micrometer-core"                % "1.7.4"
+    "io.micrometer" % "micrometer-core"                % "1.7.5"
   )
 
   val cats: Seq[ModuleID] = Seq(
