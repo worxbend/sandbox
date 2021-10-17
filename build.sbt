@@ -1,5 +1,6 @@
 import BaseSettings._
 import Dependencies._
+import ProjectUtils._
 import com.typesafe.sbt.SbtNativePackager.Docker
 import sbt.Test
 
