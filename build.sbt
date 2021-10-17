@@ -39,7 +39,7 @@ lazy val kzonix = (project in file("."))
 
 /* --- Play Framework related components --- */
 
-lazy val `play-utile` = (project in file(ProjectPaths.Components.Play.lib(Seq("play-utile"))))
+lazy val `play-utile`: Project = (project in file(ProjectPaths.Components.Play.lib(Seq("play-utile"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(

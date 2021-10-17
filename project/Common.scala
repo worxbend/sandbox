@@ -410,4 +410,37 @@ object Dependencies {
     val Atomix               = "3.1.10"
   }
 
+  object ProjectTemplate {
+
+    trait TypedProjectName {
+      def value: String
+    }
+
+    trait PathTemplate         {
+      def absolutePath: String
+      def projectPath: String
+    }
+
+    trait DependenciesTemplate {
+      def dependencies: Seq[ModuleID]
+    }
+
+    trait SettingsTemplate {
+      def withSettings(settings: Seq[Setting[_]]): SettingsTemplate
+      def withTestSettings(settings: Seq[Setting[_]]): SettingsTemplate
+    }
+
+    trait ProjectTemplate {
+      def withName(fullName: String): ProjectTemplate
+      def withName(name: TypedProjectName): ProjectTemplate
+      def withSettingTemplate(settings: SettingsTemplate): ProjectTemplate
+      def withPathTemplate(): ProjectTemplate
+      def withDependencies(dependenciesTemplate: SettingsTemplate): ProjectTemplate
+
+      def project(): Project
+    }
+
+    class BaseProjectTemplate() {}
+  }
+
 }
