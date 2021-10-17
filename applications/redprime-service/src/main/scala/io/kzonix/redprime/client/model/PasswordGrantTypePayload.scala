@@ -19,22 +19,36 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.play
+package io.kzonix.redprime.client.model
 
-import io.kzonix.sird.SirdProvider
-import play.api.ApplicationLoader
-import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
-import play.api.routing.Router
+import com.typesafe.config.Config
+import play.api.ConfigLoader
+import play.api.Logger
 
-/**
- * An ApplicationLoader that uses Guice to bootstrap the application.
- * It bind [[Router]] to [[SirdProvider]].
- */
-class SimpleApplicationLoader extends GuiceApplicationLoader {
+case class PasswordGrantTypePayload(
+    authUri: String,
+    clientId: String,
+    clientSecret: String,
+    userName: String,
+    password: String,
+    grantType: String = "password"
+)
 
-  protected override def overrides(context: ApplicationLoader.Context): Seq[GuiceableModule] =
-    super.overrides(context) :+ (bind[Router].toProvider[SirdProvider]: GuiceableModule)
+object PasswordGrantTypePayload {
+
+  private val logger: Logger = Logger(this.getClass)
+
+  implicit val configLoader: ConfigLoader[PasswordGrantTypePayload] = (config: Config, path: String) => {
+    val rootConfig: Config = config.getConfig(path)
+    val payload            = PasswordGrantTypePayload(
+      authUri = rootConfig.getString("authorizeUri"),
+      clientId = rootConfig.getString("clientId"),
+      clientSecret = rootConfig.getString("clientSecret"),
+      userName = rootConfig.getString("username"),
+      password = rootConfig.getString("password")
+    )
+    logger.info(payload.toString)
+    payload
+  }
 
 }

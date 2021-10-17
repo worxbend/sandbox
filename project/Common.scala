@@ -38,7 +38,7 @@ object ProjectNames {
     s"$name-$typeName"
 }
 
-object ConfigPaths {
+object ProjectPaths {
   // build.sbt relative root directory
   val root = "./"
 
@@ -49,86 +49,110 @@ object ConfigPaths {
 
   }
 
-  trait GeneralComponents extends Project {
+  trait GeneralComponent extends Project {
     override val basePath: String = "components"
+  }
+
+  trait Application extends Project {
+    override val basePath: String = "applications"
   }
 
   trait Project extends ProjectType {
 
-    protected val stack: String
+    protected val projectMainPath: String
 
-    lazy val lib: Seq[String] => String = (args: Seq[String]) =>
+    def api(args: Seq[String]): String =
       root + normalizedPath(
         List(
           basePath,
-          stack
-        ) ::: (args toList)
-      )
-
-    lazy val api: Seq[String] => String = (args: Seq[String]) =>
-      root + normalizedPath(
-        List(
-          basePath,
-          stack
+          projectMainPath
         ) ::: (args toList)
       ) + "-api"
 
-    lazy val impl: Seq[String] => String = (args: Seq[String]) =>
+    def impl(args: Seq[String]): String =
       root + normalizedPath(
         List(
           basePath,
-          stack
+          projectMainPath
         ) ::: (args toList)
       ) + "-impl"
 
-    lazy val service: Seq[String] => String = (args: Seq[String]) =>
+    def lib(args: Seq[String]): String =
       root + normalizedPath(
         List(
           basePath,
-          stack
+          projectMainPath
+        ) ::: (args toList)
+      )
+
+    def service(args: Seq[String]): String =
+      root + normalizedPath(
+        List(
+          basePath,
+          projectMainPath
         ) ::: (args toList)
       ) + "-service"
 
-    lazy val app: Seq[String] => String = (args: Seq[String]) =>
+    def app(args: Seq[String]): String =
       root + normalizedPath(
         List(
           basePath,
-          stack
+          projectMainPath
         ) ::: (args toList)
       ) + "-app"
 
   }
 
-  object Common extends GeneralComponents {
-    override val stack: String = "common"
+  object Components {
+
+    object Common extends GeneralComponent {
+      override val projectMainPath: String = "common"
+    }
+
+    object Play extends GeneralComponent {
+      override val projectMainPath: String = "playframework"
+    }
+
+    object Akka extends GeneralComponent {
+      override val projectMainPath: String = "akka"
+    }
+
+    object Udash extends GeneralComponent {
+      override val projectMainPath: String = "udash"
+    }
+
+    object ScalaFX extends GeneralComponent {
+      override val projectMainPath: String = "scala-fx"
+    }
+
+    object VertX extends GeneralComponent {
+      override val projectMainPath: String = "vert-x"
+    }
+
+    object Http4s extends GeneralComponent {
+      override val projectMainPath: String = "http4s"
+    }
+
+    object PicoliCLI extends GeneralComponent {
+      override val projectMainPath: String = "picoli-cli"
+    }
+
   }
 
-  object Play extends GeneralComponents {
-    override val stack: String = "playframework"
-  }
+  object Applications {
 
-  object Akka extends GeneralComponents {
-    override val stack: String = "akka"
-  }
+    object Common extends Application {
+      override val projectMainPath: String = "common"
+    }
 
-  object Udash extends GeneralComponents {
-    override val stack: String = "udash"
-  }
+    object Sandbox extends Application {
+      override val projectMainPath: String = "sandbox"
+    }
 
-  object ScalaFX extends GeneralComponents {
-    override val stack: String = "scala-fx"
-  }
+    object Root extends Application {
+      override val projectMainPath: String = "./"
+    }
 
-  object VertX extends GeneralComponents {
-    override val stack: String = "vert-x"
-  }
-
-  object Http4s extends GeneralComponents {
-    override val stack: String = "http4s"
-  }
-
-  object PicoliCLI extends GeneralComponents {
-    override val stack: String = "picoli-cli"
   }
 
 }
@@ -319,8 +343,15 @@ object Dependencies {
   ).map(artifact => "com.github.pureconfig" %% artifact % PureConfig)
 
   val micrometerPrometheus: Seq[ModuleID] = Seq(
-    "io.micrometer" % "micrometer-registry-prometheus" % "1.7.4",
-    "io.micrometer" % "micrometer-core"                % "1.7.4"
+    "io.micrometer" % "micrometer-registry-prometheus" % MicrometerPrometheus,
+    "io.micrometer" % "micrometer-core"                % MicrometerPrometheus
+  )
+
+  val atomix: Seq[ModuleID] = Seq(
+    "io.atomix" % "atomix"                % Atomix,
+    "io.atomix" % "atomix-raft"           % Atomix,
+    "io.atomix" % "atomix-primary-backup" % Atomix,
+    "io.atomix" % "atomix-gossip"         % Atomix
   )
 
   val cats: Seq[ModuleID] = Seq(
@@ -354,28 +385,29 @@ object Dependencies {
   }
 
   private[Dependencies] object Versions {
-    val TypesafeConfig = "1.4.1"
-    val ScalaGuice     = "5.0.1"
-    val PlayJson       = "2.9.2"
-    val Circe          = "0.14.0"
-    val Monix          = "3.4.0"
-    val Cats           = "2.6.1"
-    val CatsEffect     = "3.2.1"
-    val CatsMtl        = "1.2.1"
-    val PureConfig     = "0.15.0"
-    val ScalaLogging   = "3.9.4"
-    val Enumeratum     = "1.7.0"
+    val TypesafeConfig       = "1.4.1"
+    val ScalaGuice           = "5.0.1"
+    val PlayJson             = "2.9.2"
+    val Circe                = "0.14.0"
+    val Monix                = "3.4.0"
+    val Cats                 = "2.6.1"
+    val CatsEffect           = "3.2.1"
+    val CatsMtl              = "1.2.1"
+    val PureConfig           = "0.15.0"
+    val ScalaLogging         = "3.9.4"
+    val Enumeratum           = "1.7.0"
     // Test dependencies
-    val ScalaMock      = "5.1.0"
-    val ScalaCheck     = "1.15.4"
-    val ScalaTest      = "3.2.9"
-    val Specs2         = "4.12.0"
-    val Akka           = "2.6.15"
-    val Jackson        = "2.12.4"
-    val AlpakkaKafka   = "2.1.1"
-    val KafkaClients   = "2.7.0"
-    val Logback        = "1.2.5"
-
+    val ScalaMock            = "5.1.0"
+    val ScalaCheck           = "1.15.4"
+    val ScalaTest            = "3.2.9"
+    val Specs2               = "4.12.0"
+    val Akka                 = "2.6.15"
+    val Jackson              = "2.12.4"
+    val AlpakkaKafka         = "2.1.1"
+    val KafkaClients         = "2.7.0"
+    val Logback              = "1.2.5"
+    val MicrometerPrometheus = "1.7.4"
+    val Atomix               = "3.1.10"
   }
 
 }

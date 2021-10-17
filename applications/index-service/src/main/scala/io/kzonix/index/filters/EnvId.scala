@@ -19,22 +19,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.play
+package io.kzonix.index.filters
 
-import io.kzonix.sird.SirdProvider
-import play.api.ApplicationLoader
-import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
-import play.api.routing.Router
+import com.typesafe.config.Config
+import play.api.ConfigLoader
 
-/**
- * An ApplicationLoader that uses Guice to bootstrap the application.
- * It bind [[Router]] to [[SirdProvider]].
- */
-class SimpleApplicationLoader extends GuiceApplicationLoader {
+import scala.util.Random
 
-  protected override def overrides(context: ApplicationLoader.Context): Seq[GuiceableModule] =
-    super.overrides(context) :+ (bind[Router].toProvider[SirdProvider]: GuiceableModule)
+case class EnvId(id: String)
+
+object EnvId {
+
+  implicit val configLoader: ConfigLoader[EnvId] = (config: Config, path: String) => {
+    var id: String = config.getString(path)
+    id = if (id == null) new Random().nextString(24) else id
+    EnvId(id)
+  }
 
 }

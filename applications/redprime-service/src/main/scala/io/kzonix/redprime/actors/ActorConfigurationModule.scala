@@ -19,22 +19,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.play
+package io.kzonix.redprime.actors
 
-import io.kzonix.sird.SirdProvider
-import play.api.ApplicationLoader
-import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
-import play.api.routing.Router
+import com.google.inject.AbstractModule
+import play.api.libs.concurrent.AkkaGuiceSupport
 
-/**
- * An ApplicationLoader that uses Guice to bootstrap the application.
- * It bind [[Router]] to [[SirdProvider]].
- */
-class SimpleApplicationLoader extends GuiceApplicationLoader {
+class ActorConfigurationModule extends AbstractModule with AkkaGuiceSupport {
 
-  protected override def overrides(context: ApplicationLoader.Context): Seq[GuiceableModule] =
-    super.overrides(context) :+ (bind[Router].toProvider[SirdProvider]: GuiceableModule)
+  override def configure(): Unit =
+    bindActor[RedditUserOverviewActor]("RedditUserOverviewActor")
 
 }

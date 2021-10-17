@@ -19,22 +19,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.play
+package io.kzonix.redprime.client.model
 
-import io.kzonix.sird.SirdProvider
-import play.api.ApplicationLoader
-import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
-import play.api.routing.Router
+import play.api.libs.json.JsonNaming.SnakeCase
+import play.api.libs.json.Json
+import play.api.libs.json.JsonConfiguration
+import play.api.libs.json.OFormat
 
-/**
- * An ApplicationLoader that uses Guice to bootstrap the application.
- * It bind [[Router]] to [[SirdProvider]].
- */
-class SimpleApplicationLoader extends GuiceApplicationLoader {
+case class OAuthResponse(
+    accessToken: String,
+    tokenType: String,
+    expiresIn: Long,
+    scope: String
+)
 
-  protected override def overrides(context: ApplicationLoader.Context): Seq[GuiceableModule] =
-    super.overrides(context) :+ (bind[Router].toProvider[SirdProvider]: GuiceableModule)
+object OAuthResponse {
+
+  implicit val cfg: JsonConfiguration                = JsonConfiguration(SnakeCase)
+  implicit val responseReads: OFormat[OAuthResponse] = Json.format[OAuthResponse]
 
 }

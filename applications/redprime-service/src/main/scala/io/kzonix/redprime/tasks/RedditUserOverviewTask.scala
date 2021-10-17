@@ -19,22 +19,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.kzonix.play
+package io.kzonix.redprime.tasks
 
-import io.kzonix.sird.SirdProvider
-import play.api.ApplicationLoader
-import play.api.inject.bind
-import play.api.inject.guice.GuiceApplicationLoader
-import play.api.inject.guice.GuiceableModule
-import play.api.routing.Router
+import akka.actor.ActorRef
+import akka.actor.ActorSystem
+import com.google.inject.Inject
+import com.google.inject.name.Named
+import io.kzonix.redprime.actors.RedditUserOverviewActor
 
-/**
- * An ApplicationLoader that uses Guice to bootstrap the application.
- * It bind [[Router]] to [[SirdProvider]].
- */
-class SimpleApplicationLoader extends GuiceApplicationLoader {
+import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.DurationInt
 
-  protected override def overrides(context: ApplicationLoader.Context): Seq[GuiceableModule] =
-    super.overrides(context) :+ (bind[Router].toProvider[SirdProvider]: GuiceableModule)
-
+class RedditUserOverviewTask @Inject() (
+    actorSystem: ActorSystem,
+    @Named("RedditUserOverviewActor") actorRef: ActorRef
+)(implicit
+    executionContext: ExecutionContext
+) {
+  actorSystem.scheduler.scheduleAtFixedRate(
+    initialDelay = 0.microseconds,
+    interval = 15.seconds,
+    receiver = actorRef,
+    message = RedditUserOverviewActor.Tick
+  )
 }

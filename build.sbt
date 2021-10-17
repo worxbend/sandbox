@@ -1,5 +1,6 @@
 import BaseSettings._
 import Dependencies._
+import com.typesafe.sbt.SbtNativePackager.Docker
 import sbt.Test
 
 /* -- START: Global Settings -- */
@@ -13,6 +14,12 @@ lazy val commonSettings = {
   commonDependencies ++ testDependencies ++ defaultSettings
 }
 
+/* Root project
+ * ---------------------------------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
+ * */
+
 lazy val kzonix = (project in file("."))
   .settings(defaultSettings: _*)
   .settings(
@@ -24,35 +31,24 @@ lazy val kzonix = (project in file("."))
     `redprime-service`
   )
 
-lazy val `scala3-sandbox` = (project in file(ConfigPaths.Common.app(Seq("scala3-sandbox"))))
-  .settings(scala3: _*)
-  .settings(
-    name := ProjectNames.app("scala3-sandbox")
-  )
+/*
+ * ---------------------------------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
+ * */
 
-lazy val `akka-quickstart-service` = (project in file(ConfigPaths.Akka.service(Seq("akka-quickstart"))))
-  .enablePlugins(
-    AutomateHeaderPlugin,
-    BuildInfoPlugin,
-    DockerPlugin,
-    JavaAppPackaging
-  )
-  .settings(commonDependencies: _*)
+/* --- Play Framework related components --- */
+
+lazy val `play-utile` = (project in file(ProjectPaths.Components.Play.lib(Seq("play-utile"))))
+  .enablePlugins(PlayService)
+  .settings(commonSettings: _*)
   .settings(
-    scalaVersion := "2.13.6",
-    name := ProjectNames.service("quickstart"),
+    name := ProjectNames.lib("play-utile"),
     libraryDependencies ++= Seq(
       guice,
       scalaGuice,
-      logbackLogging,
-      alpakkaKafka,
-      kafkaClients
-    )
-      ++ akka
-      ++ akkaTest
-      ++ circe
-      ++ micrometerPrometheus
-      ++ pureConfig,
+      logback
+    ),
     Test / testOptions := Seq(
       Tests.Argument(
         TestFrameworks.JUnit,
@@ -61,41 +57,10 @@ lazy val `akka-quickstart-service` = (project in file(ConfigPaths.Akka.service(S
       )
     )
   )
+  .dependsOn(`sird-provider`)
+  .aggregate(`sird-provider`)
 
-lazy val `akka-cluster-bootstrap-service` = (project in file(ConfigPaths.Akka.service(Seq("akka-cluster-bootstrap"))))
-  .enablePlugins(
-    AutomateHeaderPlugin,
-    BuildInfoPlugin,
-    DockerPlugin,
-    JavaAppPackaging
-  )
-  .settings(defaultSettings: _*)
-  .settings(commonDependencies: _*)
-  .settings(
-    scalaVersion := "2.13.6",
-    name := ProjectNames.service("akka-cluster-bootstrap"),
-    libraryDependencies ++= Seq(
-      guice,
-      scalaGuice,
-      logbackLogging,
-      alpakkaKafka,
-      kafkaClients
-    )
-      ++ akka
-      ++ akkaTest
-      ++ circe
-      ++ micrometerPrometheus
-      ++ pureConfig,
-    Test / testOptions := Seq(
-      Tests.Argument(
-        TestFrameworks.JUnit,
-        "-a",
-        "-v"
-      )
-    )
-  )
-
-lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-provider"))))
+lazy val `sird-provider-api` = (project in file(ProjectPaths.Components.Play.api(Seq("sird-provider"))))
   .enablePlugins(PlayService)
   .settings(defaultSettings: _*)
   .settings(
@@ -114,7 +79,7 @@ lazy val `sird-provider-api` = (project in file(ConfigPaths.Play.api(Seq("sird-p
     )
   )
 
-lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provider"))))
+lazy val `sird-provider` = (project in file(ProjectPaths.Components.Play.lib(Seq("sird-provider"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
@@ -136,29 +101,8 @@ lazy val `sird-provider` = (project in file(ConfigPaths.Play.lib(Seq("sird-provi
   .dependsOn(`sird-provider-api`)
   .aggregate(`sird-provider-api`)
 
-lazy val `play-utile` = (project in file(ConfigPaths.Play.lib(Seq("play-utile"))))
-  .enablePlugins(PlayService)
-  .settings(commonSettings: _*)
-  .settings(
-    name := ProjectNames.lib("play-utile"),
-    libraryDependencies ++= Seq(
-      guice,
-      scalaGuice,
-      logback
-    ),
-    Test / testOptions := Seq(
-      Tests.Argument(
-        TestFrameworks.JUnit,
-        "-a",
-        "-v"
-      )
-    )
-  )
-  .dependsOn(`sird-provider`)
-  .aggregate(`sird-provider`)
-
 lazy val `play-underpressure-api` = (project in file(
-  ConfigPaths.Play.api(
+  ProjectPaths.Components.Play.api(
     Seq(
       "play",
       "play-underpressure"
@@ -184,7 +128,7 @@ lazy val `play-underpressure-api` = (project in file(
   )
 
 lazy val `play-underpressure` = (project in file(
-  ConfigPaths.Play.lib(
+  ProjectPaths.Components.Play.lib(
     Seq(
       "play",
       "play-underpressure"
@@ -211,9 +155,101 @@ lazy val `play-underpressure` = (project in file(
   .dependsOn(`play-underpressure-api`)
   .aggregate(`play-underpressure-api`)
 
+/* ------- Common Library ------- */
+
+lazy val `cogwheel` = (project in file(ProjectPaths.Components.Common.lib(Seq("cogwheel"))))
+  .settings(commonSettings: _*)
+  .settings(
+    name := ProjectNames.service("cogwheel"),
+    Compile / run / mainClass := Some("io.kzonix.cogwheel.Main"),
+    libraryDependencies ++= Seq(
+      "com.amazonaws" % "aws-java-sdk-ssm" % "1.12.68"
+    ),
+    Test / testOptions := Seq(
+      Tests.Argument(
+        TestFrameworks.ScalaTest,
+        "-oD"
+      )
+    )
+  )
+
+/* -- Sandbox Applications -- */
+lazy val `scala3-sandbox` = (project in file(ProjectPaths.Applications.Sandbox.app(Seq("scala3-sandbox"))))
+  .settings(scala3: _*)
+  .settings(
+    name := ProjectNames.app("scala3-sandbox")
+  )
+
+lazy val `akka-quickstart-service` =
+  (project in file(ProjectPaths.Applications.Sandbox.service(Seq("akka-quickstart"))))
+    .enablePlugins(
+      AutomateHeaderPlugin,
+      BuildInfoPlugin,
+      DockerPlugin,
+      JavaAppPackaging
+    )
+    .settings(commonDependencies: _*)
+    .settings(
+      scalaVersion := "2.13.6",
+      name := ProjectNames.service("quickstart"),
+      libraryDependencies ++= Seq(
+        guice,
+        scalaGuice,
+        logbackLogging,
+        alpakkaKafka,
+        kafkaClients
+      )
+        ++ akka
+        ++ akkaTest
+        ++ circe
+        ++ micrometerPrometheus
+        ++ pureConfig,
+      Test / testOptions := Seq(
+        Tests.Argument(
+          TestFrameworks.JUnit,
+          "-a",
+          "-v"
+        )
+      )
+    )
+
+lazy val `akka-cluster-bootstrap-service` =
+  (project in file(ProjectPaths.Applications.Sandbox.service(Seq("akka-cluster-bootstrap"))))
+    .enablePlugins(
+      AutomateHeaderPlugin,
+      BuildInfoPlugin,
+      DockerPlugin,
+      JavaAppPackaging
+    )
+    .settings(defaultSettings: _*)
+    .settings(commonDependencies: _*)
+    .settings(
+      scalaVersion := "2.13.6",
+      name := ProjectNames.service("akka-cluster-bootstrap"),
+      libraryDependencies ++= Seq(
+        guice,
+        scalaGuice,
+        logbackLogging,
+        alpakkaKafka,
+        kafkaClients
+      )
+        ++ akka
+        ++ akkaTest
+        ++ circe
+        ++ micrometerPrometheus
+        ++ pureConfig,
+      Test / testOptions := Seq(
+        Tests.Argument(
+          TestFrameworks.JUnit,
+          "-a",
+          "-v"
+        )
+      )
+    )
+
 /* ------- Applications ------ */
 
-lazy val `redprime-service` = (project in file(ConfigPaths.Play.service(Seq("redprime"))))
+lazy val `redprime-service` = (project in file(ProjectPaths.Applications.Root.service(Seq("redprime"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
@@ -243,7 +279,7 @@ lazy val `redprime-service` = (project in file(ConfigPaths.Play.service(Seq("red
     `play-utile`
   )
 
-lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"))))
+lazy val `index-service` = (project in file(ProjectPaths.Applications.Root.service(Seq("index"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
@@ -273,7 +309,7 @@ lazy val `index-service` = (project in file(ConfigPaths.Play.service(Seq("index"
     `play-utile`
   )
 
-lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twitee"))))
+lazy val `twitee-service` = (project in file(ProjectPaths.Applications.Root.service(Seq("twitee"))))
   .enablePlugins(PlayService)
   .settings(commonSettings: _*)
   .settings(
@@ -303,20 +339,35 @@ lazy val `twitee-service` = (project in file(ConfigPaths.Play.service(Seq("twite
     `play-utile`
   )
 
-lazy val `cogwheel` = (project in file(ConfigPaths.Play.lib(Seq("cogwheel"))))
-  .settings(commonSettings: _*)
+lazy val `hresvelgr` = (project in file(ProjectPaths.Applications.Root.app(Seq("hresvelgr"))))
+  .enablePlugins(
+    AutomateHeaderPlugin,
+    BuildInfoPlugin,
+    DockerPlugin,
+    JavaAppPackaging,
+    AshScriptPlugin
+  )
+  .settings(defaultSettings: _*)
+  .settings(commonDependencies: _*)
   .settings(
-    name := ProjectNames.service("cogwheel"),
-    Compile / run / mainClass := Some("io.kzonix.cogwheel.Main"),
+    scalaVersion := "2.13.6",
+    name := ProjectNames.app("hresvelgr"),
     libraryDependencies ++= Seq(
-      "com.amazonaws" % "aws-java-sdk-ssm" % "1.12.68"
-    ),
+      logbackLogging
+    )
+      ++ akka
+      ++ akkaTest
+      ++ circe
+      ++ micrometerPrometheus
+      ++ pureConfig,
     Test / testOptions := Seq(
       Tests.Argument(
-        TestFrameworks.ScalaTest,
-        "-oD"
+        TestFrameworks.JUnit,
+        "-a",
+        "-v"
       )
-    )
+    ),
+    Docker / dockerBaseImage := "openjdk"
   )
 
 // Scalafmt
