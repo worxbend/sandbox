@@ -63,8 +63,8 @@ class RedditClient @Inject() (
       .execute(POST.value)
 
     eventualResponse.map { response =>
-      logger.info(response.json.toString())
-      response.json.validate[OAuthResponse].asOpt
+       logger.info(response.json.toString())
+       response.json.validate[OAuthResponse].asOpt
     }
   }
 

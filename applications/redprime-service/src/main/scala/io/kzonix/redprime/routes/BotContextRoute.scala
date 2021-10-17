@@ -37,9 +37,9 @@ class BotContextRoute @Inject() (controller: BotContextController) extends Simpl
   override val routePrefix: RoutePrefix = "/reddit-bot".withVersion(1)
 
   override def routes: Routes = {
-    case GET(p"/index/${number}") => controller.index(number)
-    case GET(p"/asyncCache")      => controller.asyncCacheTest
-    case GET(p"/syncCache")       => controller.cacheTest
+    case GET(p"/index/${ number }") => controller.index(number)
+    case GET(p"/asyncCache")        => controller.asyncCacheTest
+    case GET(p"/syncCache")         => controller.cacheTest
   }
 
 }

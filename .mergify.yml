@@ -17,7 +17,7 @@ pull_request_rules:
       - label=block-merge
     actions:
       label:
-        remove: [block-merge]
+        remove: [ block-merge ]
   - name: Delete the PR branch after merge
     conditions:
       - merged

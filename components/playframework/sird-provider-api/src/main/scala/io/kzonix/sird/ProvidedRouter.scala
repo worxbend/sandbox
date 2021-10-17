@@ -27,27 +27,26 @@ import play.api.routing.Router
 /** Uses for definition String Interpolation Route Definition */
 trait ProvidedRouter extends Router {
 
-  /**
-   * Provides a router prefix based on router configuration: base prefix and route version.
-   *
-   * @return String prefix
-   */
+  /** Provides a router prefix based on router configuration: base prefix and route version.
+    *
+    * @return
+    *   String prefix
+    */
   final lazy val prefix: String = routeWithVersion(routePrefix)
   val routePrefix: RoutePrefix
 }
 
 private[sird] object ProvidedRouter {
 
-  /**
-   * Concat route version with the base route path.
-   *
-   * ==Overview==
-   * The first parameter is route prefix. It can be a string like `/parent/child/` or `parent/child`.
-   * In the result you will get something like `/v1/parent/child`.
-   *
-   * @return Function responsible to concat route version and path.
-   */
-  private[sird] def routeWithVersion: RoutePrefix => String = (routePrefix: RoutePrefix) => {
+  /** Concat route version with the base route path.
+    *
+    * 122Overview122 The first parameter is route prefix. It can be a string like `/parent/child/` or `parent/child`. In
+    * the result you will get something like `/v1/parent/child`.
+    *
+    * @return
+    *   Function responsible to concat route version and path.
+    */
+  private[sird] def routeWithVersion: RoutePrefix => String = (routePrefix: RoutePrefix) =>
     if (routePrefix.isVersional)
       Router.concatPrefix(
         "v".concat(routePrefix.version.toString),
@@ -55,6 +54,5 @@ private[sird] object ProvidedRouter {
       )
     else
       routePrefix.prefix
-  }
 
 }

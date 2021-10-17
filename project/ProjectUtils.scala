@@ -1,6 +1,7 @@
 import scala.language.postfixOps
 
 object ProjectUtils {
+
   object ProjectNames {
 
     def service(serviceName: String): String = normalizedName(
@@ -148,6 +149,5 @@ object ProjectUtils {
     }
 
   }
-
 
 }
