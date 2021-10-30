@@ -30,7 +30,6 @@ import play.api.Logger
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
-import scala.concurrent.Future
 
 object RedditUserOverviewActor {
 
@@ -49,10 +48,11 @@ class RedditUserOverviewActor @Inject() (
   override def receive: Receive = {
     case Tick =>
       rc.login().map { (maybeRes: Option[OAuthResponse]) =>
-        maybeRes match {
-          case Some(res) => logger.info(res.expiresIn.toString)
-          case None      => logger.info("Could not obtain access to the account.")
-        }
+         maybeRes match {
+           case Some(res) => logger.info(res.expiresIn.toString)
+           case None      => logger.info("Could not obtain access to the account.")
+         }
+         ()
       }
   }
 
