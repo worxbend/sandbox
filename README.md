@@ -1,6 +1,6 @@
 # Kzonix [WIP]
 
-[![buddy pipeline](https://app.buddy.works/limpid-kzonix/kzonix/pipelines/pipeline/319743/badge.svg?token=1f32544ffece2870b17b52190d6b74b15890390c971db2e94d3e962b54182e8a "buddy pipeline")](https://app.buddy.works/limpid-kzonix/kzonix/pipelines/pipeline/319743)
+[![buddy pipeline](https://app.buddy.works/limpid-kzonix-1/kzonix/pipelines/pipeline/356662/badge.svg?token=8c3f2de8600d49aa2a20b19996536bd08e48ceddfbc45a22eb8cf9f7a489ad23 "buddy pipeline")](https://app.buddy.works/limpid-kzonix-1/kzonix/pipelines/pipeline/356662)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/kzonix/kzonix.svg?logo=lgtm&logoWidth=36)](https://lgtm.com/projects/g/kzonix/kzonix/alerts/)
 
