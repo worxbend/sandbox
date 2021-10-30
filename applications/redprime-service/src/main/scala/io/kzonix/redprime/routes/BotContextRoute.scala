@@ -38,8 +38,6 @@ class BotContextRoute @Inject() (controller: BotContextController) extends Simpl
 
   override def routes: Routes = {
     case GET(p"/index/${ number }") => controller.index(number)
-    case GET(p"/asyncCache")        => controller.asyncCacheTest
-    case GET(p"/syncCache")         => controller.cacheTest
   }
 
 }
