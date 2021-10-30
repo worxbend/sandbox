@@ -54,6 +54,7 @@ class RedditUserOverviewActor @Inject() (
          }
          ()
       }
+      ()
   }
 
 }
