@@ -291,7 +291,7 @@ lazy val `index-service` = (project in file(ProjectPaths.Applications.Root.servi
       guice,
       scalaGuice,
       logback,
-      "com.azure" % "azure-storage-blob" % "12.13.0"
+      "com.azure" % "azure-storage-blob" % "12.14.1"
     ),
     Test / testOptions := Seq(
       Tests.Argument(
