@@ -36,7 +36,7 @@ import scala.concurrent.duration.DurationInt
 
 object RedditUserOverviewActor {
 
-  def props: Props = Props[RedditUserOverviewActor]
+  def props: Props = Props[RedditUserOverviewActor]()
 
   case object Tick
 }
