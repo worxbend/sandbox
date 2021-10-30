@@ -29,10 +29,8 @@ import io.kzonix.redprime.client.model.OAuthResponse
 import play.api.Logger
 
 import javax.inject.Inject
-import scala.concurrent.Await
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
-import scala.concurrent.duration.DurationInt
 
 object RedditUserOverviewActor {
 
@@ -50,16 +48,12 @@ class RedditUserOverviewActor @Inject() (
 
   override def receive: Receive = {
     case Tick =>
-      val promise: Future[Unit] = rc.login.map { (maybeRes: Option[OAuthResponse]) =>
+      rc.login().map { (maybeRes: Option[OAuthResponse]) =>
         maybeRes match {
           case Some(res) => logger.info(res.expiresIn.toString)
+          case None      => logger.info("Could not obtain access to the account.")
         }
       }
-      Await.result(
-        promise,
-        20.seconds
-      )
-
   }
 
 }

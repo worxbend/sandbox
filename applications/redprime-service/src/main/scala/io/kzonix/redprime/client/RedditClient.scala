@@ -45,7 +45,7 @@ class RedditClient @Inject() (
 
   private val logger: Logger = Logger(this.getClass)
 
-  def login: Future[Option[OAuthResponse]] = {
+  def login(): Future[Option[OAuthResponse]] = {
 
     val cfg                                  = config.get[PasswordGrantTypePayload](path = "reddit.client")
     val eventualResponse: Future[WSResponse] = ws
