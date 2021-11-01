@@ -3,7 +3,7 @@ version: '2'
 services:
 
   broker:
-    image: confluentinc/cp-kafka:6.2.0
+    image: confluentinc/cp-kafka:6.2.1
     hostname: broker
     container_name: broker
     ports:
