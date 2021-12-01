@@ -1,7 +1,7 @@
 logLevel := util.Level.Debug
 
 addSbtPlugin("org.scalameta"     % "sbt-scalafmt"       % "2.4.4")
-addSbtPlugin("com.typesafe.play" % "sbt-plugin"         % "2.8.10")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin"         % "2.8.11")
 addSbtPlugin("com.lightbend.sbt" % "sbt-java-formatter" % "0.7.0")
 addSbtPlugin("io.gatling"        % "gatling-sbt"        % "4.0.0")
 addSbtPlugin("com.typesafe.sbt"  % "sbt-twirl"          % "1.5.1")
