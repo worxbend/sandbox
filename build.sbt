@@ -191,7 +191,7 @@ lazy val `akka-quickstart-service` =
     )
     .settings(commonDependencies: _*)
     .settings(
-      scalaVersion := "2.13.7",
+      scalaVersion := "2.13.8",
       name := ProjectNames.service("quickstart"),
       libraryDependencies ++= Seq(
         guice,
@@ -225,7 +225,7 @@ lazy val `akka-cluster-bootstrap-service` =
     .settings(defaultSettings: _*)
     .settings(commonDependencies: _*)
     .settings(
-      scalaVersion := "2.13.7",
+      scalaVersion := "2.13.8",
       name := ProjectNames.service("akka-cluster-bootstrap"),
       libraryDependencies ++= Seq(
         guice,
@@ -351,7 +351,7 @@ lazy val `hresvelgr` = (project in file(ProjectPaths.Applications.Root.app(Seq("
   .settings(defaultSettings: _*)
   .settings(commonDependencies: _*)
   .settings(
-    scalaVersion := "2.13.7",
+    scalaVersion := "2.13.8",
     name := ProjectNames.app("hresvelgr"),
     libraryDependencies ++= Seq(
       logbackLogging
