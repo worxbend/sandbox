@@ -164,7 +164,7 @@ lazy val `cogwheel` = (project in file(ProjectPaths.Components.Common.lib(Seq("c
     name := ProjectNames.service("cogwheel"),
     Compile / run / mainClass := Some("io.kzonix.cogwheel.Main"),
     libraryDependencies ++= Seq(
-      "com.amazonaws" % "aws-java-sdk-ssm" % "1.12.142"
+      "com.amazonaws" % "aws-java-sdk-ssm" % "1.12.143"
     ),
     Test / testOptions := Seq(
       Tests.Argument(
