@@ -107,7 +107,7 @@ services:
     tty: true
 
   ksql-datagen:
-    image: confluentinc/ksqldb-examples:7.0.1
+    image: confluentinc/ksqldb-examples:7.2.2
     hostname: ksql-datagen
     container_name: ksql-datagen
     depends_on:
