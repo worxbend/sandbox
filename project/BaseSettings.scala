@@ -57,7 +57,7 @@ object BaseSettings {
     organization := "io.kzonix",
     organizationName := "Kzonix Projects",
     version := Utils.Versions.version(),
-    scalaVersion := "2.13.9",
+    scalaVersion := "2.13.10",
     scalacOptions := Seq[String](
       "-unchecked",
       //"-print",
